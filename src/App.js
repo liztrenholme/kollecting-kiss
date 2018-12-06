@@ -43,9 +43,9 @@ class App extends Component {
                                     <a className="nav-link" href=" http://kollectingkiss.blogspot.com/"><img src={Blogger} className="blogger-pic" alt="blogspot" width="24px" height="24px" /></a>
                                 </li>
                                 <li className="nav-item active dropdown">
-                                    <a className="nav-link dropdown-toggle scrollable-menu"
+                                    <p className="nav-link dropdown-toggle scrollable-menu"
                                         id="navbarDropdown" role="button" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">Categories</a>
+                                        aria-haspopup="true" aria-expanded="false">Categories</p>
                                     <div className="dropdown-menu pre-scrollable"
                                         aria-labelledby="navbarDropdown">
                                         <a className="dropdown-item" href="customers">customers</a>

@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import '../App.css';
-// import axios from "axios";
 
 
 class Admin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            form: {
+                _id: '',
                 itemName: '',
                 itemManufacturer: '',
                 year: '',
                 description: '',
                 itemValue: '',
-                category: 'actionFigures'
-            },
+                category: 'actionFigures',
             submit: ''
         };
         this.handleChange = this.handleChange.bind(this);
@@ -22,17 +20,6 @@ class Admin extends Component {
     }
 
     componentDidMount() {
-        // axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
-        // axios.get('/api/book')
-        //   .then(res => {
-        // this.setState({ books: res.data });
-        // console.log(this.state.books);
-        //   })
-        //   .catch((error) => {
-        //     if(error.response.status === 401) {
-        //       this.props.history.push("/login");
-        //     }
-        //   });
         const {
             Stitch,
             RemoteMongoClient,
@@ -74,18 +61,36 @@ class Admin extends Component {
             category: '',
             submit: this.state.category
         });
-        // action="/submit" method="POST" 
-    }
-
-    logout = () => {
-        localStorage.removeItem('jwtToken');
-        window.location.reload();
+    //     const {
+    //         Stitch,
+    //         RemoteMongoClient,
+    //         AnonymousCredential
+    //     } = require('mongodb-stitch-browser-sdk');
+    //     const client = Stitch.initializeDefaultAppClient('kollecting-kiss-qctxo');
+        
+    //     const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('memorabilia');
+        
+    //     client.auth.loginWithCredential(new AnonymousCredential()).then(user =>
+    //       db.collection('items').insertOne({itemName:this.state.itemName, 
+    //                                         itemManufacturer:this.state.itemManufacturer,
+    //                                         year:this.state.year,
+    //                                          description:this.state.description,
+    //                                         itemValue:this.state.itemValue,
+    //                                         category:this.state.category}, {upsert:true})
+    //     ).then(() =>
+    //     db.collection('items').find({owner_id: client.auth.user.id}, { limit: 100}).asArray()
+    //   ).then(docs => {
+    //       console.log("Found docs", docs)
+    //       console.log("[MongoDB Stitch] Connected to Stitch")
+    //   }).catch(err => {
+    //       console.error(err)
+    //   });
     }
     render() {
         return (
             <div className="Admin">
                 <div className="row">
-                    <div className="col-md-2">
+                    <div className="col-md-1">
                     </div>
                     <div className="col-md-10 adminform">
                         <h3 className="title">Enter new item</h3>
@@ -100,8 +105,6 @@ class Admin extends Component {
                             <input className="text-input" placeholder="Estimated value" required type="text"
                                 name="itemValue" value={this.state.itemValue} onChange={this.handleChange} />
                             <select name="category" value={this.state.category} onChange={this.handleChange} >
-                                <option value="customers">customers</option>
-                                <option value="hi">hi</option>
                                 <option value="actionFigures">Action Figures / Dolls</option>
                                 <option value="advertisingAds">Advertising Ads</option>
                                 <option value="artworkBusts">Artwork / Busts</option>
@@ -146,14 +149,11 @@ class Admin extends Component {
                             <input type="submit" className='btn btn-outline-secondary' value="Send" />
 
                         </form>
-                        <div className="logout-button">
-                            {localStorage.getItem('jwtToken') &&
-                                <button class="btn btn-primary" onClick={this.logout}>Logout</button>
-                            }
-                        </div>
+                    </div>
+                    <div className="col-md-1">
                     </div>
                 </div>
-                <h1 style={{color: 'red'}}>{this.state.submit}</h1>
+                <h1 style={{color: 'red'}}>Updates: {this.state.submit}</h1>
             </div>
         );
     }
