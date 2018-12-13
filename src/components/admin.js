@@ -94,14 +94,20 @@ class Admin extends Component {
     //       console.error(err)
     //   });
     }
+    
     getResult() {
     let client = Stitch.defaultAppClient;
     client.callFunction("functionTest").then(result => {
     this.setState({stringle: result})
 });
     }
+
+    // put getResult in CDM so it doesn't drain memory with continuous calls!
+    componentDidMount() {
+        this.getResult();  // maybe can put fetched data here?
+       }
+
     render() {
-        this.getResult();
         return (
             <div className="Admin">
                 <div className="row">
