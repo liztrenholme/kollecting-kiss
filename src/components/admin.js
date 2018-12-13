@@ -23,25 +23,36 @@ class Admin extends Component {
                 description: '',
                 itemValue: '',
                 category: 'actionFigures',
-            submit: ''
+            submit: '',
+            stringle: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
-        client.auth.loginWithCredential(new AnonymousCredential()).then(user =>
-          db.collection('items').updateOne({owner_id: client.auth.user.id}, {$set:{number:42}}, {upsert:true})
-        ).then(() =>
-          db.collection('items').find({owner_id: client.auth.user.id}, { limit: 100}).asArray()
-        ).then(docs => {
-            console.log("Found docs", docs)
-            console.log("[MongoDB Stitch] Connected to Stitch")
-        }).catch(err => {
-            console.error(err)
+    // componentDidMount() {
+    //     client.auth.loginWithCredential(new AnonymousCredential()).then(user =>
+    //       db.collection('items').updateOne({owner_id: client.auth.user.id}, {$set:{number:44}}, {upsert:true})
+    //     ).then(() =>
+    //       db.collection('items').find({owner_id: client.auth.user.id}, { limit: 100}).asArray()
+    //     ).then(docs => {
+    //         console.log("Found docs", docs)
+    //         console.log("[MongoDB Stitch] Connected to Stitch")
+    //     }).catch(err => {
+    //         console.error(err)
+    //     });
+    // }
+    loadList() {
+        // if (!this.client.auth.isLoggedIn) {
+        //    return;
+        // }
+        // let obj = this;
+        db.collection('items').find({}, {limit: 1000}).asArray().then(docs => {
+        //    obj.setState({ items: docs, requestPending: false });
+        console.log(docs);
+        console.log(this.state);
         });
-    }
-
+     }
 
 
     handleChange(event) {
@@ -61,32 +72,36 @@ class Admin extends Component {
             category: '',
             submit: this.state.category
         });
-        // const {
-        //     Stitch,
-        //     RemoteMongoClient,
-        //     AnonymousCredential
-        // } = require('mongodb-stitch-browser-sdk');
-        // const client = Stitch.initializeDefaultAppClient('kollecting-kiss');
+    //     const {
+    //         Stitch,
+    //         RemoteMongoClient,
+    //         AnonymousCredential
+    //     } = require('mongodb-stitch-browser-sdk');
+    //     const client = Stitch.initializeDefaultAppClient('kollecting-kiss');
         
-        // const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('memorabilia');
-        
+    //     const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('memorabilia');
+
     //     client.auth.loginWithCredential(new AnonymousCredential()).then(user =>
-          db.collection('items').insertOne({itemName:this.state.itemName, 
-                                            itemManufacturer:this.state.itemManufacturer,
-                                            year:this.state.year,
-                                             description:this.state.description,
-                                            itemValue:this.state.itemValue,
-                                            category:this.state.category}, {upsert:true})
-    //     ).then(() =>
-    //     db.collection('items').find({owner_id: client.auth.user.id}, { limit: 100}).asArray()
-    //   ).then(docs => {
-    //       console.log("Found docs", docs)
-    //       console.log("[MongoDB Stitch] Connected to Stitch")
-    //   }).catch(err => {
+    //       db.collection('items').insertOne({itemName:this.state.itemName, 
+    //                                         itemManufacturer:this.state.itemManufacturer,
+    //                                         year:this.state.year,
+    //                                          description:this.state.description,
+    //                                         itemValue:this.state.itemValue,
+    //                                         category:this.state.category})
+    //     ).then(() =>{(
+
+    //     )}.catch(err => {
     //       console.error(err)
     //   });
     }
+    getResult() {
+    let client = Stitch.defaultAppClient;
+    client.callFunction("functionTest").then(result => {
+    this.setState({stringle: result})
+});
+    }
     render() {
+        this.getResult();
         return (
             <div className="Admin">
                 <div className="row">
@@ -154,6 +169,8 @@ class Admin extends Component {
                     </div>
                 </div>
                 <h1 style={{color: 'red'}}>Updates: {this.state.submit}</h1>
+                {/* <p>{db.collection('items').find().asArray().catch(err => {console.error(err)})}</p> */}
+                <p style={{color: 'red'}}>{this.state.stringle}</p>
             </div>
         );
     }
