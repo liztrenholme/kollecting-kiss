@@ -1,71 +1,57 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+const {
+  Stitch,
+  RemoteMongoClient,
+  AnonymousCredential
+} = require('mongodb-stitch-browser-sdk');
+
+const client = Stitch.defaultAppClient;
 
 class adminLogin extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: '',
       password: '',
       message: ''
     };
-  }
-  onChange = (e) => {
-    const state = this.state
-    state[e.target.name] = e.target.value;
-    this.setState(state);
+  this.handleChange = this.handleChange.bind(this);
+  this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onSubmit = (e) => {
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleSubmit = (e) => {
     e.preventDefault();
-
-    const { username, password } = this.state;
-
-    axios.post('api/login', { username, password })
-      .then((result) => {
-        localStorage.setItem('jwtToken', result.data.token);
-        this.setState({ message: '' });
-        this.props.history.push('/')
-      })
-      .catch((error) => {
-        if(error.response.status === 401) {
-          this.setState({ message: 'Login failed. Username or password not match' });
-        }
-      });
+    client.callFunction("login", [this.state.username, this.state.password]).then(result => {
+      console.log(result) // Output: 7
+  });
+  }
+  showMe = (items) => {
+    console.log(items);
   }
 
   render() {
-    const { username, password, message } = this.state;
     return (
       <div className="container">
-        <form className="authform" onSubmit={this.onSubmit}>
-          {message !== '' &&
-            <div className="alert alert-warning alert-dismissible" role="alert">
-              { message }
-            </div>
-          }
+        <form className="authform" onSubmit={this.handleSubmit}>
           <h2 className="form-signin-heading">Please sign in</h2>
-          <label htmlFor="inputName" className="sr-only">Email address</label>
-          <input type="text" className="form-control" placeholder="Username" name="username" value={username} onChange={this.onChange} required/>
+          <label htmlFor="inputName" >Email address</label>
+          <input type="text" className="form-control" placeholder="Username" name="username" value={this.state.username} onChange={this.handleChange} required />
           <label htmlFor="inputPassword" className="sr-only">Password</label>
-          <input type="password" className="form-control" placeholder="Password" name="password" value={password} onChange={this.onChange} required/>
+          <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange} required />
           <button className="btn btn-outline-secondary" type="submit">Login</button>
           <p>
-            Not a member? <Link to="/register"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Register here</Link>
+            Not a member? <Link to="/admin"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Register here</Link>
           </p>
         </form>
-        {/* <form action="/login" method="post" className="form-inline authform">
-          <div className="form-group">
-            <input className="form-control"
-            type="email" name="email" placeholder="email" />
-            <input className="form-control"
-            type="password" name="password" placeholder="password" />
-          </div>
-          <input className="btn btn-outline-secondary btn-default" type="submit" />
-        </form> */}
       </div>
     );
   }

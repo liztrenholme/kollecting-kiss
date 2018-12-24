@@ -160,9 +160,8 @@ class Admin extends Component {
                     <div className="col-md-1">
                     </div>
                 </div>
-                <h1 style={{ color: 'red' }}>Updates: {this.state.submit}</h1>
-
-                <p style={{ color: 'red' }}>{this.state.stringle}</p>
+                <h2 style={{ color: 'red' }}>{this.state.submit}</h2>
+                {/* <p style={{ color: 'red' }}>{this.state.stringle}</p> */}
             </div>
         );
     }

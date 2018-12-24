@@ -6,6 +6,7 @@ import Twitter from "./images/twitter-48.png";
 import Blogger from "./images/blogger-5-48.png";
 import HeaderImg from "./images/header.jpg";
 import Routes from './routes/routes';
+
 class App extends Component {
     constructor() {
         super();
@@ -18,8 +19,10 @@ class App extends Component {
         this.setState({ value: e.target.value });
         console.log(this.state.value);
     }
+    // componentWillMount() {
+    //     this.lock = new Auth0Lock('6-lC2h1SLiP2WB2Hvw73oz26mLXxYxQX', 'cheesecake.auth0.com');
+    // }
     render() {
-        const { results, value } = this.state;
         return (
             <div className="App">
                 <div className="container-fluid">
@@ -102,11 +105,10 @@ class App extends Component {
                                     onChange={e => this.onChange(e)}
                                     placeholder="Search"
                                     aria-label="Search" />
-                                <a href={value.trim().toString(this)} >
+                                {/* <a href={this.value.trim().toString(this)} > */}
                                     <button className="btn btn-outline-secondary my-2 my-sm-0"
-                                        // href={value.trim().toString(this)}
-                                        // hi={console.log(value.trim().toString())}
-                                        type="submit">Search</button></a>
+                                        type="submit">Search</button>
+                                        {/* </a> */}
                             </form>
                         </div>
                     </nav>
@@ -123,7 +125,7 @@ class App extends Component {
                         </div>
                     </div>
                 </div>
-                <footer>&#9400; 2007-2018 Kollecting KISS | All rights reserved.</footer>   
+                <footer>&#9400; 2007-2018 Kollecting KISS | All rights reserved.</footer>
                 <footer><a className="light" href="/admin">[Admin]</a></footer>
             </div>
         );
