@@ -4,25 +4,21 @@ const {
     Stitch,
     RemoteMongoClient,
     AnonymousCredential,
-    userPasswordCredential
+    // userPasswordCredential
 } = require('mongodb-stitch-browser-sdk');
 
-const client = Stitch.initializeDefaultAppClient('kollecting-kiss-qctxo');
-
-const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('memorabilia');
-const mongodb = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas');
+const stitchClient = Stitch.initializeDefaultAppClient("kollecting-kiss-qctxo");
 
 class Admin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-                _id: '',
-                itemName: '',
-                itemManufacturer: '',
-                year: '',
-                description: '',
-                itemValue: '',
-                category: 'actionFigures',
+            itemName: '',
+            itemManufacturer: '',
+            year: '',
+            description: '',
+            itemValue: '',
+            category: 'actionFigures',
             submit: '',
             stringle: ''
         };
@@ -30,82 +26,73 @@ class Admin extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // componentDidMount() {
-    //     client.auth.loginWithCredential(new AnonymousCredential()).then(user =>
-    //       db.collection('items').updateOne({owner_id: client.auth.user.id}, {$set:{number:44}}, {upsert:true})
-    //     ).then(() =>
-    //       db.collection('items').find({owner_id: client.auth.user.id}, { limit: 100}).asArray()
-    //     ).then(docs => {
-    //         console.log("Found docs", docs)
-    //         console.log("[MongoDB Stitch] Connected to Stitch")
-    //     }).catch(err => {
-    //         console.error(err)
-    //     });
-    // }
     loadList() {
-        // if (!this.client.auth.isLoggedIn) {
-        //    return;
-        // }
-        // let obj = this;
-        db.collection('items').find({}, {limit: 1000}).asArray().then(docs => {
-        //    obj.setState({ items: docs, requestPending: false });
-        console.log(docs);
-        console.log(this.state);
-        });
-     }
+        stitchClient.auth.loginWithCredential(new AnonymousCredential()).then((user) => {
+            console.log(`Logged in as anonymous user with id: ${user.id}`);
+            const mongodb = stitchClient.getServiceClient(
+                RemoteMongoClient.factory,
+                "mongodb-atlas"
+            );
 
+            // Get a hook to the items collection
+            const items = mongodb.db("memorabilia").collection("items");
+
+            return items.find({})
+                .asArray();
+        })
+        // .then(displayItems);
+    }
 
     handleChange(event) {
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            submit: ''
         });
     }
 
     handleSubmit(event) {
         event.preventDefault();
         this.setState({
-            itemName: '',
-            itemManufacturer: '',
-            year: '',
-            description: '',
-            itemValue: '',
-            category: '',
-            submit: this.state.category
-        });
-    //     const {
-    //         Stitch,
-    //         RemoteMongoClient,
-    //         AnonymousCredential
-    //     } = require('mongodb-stitch-browser-sdk');
-    //     const client = Stitch.initializeDefaultAppClient('kollecting-kiss');
-        
-    //     const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('memorabilia');
-
-    //     client.auth.loginWithCredential(new AnonymousCredential()).then(user =>
-    //       db.collection('items').insertOne({itemName:this.state.itemName, 
-    //                                         itemManufacturer:this.state.itemManufacturer,
-    //                                         year:this.state.year,
-    //                                          description:this.state.description,
-    //                                         itemValue:this.state.itemValue,
-    //                                         category:this.state.category})
-    //     ).then(() =>{(
-
-    //     )}.catch(err => {
-    //       console.error(err)
-    //   });
-    }
-    
-    getResult() {
-    let client = Stitch.defaultAppClient;
-    client.callFunction("functionTest").then(result => {
-    this.setState({stringle: result})
-});
+            submit: 'Data insert successful!'
+        })
+        const mongodb = stitchClient.getServiceClient(
+            RemoteMongoClient.factory,
+            "mongodb-atlas"
+        );
+        const items = mongodb.db("memorabilia").collection("items");
+        stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
+            try {
+                items.insertOne({
+                    itemName: this.state.itemName,
+                    itemManufacturer: this.state.itemManufacturer,
+                    year: this.state.year,
+                    description: this.state.description,
+                    itemValue: this.state.itemValue,
+                    category: this.state.category
+                });
+                this.setState({
+                    itemName: '',
+                    itemManufacturer: '',
+                    year: '',
+                    description: '',
+                    itemValue: '',
+                    category: 'actionFigures',
+                    // submit: 'Data successfully entered.',
+                    stringle: ''
+                });
+            } catch (e) {
+                console.log(e);
+                this.setState({
+                    submit: 'Error inserting data.'
+                })
+            }
+        })
     }
 
     // put getResult in CDM so it doesn't drain memory with continuous calls!
     componentDidMount() {
-        this.getResult();  // maybe can put fetched data here?
-       }
+        this.loadList();
+    }
 
     render() {
         return (
@@ -118,7 +105,7 @@ class Admin extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <input className="text-input" placeholder=" Item Name" required type="text"
                                 name="itemName" value={this.state.itemName} onChange={this.handleChange} />
-                            <input className="text-input" placeholder=" Manufacturer" required type="text"
+                            <input className="text-input" placeholder=" Manufacturer" type="text"
                                 name="itemManufacturer" value={this.state.itemManufacturer} onChange={this.handleChange} />
                             <input className="text-input" placeholder=" Year" type="text" name="year" value={this.state.year} onChange={this.handleChange} />
                             <textarea className="text-input" required rows="10" cols="25"
@@ -167,16 +154,15 @@ class Admin extends Component {
                                 <option value="wine">Wine</option>
                                 <option value="lighters">Zippos / Lighters</option>
                             </select>
-                            <input type="submit" className='btn btn-outline-secondary' value="Send" />
-
+                            <input type="submit" className='btn btn-outline-secondary' value="Submit" />
                         </form>
                     </div>
                     <div className="col-md-1">
                     </div>
                 </div>
-                <h1 style={{color: 'red'}}>Updates: {this.state.submit}</h1>
-                {/* <p>{db.collection('items').find().asArray().catch(err => {console.error(err)})}</p> */}
-                <p style={{color: 'red'}}>{this.state.stringle}</p>
+                <h1 style={{ color: 'red' }}>Updates: {this.state.submit}</h1>
+
+                <p style={{ color: 'red' }}>{this.state.stringle}</p>
             </div>
         );
     }
