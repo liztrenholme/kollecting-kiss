@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './components/mem.css';
 import Logo from './images/logo.jpg';
 import Tumblr from "./images/tumblr.png";
 import Twitter from "./images/twitter-48.png";
@@ -19,16 +19,20 @@ class App extends Component {
         this.setState({ value: e.target.value });
         console.log(this.state.value);
     }
-    // componentWillMount() {
-    //     this.lock = new Auth0Lock('6-lC2h1SLiP2WB2Hvw73oz26mLXxYxQX', 'cheesecake.auth0.com');
-    // }
+
+    componentWillMount() {
+        
+    }
+
     render() {
         return (
             <div className="App">
                 <div className="container-fluid">
                     <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
                         <a className="navbar-brand" href="/"><img src={Logo} alt="logo" width="80px" /></a>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button className="navbar-toggler" type="button" data-toggle="collapse" 
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+                                aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -51,8 +55,6 @@ class App extends Component {
                                         aria-haspopup="true" aria-expanded="false">Categories</p>
                                     <div className="dropdown-menu pre-scrollable"
                                         aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item" href="customers">customers</a>
-                                        <a className="dropdown-item" href="hi">hi</a>
                                         <a className="dropdown-item" href="actionFigures">Action Figures / Dolls</a>
                                         <a className="dropdown-item" href="advertisingAds">Advertising Ads</a>
                                         <a className="dropdown-item" href="artworkBusts">Artwork / Busts</a>
@@ -106,7 +108,7 @@ class App extends Component {
                                     placeholder="Search"
                                     aria-label="Search" />
                                 {/* <a href={this.value.trim().toString(this)} > */}
-                                    <button className="btn btn-outline-secondary my-2 my-sm-0"
+                                    <button className="btn btn-outline-secondary" id="main-search"
                                         type="submit">Search</button>
                                         {/* </a> */}
                             </form>
@@ -125,8 +127,8 @@ class App extends Component {
                         </div>
                     </div>
                 </div>
-                <footer>&#9400; 2007-2018 Kollecting KISS | All rights reserved.</footer>
-                <footer><a className="light" href="/admin">[Admin]</a></footer>
+                <footer>&#9400; 2007-2019 Kollecting KISS | All rights reserved.</footer>
+                <footer><a className="light" href="/login">[Admin]</a></footer>
             </div>
         );
     }

@@ -1,3 +1,7 @@
+body {
+	text-align: center;
+}
+
 .nav-item {
 	margin: 0 1%;
 }
@@ -80,6 +84,7 @@ footer {
 
 .light {
 	color: #fff;
+	font-size: 80%;
 }
 
 textarea {
@@ -114,10 +119,14 @@ textarea {
 	.btn {
 		background-color: darkgray;
 		border: solid 2px lightgray;
-		margin: 1%;
+		margin: 1% 0;
 	}
 
 	.error-msg {
 		margin: 2%;
 		font-weight: bold;
+	}
+
+	.main-search {
+		color: #000;
 	}

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import '../App.css';
+import './mem.css';
 const {
     Stitch,
     RemoteMongoClient,
-    AnonymousCredential,
-    // userPasswordCredential
+    AnonymousCredential
 } = require('mongodb-stitch-browser-sdk');
 
 const stitchClient = Stitch.initializeDefaultAppClient("kollecting-kiss-qctxo");
@@ -19,8 +18,7 @@ class Admin extends Component {
             description: '',
             itemValue: '',
             category: 'actionFigures',
-            submit: '',
-            stringle: ''
+            submit: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,8 +37,7 @@ class Admin extends Component {
 
             return items.find({})
                 .asArray();
-        })
-        // .then(displayItems);
+        }) // possibly display items entered?
     }
 
     handleChange(event) {
@@ -60,6 +57,7 @@ class Admin extends Component {
             "mongodb-atlas"
         );
         const items = mongodb.db("memorabilia").collection("items");
+        // here we are inserting data into the database through the form
         stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
             try {
                 items.insertOne({
@@ -76,9 +74,7 @@ class Admin extends Component {
                     year: '',
                     description: '',
                     itemValue: '',
-                    category: 'actionFigures',
-                    // submit: 'Data successfully entered.',
-                    stringle: ''
+                    category: 'actionFigures'
                 });
             } catch (e) {
                 console.log(e);
@@ -89,7 +85,7 @@ class Admin extends Component {
         })
     }
 
-    // put getResult in CDM so it doesn't drain memory with continuous calls!
+    // put results fetching in CDM so it doesn't drain memory with continuous calls!
     componentDidMount() {
         this.loadList();
     }
@@ -110,7 +106,7 @@ class Admin extends Component {
                             <input className="text-input" placeholder=" Year" type="text" name="year" value={this.state.year} onChange={this.handleChange} />
                             <textarea className="text-input" required rows="10" cols="25"
                                 name="description" value={this.state.description} onChange={this.handleChange} placeholder=" Description" width="50%" height="50%"></textarea>
-                            <input className="text-input" placeholder=" Estimated value" required type="text"
+                            <input className="text-input" placeholder=" Estimated value" type="text"
                                 name="itemValue" value={this.state.itemValue} onChange={this.handleChange} />
                             <select name="category" value={this.state.category} onChange={this.handleChange} >
                                 <option value="actionFigures">Action Figures / Dolls</option>
@@ -161,7 +157,6 @@ class Admin extends Component {
                     </div>
                 </div>
                 <h2 style={{ color: 'red' }}>{this.state.submit}</h2>
-                {/* <p style={{ color: 'red' }}>{this.state.stringle}</p> */}
             </div>
         );
     }

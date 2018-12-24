@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Admin from './admin';
-// import Form from './loginForm';
+import './mem.css';
 
 const { Stitch } = require('mongodb-stitch-browser-sdk');
 
@@ -30,6 +30,7 @@ class adminLogin extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    // authenticating through stitch to keep password secure
     client.callFunction("login", [this.state.username, this.state.password]).then(result => {
       console.log("handleSubmit here: " + result);
       if (result === true) {
@@ -50,9 +51,9 @@ class adminLogin extends Component {
   render() {
     const form = <div className="Login">
       <div className="row">
-        <div className="col-md-1">
+        <div className="col-md-2">
         </div>
-        <div className="col-md-10 authform">
+        <div className="col-md-8 authform">
           <form onSubmit={this.handleSubmit}>
             <h2>Please sign in</h2>
             <input type="text" className="text-input"
@@ -63,12 +64,14 @@ class adminLogin extends Component {
               onChange={this.handleChange} required />
             <input type="submit" className='btn btn-outline-secondary' value="Log In" />
           </form>
-          <p className="error-msg" style={{ color: 'red' }}>{this.state.message}</p>
-          <div className="col-md-1">
           </div>
+          <div>
+            <p className="error-msg" style={{ color: 'red' }}>{this.state.message}</p>
+          </div>
+        <div className="col-md-2">
         </div>
       </div>
-    </div>;
+    </div>
     return (
       <div>
         {this.state.authed ? <Admin /> : form}
