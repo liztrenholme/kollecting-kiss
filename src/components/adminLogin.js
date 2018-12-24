@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Admin from './admin';
-import Form from './loginForm';
+// import Form from './loginForm';
 
 const { Stitch } = require('mongodb-stitch-browser-sdk');
 
 const client = Stitch.defaultAppClient;
 
 class adminLogin extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
       message: '',
-      authed: false,
-      whichView: this.showWhichView(this.authed)
+      authed: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.showWhichView = this.showWhichView.bind(this);
+
   }
 
 
@@ -31,17 +28,16 @@ class adminLogin extends Component {
     })
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
     client.callFunction("login", [this.state.username, this.state.password]).then(result => {
-      console.log(result);
+      console.log("handleSubmit here: " + result);
       if (result === true) {
         this.setState({
           authed: true
         })
-        // return <Admin />
       }
-      else if (result === false || result === null || result === undefined) {
+      else if (result === false) {
         this.setState({
           username: '',
           password: '',
@@ -51,23 +47,31 @@ class adminLogin extends Component {
       }
     })
   }
-
-    showWhichView(authed) {
-      if (authed === false) {
-        return <Form />
-      }
-      else if (authed === true) {
-        return <Admin />
-      }
-    }
-  
-
   render() {
+    const form = <div className="Login">
+      <div className="row">
+        <div className="col-md-1">
+        </div>
+        <div className="col-md-10 authform">
+          <form onSubmit={this.handleSubmit}>
+            <h2>Please sign in</h2>
+            <input type="text" className="text-input"
+              placeholder="Username" name="username"
+              value={this.state.value} onChange={this.handleChange} required />
+            <input type="password" className="text-input"
+              placeholder="Password" name="password" value={this.state.value}
+              onChange={this.handleChange} required />
+            <input type="submit" className='btn btn-outline-secondary' value="Log In" />
+          </form>
+          <p className="error-msg" style={{ color: 'red' }}>{this.state.message}</p>
+          <div className="col-md-1">
+          </div>
+        </div>
+      </div>
+    </div>;
     return (
       <div>
-        {this.state.whichView}
-        {console.log(this.state.authed)}
-        <Form />
+        {this.state.authed ? <Admin /> : form}
       </div>
     );
   }
