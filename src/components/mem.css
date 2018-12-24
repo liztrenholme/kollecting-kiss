@@ -103,8 +103,7 @@ textarea {
   }
   
   .photo-upload {
-	  width: 50px;
-	  height: 100px;
+	  padding: 5% 1%;
 	  border: dashed darkgray 3px;
   }
 

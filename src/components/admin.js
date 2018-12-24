@@ -57,7 +57,8 @@ class Admin extends Component {
                     year: this.state.year,
                     description: this.state.description,
                     itemValue: this.state.itemValue,
-                    category: this.state.category
+                    category: this.state.category,
+                    imageURL: this.state.imageURL
                 });
                 this.setState({
                     itemName: '',
@@ -96,8 +97,9 @@ class Admin extends Component {
 
             if (response.body.secure_url !== '') {
                 this.setState({
-                    uploadedFileCloudinaryUrl: response.body.secure_url
+                    imageURL: response.body.secure_url
                 });
+                console.log(this.state.imageURL);
             }
         });
     }
@@ -113,37 +115,28 @@ class Admin extends Component {
                         <div >
                             <Dropzone onDrop={this.onImageDrop}
                                 multiple={false}
-                                accept="image/*"
-                                className="photo-upload">
+                                accept="image/*">
                                 {({ getRootProps, getInputProps, isDragActive }) => {
                                     return (
                                         <div
-                                            {...getRootProps()}
-                                        // className={classNames('dropzone', { 'dropzone--isActive': isDragActive })}
-                                        >
+                                            {...getRootProps()}                                        >
                                             <input {...getInputProps()} />
                                             {
                                                 isDragActive ?
-                                                    <p>Drop files here...</p> :
-                                                    <p>Try dropping some files here, or click to select files to upload.</p>
+                                                    <p className="photo-upload">Drop image here...</p> :
+                                                    <p className="photo-upload">Try dropping an image here, or click to select image to upload.</p>
                                             }
                                         </div>
                                     )
                                 }}
                             </Dropzone>
-                            {/* <Dropzone onDrop={this.onImageDrop}
-                                multiple={false}
-                                accept="image/*"
-                                className="photo-upload">
-                                {({getRootProps}) => <div {...getRootProps()} />}
-                            </Dropzone>
-                            <p>Click or drop photo here!</p> */}
                             <div>
+                                {/* need to get image to appear after upload now! */}
                                 {this.state.imageURL === '' ? null :
-                                    <div>
+                                    (<div>
                                         <p>{this.state.uploadedFile.name}</p>
                                         <img src={this.state.imageURL} />
-                                    </div>}
+                                    </div>)}
                             </div>
                         </div>
                         <form onSubmit={this.handleSubmit}>
