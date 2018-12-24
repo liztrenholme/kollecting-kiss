@@ -13,7 +13,7 @@ class adminLogin extends Component {
       username: '',
       password: '',
       message: '',
-      authed: false
+      authed: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,7 +49,7 @@ class adminLogin extends Component {
     })
   }
   render() {
-    const form = <div className="Login">
+    const form = (<div className="Login">
       <div className="row">
         <div className="col-md-2">
         </div>
@@ -64,14 +64,14 @@ class adminLogin extends Component {
               onChange={this.handleChange} required />
             <input type="submit" className='btn btn-outline-secondary' value="Log In" />
           </form>
-          </div>
-          <div>
-            <p className="error-msg" style={{ color: 'red' }}>{this.state.message}</p>
-          </div>
+        </div>
+        <div>
+          <p className="error-msg" style={{ color: 'red' }}>{this.state.message}</p>
+        </div>
         <div className="col-md-2">
         </div>
       </div>
-    </div>
+    </div>);
     return (
       <div>
         {this.state.authed ? <Admin /> : form}

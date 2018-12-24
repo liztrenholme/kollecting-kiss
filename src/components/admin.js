@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import './mem.css';
 import stitchClient from './stitch';
+import Dropzone from 'react-dropzone';
+import request from 'superagent';
 
 const {
     RemoteMongoClient,
     AnonymousCredential
-  } = require('mongodb-stitch-browser-sdk');
+} = require('mongodb-stitch-browser-sdk');
+
+const CLOUDINARY_UPLOAD_PRESET = 'jvr3ebf0';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/cheesecake/upload';
 
 class Admin extends Component {
     constructor(props) {
@@ -17,10 +22,13 @@ class Admin extends Component {
             description: '',
             itemValue: '',
             category: 'actionFigures',
-            submit: ''
+            submit: '',
+            uploadedFile: null,
+            imageURL: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onImageDrop = this.onImageDrop.bind(this);
     }
 
     handleChange(event) {
@@ -68,6 +76,32 @@ class Admin extends Component {
         })
     }
 
+    onImageDrop(files) {
+        this.setState({
+            uploadedFile: files[0]
+        });
+
+        this.handleImageUpload(files[0]);
+    }
+
+    handleImageUpload(file) {
+        let upload = request.post(CLOUDINARY_UPLOAD_URL)
+            .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+            .field('file', file);
+
+        upload.end((err, response) => {
+            if (err) {
+                console.error(err);
+            }
+
+            if (response.body.secure_url !== '') {
+                this.setState({
+                    uploadedFileCloudinaryUrl: response.body.secure_url
+                });
+            }
+        });
+    }
+
     render() {
         return (
             <div className="Admin">
@@ -76,6 +110,42 @@ class Admin extends Component {
                     </div>
                     <div className="col-md-10 adminform">
                         <h3 className="title">Enter new item</h3>
+                        <div >
+                            <Dropzone onDrop={this.onImageDrop}
+                                multiple={false}
+                                accept="image/*"
+                                className="photo-upload">
+                                {({ getRootProps, getInputProps, isDragActive }) => {
+                                    return (
+                                        <div
+                                            {...getRootProps()}
+                                        // className={classNames('dropzone', { 'dropzone--isActive': isDragActive })}
+                                        >
+                                            <input {...getInputProps()} />
+                                            {
+                                                isDragActive ?
+                                                    <p>Drop files here...</p> :
+                                                    <p>Try dropping some files here, or click to select files to upload.</p>
+                                            }
+                                        </div>
+                                    )
+                                }}
+                            </Dropzone>
+                            {/* <Dropzone onDrop={this.onImageDrop}
+                                multiple={false}
+                                accept="image/*"
+                                className="photo-upload">
+                                {({getRootProps}) => <div {...getRootProps()} />}
+                            </Dropzone>
+                            <p>Click or drop photo here!</p> */}
+                            <div>
+                                {this.state.imageURL === '' ? null :
+                                    <div>
+                                        <p>{this.state.uploadedFile.name}</p>
+                                        <img src={this.state.imageURL} />
+                                    </div>}
+                            </div>
+                        </div>
                         <form onSubmit={this.handleSubmit}>
                             <input className="text-input" placeholder=" Item Name" required type="text"
                                 name="itemName" value={this.state.itemName} onChange={this.handleChange} />

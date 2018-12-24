@@ -14,29 +14,32 @@ class Featured extends Component {
       featured: []
     };
   }
-  
-  loadList() {
+
+  getDataList() {
     stitchClient.auth.loginWithCredential(new AnonymousCredential()).then((user) => {
-        console.log(`Logged in as anonymous user with id: ${user.id}`);
-        const mongodb = stitchClient.getServiceClient(
-            RemoteMongoClient.factory,
-            "mongodb-atlas"
-        );
+      // console.log(`Logged in as anonymous user with id: ${user.id}`);
+      const mongodb = stitchClient.getServiceClient(
+        RemoteMongoClient.factory,
+        "mongodb-atlas"
+      );
+      // Get a hook to the items collection
+      const items = mongodb.db("memorabilia").collection("items");
+      return items.find({}, {limit: 9})
+        .asArray()
+    })
+    .then(
+      // loadList()
+    );
+  }
 
-        // Get a hook to the items collection
-        const items = mongodb.db("memorabilia").collection("items");
-
-        return items.find({})
-            .asArray();
-    }) // possibly display items entered?
-}
 
   // put results fetching in CDM so it doesn't drain memory with continuous calls!
   componentDidMount() {
-    this.loadList();
-}
+    this.getDataList();
+  }
 
   render() {
+    console.log(this.state.featured);
     return (
       <div className="Featured">
         <div className="row">
@@ -60,18 +63,18 @@ class Featured extends Component {
             <table>
               <tbody>
                 <tr>
-                  {this.state.featured.map(hi =>
-                    <td key={hi.id}>{hi.greeting}</td>
-                  )}
+                  {/* {this.state.featured.map(hi =>
+                    <td key={hi.id}>{hi.greeting}</td> */}
+                  {/* )} */}
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-        </div>
+      </div>
 
-        );
-      }
-    }
-    
+    );
+  }
+}
+
 export default Featured;
