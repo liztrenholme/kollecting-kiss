@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import './mem.css';
+import stitchClient from './stitch';
+
 const {
-    Stitch,
     RemoteMongoClient,
     AnonymousCredential
-} = require('mongodb-stitch-browser-sdk');
-
-const stitchClient = Stitch.initializeDefaultAppClient("kollecting-kiss-qctxo");
+  } = require('mongodb-stitch-browser-sdk');
 
 class Admin extends Component {
     constructor(props) {
@@ -22,22 +21,6 @@ class Admin extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    loadList() {
-        stitchClient.auth.loginWithCredential(new AnonymousCredential()).then((user) => {
-            console.log(`Logged in as anonymous user with id: ${user.id}`);
-            const mongodb = stitchClient.getServiceClient(
-                RemoteMongoClient.factory,
-                "mongodb-atlas"
-            );
-
-            // Get a hook to the items collection
-            const items = mongodb.db("memorabilia").collection("items");
-
-            return items.find({})
-                .asArray();
-        }) // possibly display items entered?
     }
 
     handleChange(event) {
@@ -83,11 +66,6 @@ class Admin extends Component {
                 })
             }
         })
-    }
-
-    // put results fetching in CDM so it doesn't drain memory with continuous calls!
-    componentDidMount() {
-        this.loadList();
     }
 
     render() {

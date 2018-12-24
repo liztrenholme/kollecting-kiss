@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import './mem.css';
+import stitchClient from './stitch';
+
+const {
+  RemoteMongoClient,
+  AnonymousCredential
+} = require('mongodb-stitch-browser-sdk');
 
 class Featured extends Component {
   constructor() {
@@ -8,12 +14,27 @@ class Featured extends Component {
       featured: []
     };
   }
+  
+  loadList() {
+    stitchClient.auth.loginWithCredential(new AnonymousCredential()).then((user) => {
+        console.log(`Logged in as anonymous user with id: ${user.id}`);
+        const mongodb = stitchClient.getServiceClient(
+            RemoteMongoClient.factory,
+            "mongodb-atlas"
+        );
 
-  // componentDidMount() {
-  //   fetch('/color')
-  //     .then(res => res.json())
-  //     .then(hi => this.setState({ hi }, () => console.log('Hellos fetched...', hi)));
-  // }
+        // Get a hook to the items collection
+        const items = mongodb.db("memorabilia").collection("items");
+
+        return items.find({})
+            .asArray();
+    }) // possibly display items entered?
+}
+
+  // put results fetching in CDM so it doesn't drain memory with continuous calls!
+  componentDidMount() {
+    this.loadList();
+}
 
   render() {
     return (
