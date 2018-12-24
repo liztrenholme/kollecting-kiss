@@ -9,9 +9,6 @@ const {
     AnonymousCredential
 } = require('mongodb-stitch-browser-sdk');
 
-const CLOUDINARY_UPLOAD_PRESET = 'jvr3ebf0';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/cheesecake/upload';
-
 class Admin extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +27,7 @@ class Admin extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onImageDrop = this.onImageDrop.bind(this);
     }
-
+// updates state with form inputs
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value,
@@ -48,7 +45,7 @@ class Admin extends Component {
             "mongodb-atlas"
         );
         const items = mongodb.db("memorabilia").collection("items");
-        // here we are inserting data into the database through the form
+    // here we are inserting data into the database through the form
         stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
             try {
                 items.insertOne({
@@ -66,7 +63,8 @@ class Admin extends Component {
                     year: '',
                     description: '',
                     itemValue: '',
-                    category: 'actionFigures'
+                    category: 'actionFigures',
+                    imageURL: ''
                 });
             } catch (e) {
                 console.log(e);
@@ -76,18 +74,17 @@ class Admin extends Component {
             }
         })
     }
-
+    // allows user to either click on or drag image to box for upload
     onImageDrop(files) {
         this.setState({
             uploadedFile: files[0]
         });
-
         this.handleImageUpload(files[0]);
     }
-
+    // sends image to cloudinary, updates state, fetches imageURL to send to mongodb
     handleImageUpload(file) {
-        let upload = request.post(CLOUDINARY_UPLOAD_URL)
-            .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+        let upload = request.post('https://api.cloudinary.com/v1_1/cheesecake/upload')
+            .field('upload_preset', 'jvr3ebf0')
             .field('file', file);
 
         upload.end((err, response) => {
@@ -103,7 +100,6 @@ class Admin extends Component {
             }
         });
     }
-
     render() {
         return (
             <div className="Admin">
@@ -117,25 +113,22 @@ class Admin extends Component {
                                 multiple={false}
                                 accept="image/*">
                                 {({ getRootProps, getInputProps, isDragActive }) => {
-                                    return (
-                                        <div
-                                            {...getRootProps()}                                        >
-                                            <input {...getInputProps()} />
-                                            {
-                                                isDragActive ?
-                                                    <p className="photo-upload">Drop image here...</p> :
-                                                    <p className="photo-upload">Try dropping an image here, or click to select image to upload.</p>
-                                            }
-                                        </div>
-                                    )
+                                    return (<div
+                                        {...getRootProps()}>
+                                        <input {...getInputProps()} />
+                                        {
+                                            isDragActive ?
+                                                <p className="photo-upload">Drop image here...</p> :
+                                                <p className="photo-upload">Try dropping an image here, or click to select image to upload.</p>
+                                        }
+                                    </div>)
                                 }}
                             </Dropzone>
                             <div>
-                                {/* need to get image to appear after upload now! */}
                                 {this.state.imageURL === '' ? null :
                                     (<div>
                                         <p>{this.state.uploadedFile.name}</p>
-                                        <img src={this.state.imageURL} />
+                                        <img src={this.state.imageURL} alt="Successfully uploaded" height="200px" />
                                     </div>)}
                             </div>
                         </div>
