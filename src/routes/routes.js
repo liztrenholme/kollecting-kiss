@@ -9,10 +9,10 @@ export default () => (
     <div>
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Switch>
-                <Route path="/contact" exact component={Contact} />
-                <Route path="/" exact component={Featured} />
+                <Route path={process.env.PUBLIC_URL + "/contact"} exact component={Contact} />
+                <Route path={process.env.PUBLIC_URL + "/"} exact component={Featured} />
                 {/* <Route path="?" component={Search} /> */}
-                <Route path='/login' component={adminLogin} />
+                <Route path={process.env.PUBLIC_URL + '/login'} component={adminLogin} />
             </Switch>
         </BrowserRouter>
     </div>
