@@ -149,7 +149,7 @@ class App extends Component {
                     </div>
                 </div>
                 <footer>&#9400; 2007-2019 Kollecting KISS | All rights reserved.</footer>
-                <footer><a className="light" href="/login">[Admin]</a></footer>
+                <footer><a className="light" href="/kollecting-kiss/login">[Admin]</a></footer>
             </div>
         );
     }
