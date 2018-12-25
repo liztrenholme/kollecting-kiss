@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/kollecting-kiss/precache-manifest.f83263e10c670eee4259b5694a4b3bb2.js"
+  "/kollecting-kiss/precache-manifest.39dfbbd0e260d43400315524a8f49ff0.js"
 );
 
 workbox.clientsClaim();
