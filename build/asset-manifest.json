@@ -1,7 +1,7 @@
 {
   "main.css": "/kollecting-kiss/static/css/main.15fd1f4a.chunk.css",
-  "main.js": "/kollecting-kiss/static/js/main.55cd08ee.chunk.js",
-  "main.js.map": "/kollecting-kiss/static/js/main.55cd08ee.chunk.js.map",
+  "main.js": "/kollecting-kiss/static/js/main.f880ae9c.chunk.js",
+  "main.js.map": "/kollecting-kiss/static/js/main.f880ae9c.chunk.js.map",
   "static/js/1.e60188e9.chunk.js": "/kollecting-kiss/static/js/1.e60188e9.chunk.js",
   "static/js/1.e60188e9.chunk.js.map": "/kollecting-kiss/static/js/1.e60188e9.chunk.js.map",
   "runtime~main.js": "/kollecting-kiss/static/js/runtime~main.b605d26b.js",
@@ -10,6 +10,6 @@
   "static/media/header.jpg": "/kollecting-kiss/static/media/header.bc6b8447.jpg",
   "static/css/main.15fd1f4a.chunk.css.map": "/kollecting-kiss/static/css/main.15fd1f4a.chunk.css.map",
   "index.html": "/kollecting-kiss/index.html",
-  "precache-manifest.f83263e10c670eee4259b5694a4b3bb2.js": "/kollecting-kiss/precache-manifest.f83263e10c670eee4259b5694a4b3bb2.js",
+  "precache-manifest.ae67fd70aeeb08f9ae9e75f76e81455a.js": "/kollecting-kiss/precache-manifest.ae67fd70aeeb08f9ae9e75f76e81455a.js",
   "service-worker.js": "/kollecting-kiss/service-worker.js"
 }
