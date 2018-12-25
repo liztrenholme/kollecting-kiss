@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "f880ae9c6ac2a315da07",
+    "revision": "55cd08eecf513d12b4bf",
     "url": "/kollecting-kiss/static/css/main.15fd1f4a.chunk.css"
   },
   {
-    "revision": "f880ae9c6ac2a315da07",
-    "url": "/kollecting-kiss/static/js/main.f880ae9c.chunk.js"
+    "revision": "55cd08eecf513d12b4bf",
+    "url": "/kollecting-kiss/static/js/main.55cd08ee.chunk.js"
   },
   {
     "revision": "e60188e9db0b56803285",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/kollecting-kiss/static/media/header.bc6b8447.jpg"
   },
   {
-    "revision": "00019a124185ae137b669ed2d2421f87",
+    "revision": "7b36eda74e4dcbcff83dfb261a19d35c",
     "url": "/kollecting-kiss/index.html"
   }
 ];

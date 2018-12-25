@@ -11,8 +11,7 @@ export default () => (
             <Switch>
                 <Route path="/contact" exact component={Contact} />
                 <Route path="/" exact component={Featured} />
-                {/* <Route path="?" component={Search} /> */}
-                <Route path='/login' component={adminLogin} />
+                <Route path='/login' exact component={adminLogin} />
             </Switch>
         </BrowserRouter>
     </div>
