@@ -6,18 +6,41 @@ import Twitter from "./images/twitter-48.png";
 import Blogger from "./images/blogger-5-48.png";
 import HeaderImg from "./images/header.jpg";
 import Routes from './routes/routes';
+import stitchClient from './components/stitch';
+
+const {
+    RemoteMongoClient,
+    AnonymousCredential
+} = require('mongodb-stitch-browser-sdk');
+
 
 class App extends Component {
     constructor() {
         super();
         this.state = {
             value: '',
+            category: '',
             results: []
-        }
+        };
+        this.fetchData = this.fetchData.bind(this);
     }
     onChange(e) {
+        // event.preventDefault();
         this.setState({ value: e.target.value });
         console.log(this.state.value);
+    }
+
+    fetchData() {
+        const mongodb = stitchClient.getServiceClient(
+            RemoteMongoClient.factory,
+            "mongodb-atlas"
+        );
+        const items = mongodb.db("memorabilia").collection("items");
+ 
+        stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => { 
+            items.find({category: 'beltBuckles'})
+        });
+        console.log(items);
     }
 
     componentWillMount() {
@@ -55,46 +78,46 @@ class App extends Component {
                                         aria-haspopup="true" aria-expanded="false">Categories</p>
                                     <div className="dropdown-menu pre-scrollable"
                                         aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item" href="actionFigures">Action Figures / Dolls</a>
-                                        <a className="dropdown-item" href="advertisingAds">Advertising Ads</a>
-                                        <a className="dropdown-item" href="artworkBusts">Artwork / Busts</a>
-                                        <a className="dropdown-item" href="backstagePasses">Backstage Passes</a>
-                                        <a className="dropdown-item" href="bags">Bags / Backpacks / Wallets</a>
-                                        <a className="dropdown-item" href="beltBuckles">Belt Buckles</a>
-                                        <a className="dropdown-item" href="blankets">Blankets / Rugs / Towels</a>
-                                        <a className="dropdown-item" href="books">Books</a>
-                                        <a className="dropdown-item" href="buttons">Buttons / Lapel Pins</a>
-                                        <a className="dropdown-item" href="calendars">Calendars</a>
-                                        <a className="dropdown-item" href="autoAccessories">Car Automobile Accessories</a>
-                                        <a className="dropdown-item" href="cars">Cars / Die Cast</a>
-                                        <a className="dropdown-item" href="clocks">Clocks / Watches</a>
-                                        <a className="dropdown-item" href="clothing">Clothing</a>
-                                        <a className="dropdown-item" href="coins">Coins</a>
-                                        <a className="dropdown-item" href="comics">Comics</a>
-                                        <a className="dropdown-item" href="electronics">Electronics / Gaming Gear</a>
-                                        <a className="dropdown-item" href="games">Games / Puzzles</a>
-                                        <a className="dropdown-item" href="glassware">Glassware</a>
-                                        <a className="dropdown-item" href="guitarDrum">Guitar Picks & Drum Sticks</a>
-                                        <a className="dropdown-item" href="halloween">Halloween Products</a>
-                                        <a className="dropdown-item" href="health">Health & Beauty</a>
-                                        <a className="dropdown-item" href="homeDecor">Home Decor</a>
-                                        <a className="dropdown-item" href="incenseCandles">Incense / Candles</a>
-                                        <a className="dropdown-item" href="jewelry">Jewelry</a>
-                                        <a className="dropdown-item" href="keychains">Keychains</a>
-                                        <a className="dropdown-item" href="lunchBoxes">Lunch Boxes</a>
-                                        <a className="dropdown-item" href="magazines">Magazines</a>
-                                        <a className="dropdown-item" href="magnets">Magnet / Magnet Sets</a>
-                                        <a className="dropdown-item" href="misc">Miscellaneous</a>
-                                        <a className="dropdown-item" href="ornaments">Ornaments</a>
-                                        <a className="dropdown-item" href="petSupplies">Pet Supplies & Accessories</a>
-                                        <a className="dropdown-item" href="posters">Posters</a>
-                                        <a className="dropdown-item" href="stationary">Stationary Products</a>
-                                        <a className="dropdown-item" href="stickersPatches">Stickers / Patches</a>
-                                        <a className="dropdown-item" href="tickets">Tickets / Stubs</a>
-                                        <a className="dropdown-item" href="tourBooks">Tour Books</a>
-                                        <a className="dropdown-item" href="tradingPostCards">Trading Cards Phone & Post Cards</a>
-                                        <a className="dropdown-item" href="wine">Wine</a>
-                                        <a className="dropdown-item" href="lighters">Zippos / Lighters</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="actionFigures" href="actionFigures">Action Figures / Dolls</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="advertisingAds" href="advertisingAds">Advertising Ads</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="artworkBusts" href="artworkBusts">Artwork / Busts</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="backstagePasses" href="backstagePasses">Backstage Passes</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="bags" href="bags">Bags / Backpacks / Wallets</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="beltBuckles" href="beltBuckles">Belt Buckles</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="blankets" href="blankets">Blankets / Rugs / Towels</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="books" href="books">Books</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="buttons" href="buttons">Buttons / Lapel Pins</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="calendars" href="calendars">Calendars</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="autoAccessories" href="autoAccessories">Car Automobile Accessories</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="cars" href="cars">Cars / Die Cast</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="clocks" href="clocks">Clocks / Watches</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="clothing" href="clothing">Clothing</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="coins" href="coins">Coins</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="comics" href="comics">Comics</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="electronics" href="electronics">Electronics / Gaming Gear</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="games" href="games">Games / Puzzles</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="glassware" href="glassware">Glassware</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="guitarDrum" href="guitarDrum">Guitar Picks & Drum Sticks</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="halloween" href="halloween">Halloween Products</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="health" href="health">Health & Beauty</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="homeDecor" href="homeDecor">Home Decor</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="incenseCandles" href="incenseCandles">Incense / Candles</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="jewelry" href="jewelry">Jewelry</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="keychains" href="keychains">Keychains</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="lunchBoxes" href="lunchBoxes">Lunch Boxes</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="magazines" href="magazines">Magazines</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="magnets" href="magnets">Magnet / Magnet Sets</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="misc" href="misc">Miscellaneous</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="ornaments" href="ornaments">Ornaments</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="petSupplies" href="petSupplies">Pet Supplies & Accessories</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="posters" href="posters">Posters</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="stationary" href="stationary">Stationary Products</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="stickersPatches" href="stickersPatches">Stickers / Patches</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="tickets" href="tickets">Tickets / Stubs</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="tourBooks" href="tourBooks">Tour Books</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="tradingPostCards" href="tradingPostCards">Trading Cards Phone & Post Cards</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="wine" href="wine">Wine</a>
+                                        <a className="dropdown-item" onChange={e => this.onChange(e)} name="lighters" href="lighters">Zippos / Lighters</a>
                                     </div>
                                 </li>
                                 <li className="nav-item active">
@@ -107,10 +130,8 @@ class App extends Component {
                                     onChange={e => this.onChange(e)}
                                     placeholder="Search"
                                     aria-label="Search" />
-                                {/* <a href={this.value.trim().toString(this)} > */}
                                     <button className="btn btn-outline-secondary" id="main-search"
-                                        type="submit">Search</button>
-                                        {/* </a> */}
+                                        type="submit" onSubmit={this.fetchData}>Search</button>
                             </form>
                         </div>
                     </nav>

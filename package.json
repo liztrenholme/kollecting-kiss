@@ -2,8 +2,10 @@
   "name": "kollecting-kiss",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://liztrenholme.github.io/kollecting-kiss",
   "dependencies": {
     "axios": "^0.18.0",
+    "gh-pages": "^2.0.1",
     "mongodb-stitch-browser-sdk": "^4.1.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -15,6 +17,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
