@@ -7,7 +7,7 @@ import adminLogin from '../components/adminLogin';
 
 export default () => (
     <div>
-        <BrowserRouter basename={'kollecting-kiss'}>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Switch>
                 <Route path={process.env.PUBLIC_URL + "/contact"} exact component={Contact} />
                 <Route path={process.env.PUBLIC_URL + "/"} exact component={Featured} />
