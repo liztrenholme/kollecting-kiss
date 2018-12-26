@@ -88,10 +88,8 @@ footer {
 }
 
 textarea {
-	/* margin: 0 0 0 10px; */
 	border: 1px solid #f2f2f2;
 	border-radius: 20px;
-	background-color: #bbbbbb;
   }
 
 	.form-control {
@@ -111,19 +109,26 @@ textarea {
 	width: 10%;
 	margin: 0 -10 0 10%;
   }
+
+  .options {
+	  margin: 0 2%;
+  }
   
   .text-input {
 	border: 1px solid #f2f2f2;
-	background-color: #bbbbbb;
+	background-color: #d8d8d8;
 	width: 100%;
-	border: 1px solid #f2f2f2;
 	border-radius: 10px;
 	margin-top: 1%;
 	}
+
+	.text-input:focus {
+		border: 2px solid #3b03d4;
+	}
 	
 	.btn {
-		background-color: darkgray;
-		border: solid 2px lightgray;
+		background-color: #d8d8d8;
+		border: solid 4px #f0f0;
 		margin: 1% 0;
 	}
 

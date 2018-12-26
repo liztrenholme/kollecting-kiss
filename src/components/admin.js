@@ -37,9 +37,6 @@ class Admin extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.setState({
-            submit: 'Data insert successful!'
-        })
         const mongodb = stitchClient.getServiceClient(
             RemoteMongoClient.factory,
             "mongodb-atlas"
@@ -64,7 +61,8 @@ class Admin extends Component {
                     description: '',
                     itemValue: '',
                     category: 'actionFigures',
-                    imageURL: ''
+                    imageURL: '',
+                    submit: 'Data insert successful!'
                 });
             } catch (e) {
                 console.log(e);
@@ -145,7 +143,7 @@ class Admin extends Component {
                                 name="description" value={this.state.description} onChange={this.handleChange} placeholder=" Description" width="50%" height="50%"></textarea>
                             <input className="text-input" placeholder=" Estimated value" type="text"
                                 name="itemValue" value={this.state.itemValue} onChange={this.handleChange} />
-                            <select name="category" value={this.state.category} onChange={this.handleChange} >
+                            <select className="options" name="category" value={this.state.category} onChange={this.handleChange} >
                                 <option value="actionFigures">Action Figures / Dolls</option>
                                 <option value="advertisingAds">Advertising Ads</option>
                                 <option value="artworkBusts">Artwork / Busts</option>
@@ -193,7 +191,7 @@ class Admin extends Component {
                     <div className="col-md-1">
                     </div>
                 </div>
-                <h2 style={{ color: 'red' }}>{this.state.submit}</h2>
+                <h1 style={{ color: 'red' }}>{this.state.submit}</h1>
             </div>
         );
     }

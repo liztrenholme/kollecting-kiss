@@ -13,7 +13,7 @@ class adminLogin extends Component {
       username: '',
       password: '',
       message: '',
-      authed: false
+      authed: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,7 +43,7 @@ class adminLogin extends Component {
           username: '',
           password: '',
           message: "Incorrect Username and/or Password",
-          authed: true
+          authed: false
         })
       }
     })
@@ -51,9 +51,9 @@ class adminLogin extends Component {
   render() {
     const form = (<div className="Login">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-md-3">
         </div>
-        <div className="col-md-8 authform">
+        <div className="col-md-6 authform">
           <div className="row">
             <div className="col-md-12">
               <form onSubmit={this.handleSubmit}>
@@ -74,7 +74,7 @@ class adminLogin extends Component {
               </div>
             </div>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-3">
         </div>
       </div>
     </div>);

@@ -135,7 +135,7 @@ class App extends Component {
                             </form>
                         </div>
                     </nav>
-                    <div className="container">
+                    <div className="container-fluid">
                         <div className="row">
                             <div className="col-md-12">
                                 <img className="header" src={HeaderImg} alt="header" />
