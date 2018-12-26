@@ -1,0 +1,1 @@
+A site built for a friend that keeps track of KISS memorabilia made through the years.  Database through MongoDB with a UI for data entry.  Search functionality coming very soon.
