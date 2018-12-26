@@ -43,7 +43,7 @@ class adminLogin extends Component {
           username: '',
           password: '',
           message: "Incorrect Username and/or Password",
-          authed: false
+          authed: true
         })
       }
     })
@@ -54,19 +54,25 @@ class adminLogin extends Component {
         <div className="col-md-2">
         </div>
         <div className="col-md-8 authform">
-          <form onSubmit={this.handleSubmit}>
-            <h2>Please sign in</h2>
-            <input type="text" className="text-input"
-              placeholder="Username" name="username"
-              value={this.state.value} onChange={this.handleChange} required />
-            <input type="password" className="text-input"
-              placeholder="Password" name="password" value={this.state.value}
-              onChange={this.handleChange} required />
-            <input type="submit" className='btn btn-outline-secondary' value="Log In" />
-          </form>
-        </div>
-        <div>
-          <p className="error-msg" style={{ color: 'red' }}>{this.state.message}</p>
+          <div className="row">
+            <div className="col-md-12">
+              <form onSubmit={this.handleSubmit}>
+                <h2>Please sign in</h2>
+                <input type="text" className="text-input"
+                  placeholder="Username" name="username"
+                  value={this.state.value} onChange={this.handleChange} required />
+                <input type="password" className="text-input"
+                  placeholder="Password" name="password" value={this.state.value}
+                  onChange={this.handleChange} required />
+                <input type="submit" className='btn btn-outline-secondary' value="Log In" />
+              </form>
+            </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12">
+                <p className="error-msg" style={{ color: 'red' }}>{this.state.message}</p>
+              </div>
+            </div>
         </div>
         <div className="col-md-2">
         </div>

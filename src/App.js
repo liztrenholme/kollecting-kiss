@@ -142,7 +142,7 @@ class App extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="routes-rendered-here">
+                            <div className="routes-rendered-here col-md-12">
                                 <Routes />
                             </div>
                         </div>

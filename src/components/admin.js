@@ -90,6 +90,9 @@ class Admin extends Component {
         upload.end((err, response) => {
             if (err) {
                 console.error(err);
+                this.setState({
+                    submit: "Error: picture may be too large, or there was a problem on Cloudinary's end."
+                })
             }
 
             if (response.body.secure_url !== '') {

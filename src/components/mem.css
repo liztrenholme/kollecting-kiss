@@ -128,8 +128,9 @@ textarea {
 	}
 
 	.error-msg {
-		margin: 2%;
+		text-align: center;
 		font-weight: bold;
+		font-size: 110%;
 	}
 
 	.main-search {
