@@ -132,6 +132,10 @@ textarea {
 		margin: 1% 0;
 	}
 
+	.white-text {
+		color: #fff;
+	}
+
 	.error-msg {
 		text-align: center;
 		font-weight: bold;

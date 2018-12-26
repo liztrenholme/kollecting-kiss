@@ -8,6 +8,7 @@ const {
     RemoteMongoClient,
     AnonymousCredential
 } = require('mongodb-stitch-browser-sdk');
+let lastItem = [];
 
 class Admin extends Component {
     constructor(props) {
@@ -21,13 +22,14 @@ class Admin extends Component {
             category: 'actionFigures',
             submit: '',
             uploadedFile: null,
-            imageURL: ''
+            imageURL: '',
+            lastItem: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onImageDrop = this.onImageDrop.bind(this);
     }
-// updates state with form inputs
+    // updates state with form inputs
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value,
@@ -42,7 +44,7 @@ class Admin extends Component {
             "mongodb-atlas"
         );
         const items = mongodb.db("memorabilia").collection("items");
-    // here we are inserting data into the database through the form
+        // here we are inserting data into the database through the form
         stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
             try {
                 items.insertOne({
@@ -64,13 +66,18 @@ class Admin extends Component {
                     imageURL: '',
                     submit: 'Data insert successful!'
                 });
-            } catch (e) {
-                console.log(e);
+            } catch (err) {
+                console.log(err);
                 this.setState({
                     submit: 'Error inserting data.'
                 })
             }
         })
+        lastItem.push(JSON.stringify(this.state));
+        // function showLastItem() {
+        //     return ()
+        // }
+        // showLastItem();
     }
     // allows user to either click on or drag image to box for upload
     onImageDrop(files) {
@@ -101,7 +108,11 @@ class Admin extends Component {
             }
         });
     }
+
+    
+
     render() {
+        // console.log(lastItem);
         return (
             <div className="Admin">
                 <div className="row">
@@ -191,7 +202,21 @@ class Admin extends Component {
                     <div className="col-md-1">
                     </div>
                 </div>
-                <h1 style={{ color: 'red' }}>{this.state.submit}</h1>
+                <div className="row">
+                    <div className="col-md-12">
+                        <h1 style={{ color: 'red' }}>{this.state.submit}</h1>
+                    </div>
+                </div>
+                {/* <div className="row">
+                <div className="col-md-12">
+            
+                {lastItem}
+                 <p className="white-text">{lastItem.category} <img src={lastItem.imageURL} alt="no picture uploaded" width="80px" />
+                    {lastItem.itemName} {lastItem.itemManufacturer}
+                     {lastItem.description} ${lastItem.itemValue} {lastItem.year}</p>
+                 
+                </div>
+                </div> */}
             </div>
         );
     }
