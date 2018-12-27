@@ -16,7 +16,7 @@ class Featured extends Component {
   }
 
   getDataList() {
-    
+
   }
 
 
@@ -30,10 +30,10 @@ class Featured extends Component {
       );
       // Get a hook to the items collection
       const items = mongodb.db("memorabilia").collection("items");
-       return items.find({}, {limit: 9}).asArray()
-        
+      return items.find({}, { limit: 9 }).asArray()
+
     })
-    // .then(response => response.json())
+      // .then(response => response.json())
       .then(items => this.setState({ items: items }));
   }
 
@@ -66,12 +66,17 @@ class Featured extends Component {
           </div>
           <div className="featured-items">
             <h3>Featured Items</h3>
-                <ul>
+            <div className="row">
+              <div className="col-md-12">
+              <div className="grid-container">
                   {/* {console.log(items[2])} */}
                   {itemsArr.map(item =>
-                    <li key={item._id}>{item.itemName} {item.description} <img src={item.imageURL} width="100px" /></li>
+                    <div className="grid-item" key={item._id}><h4 className="listing-title">{item.itemName}</h4> <p className="listing-description">{item.description}</p>
+                      <img src={item.imageURL} alt={item.itemName} height="100px" /></div>
                   )}
-                </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
