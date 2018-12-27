@@ -23,6 +23,7 @@ class Admin extends Component {
             submit: '',
             uploadedFile: null,
             imageURL: '',
+            totalImages: [],
             lastItem: []
         };
         this.handleChange = this.handleChange.bind(this);
@@ -101,10 +102,15 @@ class Admin extends Component {
             }
 
             if (response.body.secure_url !== '') {
+                let imgArr = [];
+                imgArr.push(response.body.secure_url);
                 this.setState({
-                    imageURL: response.body.secure_url
+                    imageURL: response.body.secure_url,
+                    totalImages: imgArr
                 });
                 console.log(this.state.imageURL);
+                console.log(this.state.totalImages);
+                console.log(imgArr);
             }
         });
     }
@@ -207,16 +213,16 @@ class Admin extends Component {
                         <h1 style={{ color: 'red' }}>{this.state.submit}</h1>
                     </div>
                 </div>
-                {/* <div className="row">
+                <div className="row">
                 <div className="col-md-12">
             
-                {lastItem}
-                 <p className="white-text">{lastItem.category} <img src={lastItem.imageURL} alt="no picture uploaded" width="80px" />
+                {/* {lastItem} */}
+                 {/* <p className="white-text">{lastItem.category} <img src={lastItem.imageURL} alt="no picture uploaded" width="80px" />
                     {lastItem.itemName} {lastItem.itemManufacturer}
-                     {lastItem.description} ${lastItem.itemValue} {lastItem.year}</p>
+                     {lastItem.description} ${lastItem.itemValue} {lastItem.year}</p> */}
                  
                 </div>
-                </div> */}
+                </div>
             </div>
         );
     }

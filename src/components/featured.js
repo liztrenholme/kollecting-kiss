@@ -11,12 +11,18 @@ class Featured extends Component {
   constructor() {
     super();
     this.state = {
-      featured: []
+      items: ''
     };
   }
 
   getDataList() {
-    stitchClient.auth.loginWithCredential(new AnonymousCredential()).then((user) => {
+    
+  }
+
+
+  // put results fetching in CDM so it doesn't drain memory with continuous calls!
+  componentDidMount() {
+    stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
       // console.log(`Logged in as anonymous user with id: ${user.id}`);
       const mongodb = stitchClient.getServiceClient(
         RemoteMongoClient.factory,
@@ -24,22 +30,22 @@ class Featured extends Component {
       );
       // Get a hook to the items collection
       const items = mongodb.db("memorabilia").collection("items");
-      return items.find({}, {limit: 9})
-        .asArray()
+       return items.find({}, {limit: 9}).asArray()
+        
     })
-    .then(
-      // loadList()
-    );
+    // .then(response => response.json())
+      .then(items => this.setState({ items: items }));
   }
 
-
-  // put results fetching in CDM so it doesn't drain memory with continuous calls!
-  componentDidMount() {
-    this.getDataList();
-  }
+  // loadList(items) {
+  //   console.log(items);
+  // }
 
   render() {
-    console.log(this.state.featured);
+    console.log(this.state.items);
+    const { items } = this.state;
+    const itemsArr = Object.keys(items).map(i => items[i]);
+    // ******** need to turn items into an array (not just array of objects) 
     return (
       <div className="Featured">
         <div className="row">
@@ -60,15 +66,12 @@ class Featured extends Component {
           </div>
           <div className="featured-items">
             <h3>Featured Items</h3>
-            <table>
-              <tbody>
-                <tr>
-                  {/* {this.state.featured.map(hi =>
-                    <td key={hi.id}>{hi.greeting}</td> */}
-                  {/* )} */}
-                </tr>
-              </tbody>
-            </table>
+                <ul>
+                  {/* {console.log(items[2])} */}
+                  {itemsArr.map(item =>
+                    <li key={item._id}>{item.itemName} {item.description} <img src={item.imageURL} width="100px" /></li>
+                  )}
+                </ul>
           </div>
         </div>
       </div>
