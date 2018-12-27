@@ -13,7 +13,7 @@ class adminLogin extends Component {
       username: '',
       password: '',
       message: '',
-      authed: false
+      authed: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

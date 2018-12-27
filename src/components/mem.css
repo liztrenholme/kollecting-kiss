@@ -78,6 +78,10 @@ a:hover {
 	  border-bottom: dotted 1px black;
   }
 
+  .uploaded {
+	  margin: 1% 2%;
+  }
+
   /* .featured-image {
 	  border: solid 2px darkgray;
 	  border-radius: 20px;
