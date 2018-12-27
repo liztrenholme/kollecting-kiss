@@ -78,6 +78,11 @@ a:hover {
 	  border-bottom: dotted 1px black;
   }
 
+  /* .featured-image {
+	  border: solid 2px darkgray;
+	  border-radius: 20px;
+  } */
+
 h4 {
 	font-weight: bold;
 	font-size: 110%;
@@ -160,3 +165,9 @@ textarea {
 	.main-search {
 		color: #000;
 	}
+
+	@media only screen and (max-width: 600px) {
+		.grid-container {
+			grid-template-columns: auto auto;
+		  }
+	  }

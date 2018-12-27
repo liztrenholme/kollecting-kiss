@@ -8,7 +8,7 @@ const {
     RemoteMongoClient,
     AnonymousCredential
 } = require('mongodb-stitch-browser-sdk');
-let lastItem = [];
+let imgArr = [];
 
 class Admin extends Component {
     constructor(props) {
@@ -22,9 +22,7 @@ class Admin extends Component {
             category: 'actionFigures',
             submit: '',
             uploadedFile: null,
-            imageURL: '',
-            totalImages: [],
-            lastItem: []
+            imageURL: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,7 +43,7 @@ class Admin extends Component {
             "mongodb-atlas"
         );
         const items = mongodb.db("memorabilia").collection("items");
-        // here we are inserting data into the database through the form
+    // here we are inserting data into the database through the form
         stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
             try {
                 items.insertOne({
@@ -74,11 +72,6 @@ class Admin extends Component {
                 })
             }
         })
-        lastItem.push(JSON.stringify(this.state));
-        // function showLastItem() {
-        //     return ()
-        // }
-        // showLastItem();
     }
     // allows user to either click on or drag image to box for upload
     onImageDrop(files) {
@@ -102,23 +95,17 @@ class Admin extends Component {
             }
 
             if (response.body.secure_url !== '') {
-                let imgArr = [];
                 imgArr.push(response.body.secure_url);
                 this.setState({
-                    imageURL: response.body.secure_url,
-                    totalImages: imgArr
+                    imageURL: imgArr
                 });
-                console.log(this.state.imageURL);
-                console.log(this.state.totalImages);
-                console.log(imgArr);
+                // console.log(this.state.imageURL);
+                // console.log(this.state.totalImages);
+                // console.log(imgArr);
             }
         });
     }
-
-    
-
     render() {
-        // console.log(lastItem);
         return (
             <div className="Admin">
                 <div className="row">
@@ -144,10 +131,10 @@ class Admin extends Component {
                             </Dropzone>
                             <div>
                                 {this.state.imageURL === '' ? null :
-                                    (<div>
-                                        <p>{this.state.uploadedFile.name}</p>
-                                        <img src={this.state.imageURL} alt="Successfully uploaded" height="200px" />
-                                    </div>)}
+                                    imgArr.map(image =>
+                                        <img className="uploaded" src={image} key={image} alt="Successfully uploaded" height="100px" />
+                                    )
+                                }
                             </div>
                         </div>
                         <form onSubmit={this.handleSubmit}>
@@ -214,14 +201,8 @@ class Admin extends Component {
                     </div>
                 </div>
                 <div className="row">
-                <div className="col-md-12">
-            
-                {/* {lastItem} */}
-                 {/* <p className="white-text">{lastItem.category} <img src={lastItem.imageURL} alt="no picture uploaded" width="80px" />
-                    {lastItem.itemName} {lastItem.itemManufacturer}
-                     {lastItem.description} ${lastItem.itemValue} {lastItem.year}</p> */}
-                 
-                </div>
+                    <div className="col-md-12">
+                    </div>
                 </div>
             </div>
         );

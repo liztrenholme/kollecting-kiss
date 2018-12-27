@@ -15,11 +15,6 @@ class Featured extends Component {
     };
   }
 
-  getDataList() {
-
-  }
-
-
   // put results fetching in CDM so it doesn't drain memory with continuous calls!
   componentDidMount() {
     stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
@@ -33,19 +28,11 @@ class Featured extends Component {
       return items.find({}, { limit: 9 }).asArray()
 
     })
-      // .then(response => response.json())
       .then(items => this.setState({ items: items }));
   }
-
-  // loadList(items) {
-  //   console.log(items);
-  // }
-
   render() {
-    console.log(this.state.items);
     const { items } = this.state;
     const itemsArr = Object.keys(items).map(i => items[i]);
-    // ******** need to turn items into an array (not just array of objects) 
     return (
       <div className="Featured">
         <div className="row">
@@ -69,10 +56,9 @@ class Featured extends Component {
             <div className="row">
               <div className="col-md-12">
               <div className="grid-container">
-                  {/* {console.log(items[2])} */}
                   {itemsArr.map(item =>
                     <div className="grid-item" key={item._id}><h4 className="listing-title">{item.itemName}</h4> <p className="listing-description">{item.description}</p>
-                      <img src={item.imageURL} alt={item.itemName} height="100px" /></div>
+                      <img className="featured-image" src={item.imageURL[0]} alt={item.itemName} height="100px" /></div>
                   )}
                 </div>
               </div>
