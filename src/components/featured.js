@@ -8,30 +8,23 @@ const {
 } = require('mongodb-stitch-browser-sdk');
 
 class Featured extends Component {
-  constructor() {
-    super();
-    this.state = {
-      items: ''
-    };
-  }
 
   // put results fetching in CDM so it doesn't drain memory with continuous calls!
-  componentDidMount() {
-    stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
-      // console.log(`Logged in as anonymous user with id: ${user.id}`);
-      const mongodb = stitchClient.getServiceClient(
-        RemoteMongoClient.factory,
-        "mongodb-atlas"
-      );
-      // Get a hook to the items collection
-      const items = mongodb.db("memorabilia").collection("items");
-      return items.find({}, { limit: 9 }).asArray()
+  // componentDidMount() {
+  //   stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
+  //     const mongodb = stitchClient.getServiceClient(
+  //       RemoteMongoClient.factory,
+  //       "mongodb-atlas"
+  //     );
+  //     // Get a hook to the items collection
+  //     const items = mongodb.db("memorabilia").collection("items");
+  //     return items.find({}, { limit: 9 }).asArray()
 
-    })
-      .then(items => this.setState({ items: items }));
-  }
+  //   })
+  //     .then(items => this.setState({ items: items }));
+  // }
   render() {
-    const { items } = this.state;
+    const { items } = this.props;
     const itemsArr = Object.keys(items).map(i => items[i]);
     return (
       <div className="Featured">
@@ -57,8 +50,14 @@ class Featured extends Component {
               <div className="col-md-12">
               <div className="grid-container">
                   {itemsArr.map(item =>
-                    <div className="grid-item" key={item._id}><h4 className="listing-title">{item.itemName}</h4> <p className="listing-description">{item.description}</p>
-                      <img className="featured-image" src={item.imageURL[0]} alt={item.itemName} height="100px" /></div>
+                    <div className="grid-item" key={item._id} value={item.itemName} onClick={this.props.grabName}>
+                    <a href={process.env.PUBLIC_URL + "/item_view"}>
+                    <h4 className="listing-title">{item.itemName}</h4> 
+                    <p className="listing-description">{item.description}</p>
+                    <img className="featured-image" src={item.imageURL[0]} 
+                      alt={item.itemName} height="100px" />
+                      </a>
+                      </div>
                   )}
                 </div>
               </div>
