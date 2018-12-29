@@ -1,28 +1,9 @@
 import React, { Component } from 'react';
 import './mem.css';
-import stitchClient from './stitch';
 
-const {
-  RemoteMongoClient,
-  AnonymousCredential
-} = require('mongodb-stitch-browser-sdk');
 
 class Featured extends Component {
 
-  // put results fetching in CDM so it doesn't drain memory with continuous calls!
-  // componentDidMount() {
-  //   stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
-  //     const mongodb = stitchClient.getServiceClient(
-  //       RemoteMongoClient.factory,
-  //       "mongodb-atlas"
-  //     );
-  //     // Get a hook to the items collection
-  //     const items = mongodb.db("memorabilia").collection("items");
-  //     return items.find({}, { limit: 9 }).asArray()
-
-  //   })
-  //     .then(items => this.setState({ items: items }));
-  // }
   render() {
     const { items } = this.props;
     const itemsArr = Object.keys(items).map(i => items[i]);
@@ -65,7 +46,6 @@ class Featured extends Component {
           </div>
         </div>
       </div>
-
     );
   }
 }

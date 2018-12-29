@@ -6,9 +6,9 @@ class Contact extends Component {
     return (
       <div className="Contact">
             <div className="row">
-              <div className="col-md-4">
+              <div className="col-md-2">
               </div>
-              <div className="col-md-6 contactform">
+              <div className="col-md-8 contactform">
               <h3 className="title">Ask a question</h3>
                 <p className="hear">Send us a general question or comment here.</p>
                 <form action="https://formspree.io/liztrenholme@gmail.com" method="POST">

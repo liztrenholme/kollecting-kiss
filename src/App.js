@@ -5,7 +5,6 @@ import Tumblr from "./images/tumblr.png";
 import Twitter from "./images/twitter-48.png";
 import Blogger from "./images/blogger-5-48.png";
 import HeaderImg from "./images/header.jpg";
-// import Routes from './routes/routes';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Contact from './components/contact';
 import Featured from './components/featured';
