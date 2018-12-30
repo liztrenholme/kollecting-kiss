@@ -9,7 +9,7 @@ class ItemView extends Component {
                     <div className="col-md-2">
                     </div>
                     <div className="col-md-8 featured-items">
-                        <h4>Item view here {this.props.grabbedName}</h4>
+                        <h4>Item view here {this.props._id}</h4>
                     </div>
                     <div className="col-md-2">
                     </div>

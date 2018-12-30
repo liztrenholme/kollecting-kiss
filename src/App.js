@@ -27,11 +27,11 @@ class App extends Component {
             category: '',
             results: [],
             hi: "hello world",
-            grabbedName: '',
+            _id: 'id here',
             items: '',
             selected: ''
         };
-        this.grabName = this.grabName.bind(this);
+        this.grabId = this.grabId.bind(this);
         this.onChange = this.onChange.bind(this);
     }
     onChange(e) {
@@ -42,19 +42,33 @@ class App extends Component {
             selected: this.state.value
         })
     }
-    grabName(event) {
+    grabId(event) {
         event.preventDefault();
         console.log("This message is coming from app.js and piping through routes");
-        console.log(event.target.value);
+        console.log(event.target.key);
         this.setState({
-            grabbedName: event.target.value
+            _id: event.target.key
         })
     }
 
-    //function to get item _id when item is clicked on, then put that value into state
+    //function to get item _id when item is clicked on, then puts that value into state
+
+
+
+
+
 
     //function to search db for item name using state from value, then pass item data to itemview
 
+
+
+
+
+
+
+/*************** this will become function that gets fired with item is selected from
+ * categories menu *******************
+ */
     // fetchData() {
     //     const mongodb = stitchClient.getServiceClient(
     //         RemoteMongoClient.factory,
@@ -63,10 +77,12 @@ class App extends Component {
     //     const items = mongodb.db("memorabilia").collection("items");
 
     //     stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
-    //         items.find({ category: 'beltBuckles' })
+    //         items.find({ category: this.state.selected })
     //     });
     //     console.log(items);
     // }
+   
+    /*********************************************************************** */
 
     // put results fetching in CDM so it doesn't drain memory with continuous calls!
     componentDidMount() {
@@ -83,10 +99,8 @@ class App extends Component {
         })
             .then(items => this.setState({ items: items }));
     }
-
-
     render() {
-        console.log(this.state.grabbedName);
+        console.log(this.state._id);
         const { items } = this.state;
         return (
 
@@ -189,7 +203,10 @@ class App extends Component {
                                     <BrowserRouter basename={process.env.PUBLIC_URL}>
                                         <Switch>
                                             <Route path="/contact" exact component={Contact} />
-                                            <Route path="/" exact render={(props) => <Featured {...props} items={items} hi={props.hi} />} />
+                                            <Route path="/" exact render={(props) => <Featured {...props} 
+                                                    items={items} 
+                                                    hi={props._id}
+                                                    onClick={props.grabId} />} />
                                             <Route path='/login' exact component={adminLogin} />
                                             <Route path='/item_view' exact render={(props) => <ItemView {...props}
                                                 grabbedName={this.state.category} hi={"hello world"} />}
