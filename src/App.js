@@ -28,40 +28,49 @@ class App extends Component {
             results: [],
             hi: "hello world",
             _id: 'id here',
+            itemName: 'test',
+            imageURL: '',
+            year: 'test',
+            itemManufacturer: 'test',
+            description: 'test',
             items: '',
             selected: ''
         };
         this.grabId = this.grabId.bind(this);
-        this.onChange = this.onChange.bind(this);
+        this.sayHi = this.sayHi.bind(this);
+        // this.onChange = this.onChange.bind(this);
     }
-    onChange(e) {
-        // event.preventDefault();
-        this.setState({ value: e.target.value });
-        console.log(this.state.value);
-        this.setState({
-            selected: this.state.value
-        })
-    }
+    // onChange(e) {
+    //     // event.preventDefault();
+    //     this.setState({ value: e.target.value });
+    //     console.log(this.state.value);
+    //     this.setState({
+    //         selected: this.state.value
+    //     })
+    // }
+
+//function to get item _id when item is clicked on, then puts that value into state
     grabId(event) {
-        event.preventDefault();
+        // event.preventDefault();
         console.log("This message is coming from app.js and piping through routes");
         console.log(event.target.key);
         this.setState({
-            _id: event.target.key
+            _id: event.currentTarget.dataset.valuename
         })
+        console.log(event.currentTarget.dataset.valuename);
+        console.log(this.state._id);
     }
 
-    //function to get item _id when item is clicked on, then puts that value into state
+    // need to put onclick function in child component too! I think?
 
+    sayHi (event) {
+        this.setState({
+            hi: event.currentTarget.dataset.valuename
+        })
+        console.log(this.state.hi);
+    }
 
-
-
-
-
-    //function to search db for item name using state from value, then pass item data to itemview
-
-
-
+//function to search db for item name using state from value, then pass item data to itemview
 
 
 
@@ -100,7 +109,7 @@ class App extends Component {
             .then(items => this.setState({ items: items }));
     }
     render() {
-        console.log(this.state._id);
+        // console.log(this.state._id);
         const { items } = this.state;
         return (
 
@@ -198,27 +207,33 @@ class App extends Component {
                         </div>
                         <div className="row">
                             <div className="routes-rendered-here col-md-12">
-                                {/* <Routes onClick={this.grabName} /> */}
                                 <div>
                                     <BrowserRouter basename={process.env.PUBLIC_URL}>
                                         <Switch>
                                             <Route path="/contact" exact component={Contact} />
                                             <Route path="/" exact render={(props) => <Featured {...props} 
                                                     items={items} 
-                                                    hi={props._id}
-                                                    onClick={props.grabId} />} />
+                                                    hi={this.state._id}
+                                                    onClick={() => this.grabId}
+                                                     />} />
                                             <Route path='/login' exact component={adminLogin} />
                                             <Route path='/item_view' exact render={(props) => <ItemView {...props}
-                                                grabbedName={this.state.category} hi={"hello world"} />}
+                                                _id={this.state._id} 
+                                                itemName={this.state.itemName}
+                                                year={this.state.year}
+                                                itemManufacturer={this.state.itemManufacturer}
+                                                description={this.state.description}
+                                                hi={"hello world"} />}
                                             />
                                         </Switch>
                                     </BrowserRouter>
+                                    {/* <p data-valuename={this.state.hi} onClick={this.sayHi} style={{color: 'red'}}>hi</p> */}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <footer>&#9400; 2007-2019 Kollecting KISS | All rights reserved.</footer>
+                <footer>&#9400; 2007-{new Date().getFullYear()} Kollecting KISS | All rights reserved.</footer>
                 <footer><a className="light" href={process.env.PUBLIC_URL + "/login"}>[Admin]</a></footer>
 
             </div>
