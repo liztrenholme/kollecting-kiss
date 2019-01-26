@@ -49,7 +49,7 @@ class App extends Component {
     //     })
     // }
 
-//function to get item _id when item is clicked on, then puts that value into state
+    //function to get item _id when item is clicked on, then puts that value into state
     grabId(event) {
         // event.preventDefault();
         console.log("This message is coming from app.js and piping through routes");
@@ -63,21 +63,21 @@ class App extends Component {
 
     // need to put onclick function in child component too! I think?
 
-    sayHi (event) {
+    sayHi(event) {
         this.setState({
             hi: event.currentTarget.dataset.valuename
         })
         console.log(this.state.hi);
     }
 
-//function to search db for item name using state from value, then pass item data to itemview
+    //function to search db for item name using state from value, then pass item data to itemview
 
 
 
 
-/*************** this will become function that gets fired with item is selected from
- * categories menu *******************
- */
+    /*************** this will become function that gets fired with item is selected from
+     * categories menu *******************
+     */
     // fetchData() {
     //     const mongodb = stitchClient.getServiceClient(
     //         RemoteMongoClient.factory,
@@ -90,7 +90,7 @@ class App extends Component {
     //     });
     //     console.log(items);
     // }
-   
+
     /*********************************************************************** */
 
     // put results fetching in CDM so it doesn't drain memory with continuous calls!
@@ -116,25 +116,36 @@ class App extends Component {
             <div className="App">
                 <div className="container-fluid">
                     <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-                        <a className="navbar-brand" href="/"><img src={Logo} alt="logo" width="80px" /></a>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <a className="navbar-brand"
+                            href="/"><img src={Logo}
+                                alt="logo"
+                                width="80px" /></a>
+                        <button className="navbar-toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div className="collapse navbar-collapse"
+                            id="navbarSupportedContent">
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item active">
                                     <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="http://kollectingkiss.tumblr.com/"><img src={Tumblr} alt="tumblr" width="24px" height="24px" /></a>
+                                    <a className="nav-link" href="http://kollectingkiss.tumblr.com/">
+                                        <img src={Tumblr} alt="tumblr" width="24px" height="24px" /></a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="http://twitter.com/KollectingKiss"><img src={Twitter} alt="twitter" width="24px" height="24px" /></a>
+                                    <a className="nav-link" href="http://twitter.com/KollectingKiss">
+                                        <img src={Twitter} alt="twitter" width="24px" height="24px" /></a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href=" http://kollectingkiss.blogspot.com/"><img src={Blogger} className="blogger-pic" alt="blogspot" width="24px" height="24px" /></a>
+                                    <a className="nav-link" href=" http://kollectingkiss.blogspot.com/">
+                                        <img src={Blogger} className="blogger-pic" alt="blogspot" width="24px" height="24px" /></a>
                                 </li>
                                 <li className="nav-item active dropdown">
                                     <p className="nav-link dropdown-toggle scrollable-menu"
@@ -211,14 +222,15 @@ class App extends Component {
                                     <BrowserRouter basename={process.env.PUBLIC_URL}>
                                         <Switch>
                                             <Route path="/contact" exact component={Contact} />
-                                            <Route path="/" exact render={(props) => <Featured {...props} 
-                                                    items={items} 
-                                                    hi={this.state._id}
-                                                    onClick={() => this.grabId}
-                                                     />} />
+                                            <Route path="/" exact render={(props) => <Featured {...props}
+                                                items={items}
+                                                hi={this.state._id}
+                                                // onClick={() => this.grabId}
+                                                onClick={this.grabId}
+                                            />} />
                                             <Route path='/login' exact component={adminLogin} />
                                             <Route path='/item_view' exact render={(props) => <ItemView {...props}
-                                                _id={this.state._id} 
+                                                _id={this.state._id}
                                                 itemName={this.state.itemName}
                                                 year={this.state.year}
                                                 itemManufacturer={this.state.itemManufacturer}
@@ -227,7 +239,7 @@ class App extends Component {
                                             />
                                         </Switch>
                                     </BrowserRouter>
-                                    {/* <p data-valuename={this.state.hi} onClick={this.sayHi} style={{color: 'red'}}>hi</p> */}
+                                    <p data-valuename={this.state.hi} onClick={this.sayHi} style={{color: 'red'}}>hi</p>
                                 </div>
                             </div>
                         </div>

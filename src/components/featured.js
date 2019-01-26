@@ -43,7 +43,7 @@ class Featured extends Component {
                     <div className="grid-item" 
                           key={item._id} 
                           data-valuename={item.itemName} 
-                          onClick={this.grabId}>
+                          onClick={this.props.onClick}>
                     {/* <a href={process.env.PUBLIC_URL + "/item_view"}> */}
                     <h4 className="listing-title">{item.itemName}</h4> 
                     <p className="listing-description">{item.description}</p>
