@@ -42,14 +42,14 @@ class Featured extends Component {
                   {itemsArr.map(item =>
                     <div className="grid-item" 
                           key={item._id} 
-                          data-valuename={item.itemName} 
+                          data-valuename={item._id} 
                           onClick={this.props.onClick}>
-                    {/* <a href={process.env.PUBLIC_URL + "/item_view"}> */}
+                    <a href={process.env.PUBLIC_URL + "/item_view"}>
                     <h4 className="listing-title">{item.itemName}</h4> 
                     <p className="listing-description">{item.description}</p>
                     <img className="featured-image" src={item.imageURL[0]} 
                       alt={item.itemName} height="100px" />
-                      {/* </a> */}
+                      </a>
                       </div>
                   )}
                 </div>

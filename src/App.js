@@ -26,8 +26,7 @@ class App extends Component {
             value: '',
             category: '',
             results: [],
-            hi: "hello world",
-            _id: 'id here',
+            _id: '',
             itemName: 'test',
             imageURL: '',
             year: 'test',
@@ -37,7 +36,6 @@ class App extends Component {
             selected: ''
         };
         this.grabId = this.grabId.bind(this);
-        this.sayHi = this.sayHi.bind(this);
         // this.onChange = this.onChange.bind(this);
     }
     // onChange(e) {
@@ -51,23 +49,11 @@ class App extends Component {
 
     //function to get item _id when item is clicked on, then puts that value into state
     grabId(event) {
-        // event.preventDefault();
-        console.log("This message is coming from app.js and piping through routes");
-        console.log(event.target.key);
         this.setState({
             _id: event.currentTarget.dataset.valuename
         })
         console.log(event.currentTarget.dataset.valuename);
         console.log(this.state._id);
-    }
-
-    // need to put onclick function in child component too! I think?
-
-    sayHi(event) {
-        this.setState({
-            hi: event.currentTarget.dataset.valuename
-        })
-        console.log(this.state.hi);
     }
 
     //function to search db for item name using state from value, then pass item data to itemview
@@ -96,7 +82,6 @@ class App extends Component {
     // put results fetching in CDM so it doesn't drain memory with continuous calls!
     componentDidMount() {
         stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
-            // console.log(`Logged in as anonymous user with id: ${user.id}`);
             const mongodb = stitchClient.getServiceClient(
                 RemoteMongoClient.factory,
                 "mongodb-atlas"
@@ -109,7 +94,6 @@ class App extends Component {
             .then(items => this.setState({ items: items }));
     }
     render() {
-        // console.log(this.state._id);
         const { items } = this.state;
         return (
 
@@ -225,21 +209,19 @@ class App extends Component {
                                             <Route path="/" exact render={(props) => <Featured {...props}
                                                 items={items}
                                                 hi={this.state._id}
-                                                // onClick={() => this.grabId}
                                                 onClick={this.grabId}
                                             />} />
                                             <Route path='/login' exact component={adminLogin} />
-                                            <Route path='/item_view' exact render={(props) => <ItemView {...props}
+                                            <Route path={'/item_view/' + this.state._id} exact render={(props) => (<ItemView {...props}
                                                 _id={this.state._id}
                                                 itemName={this.state.itemName}
                                                 year={this.state.year}
                                                 itemManufacturer={this.state.itemManufacturer}
                                                 description={this.state.description}
-                                                hi={"hello world"} />}
+                                            />)}
                                             />
                                         </Switch>
                                     </BrowserRouter>
-                                    <p data-valuename={this.state.hi} onClick={this.sayHi} style={{color: 'red'}}>hi</p>
                                 </div>
                             </div>
                         </div>

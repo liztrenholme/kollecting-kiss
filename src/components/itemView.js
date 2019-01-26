@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
 import './mem.css';
+import stitchClient from '../components/stitch';
+
+const {
+    RemoteMongoClient,
+    AnonymousCredential
+} = require('mongodb-stitch-browser-sdk');
 
 class ItemView extends Component {
+
+    componentDidMount() {
+        stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
+            const mongodb = stitchClient.getServiceClient(
+                RemoteMongoClient.factory,
+                "mongodb-atlas"
+            );
+            // Get a hook to the items collection
+            const items = mongodb.db("memorabilia").collection("items");
+            return items.find({"_id": this.props._id}).asArray()
+
+        })
+            .then(items => this.setState({ items: items }));
+    }
+
     render() {
         return (
             <div>
