@@ -50,9 +50,10 @@ class App extends Component {
     //function to get item _id when item is clicked on, then puts that value into state
     grabId(event) {
         this.setState({
-            _id: event.currentTarget.dataset.valuename
+            _id: event.currentTarget.dataset.key,
+            itemName: event.currentTarget.dataset.valuename
         })
-        console.log(event.currentTarget.dataset.valuename);
+        console.log(event.currentTarget.dataset.valuename, event.currentTarget.dataset.key);
         console.log(this.state._id);
     }
 
@@ -215,9 +216,9 @@ class App extends Component {
                                             <Route path={'/item_view/' + this.state._id} exact render={(props) => (<ItemView {...props}
                                                 _id={this.state._id}
                                                 itemName={this.state.itemName}
-                                                year={this.state.year}
-                                                itemManufacturer={this.state.itemManufacturer}
-                                                description={this.state.description}
+                                                // year={this.state.year}
+                                                // itemManufacturer={this.state.itemManufacturer}
+                                                // description={this.state.description}
                                             />)}
                                             />
                                         </Switch>

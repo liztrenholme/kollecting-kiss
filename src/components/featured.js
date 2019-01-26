@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import './mem.css';
 
 
@@ -40,16 +41,18 @@ class Featured extends Component {
               <div className="col-md-12">
               <div className="grid-container">
                   {itemsArr.map(item =>
-                    <div className="grid-item" 
+                    <div className="grid-item"
                           key={item._id} 
-                          data-valuename={item._id} 
+                          data-key={item._id}
+                          data-valuename={item.itemName} 
                           onClick={this.props.onClick}>
-                    <a href={process.env.PUBLIC_URL + "/item_view"}>
-                    <h4 className="listing-title">{item.itemName}</h4> 
+                    {/* <a href={process.env.PUBLIC_URL + "/item_view"}> */}
+                    <NavLink to="/item_view">
+                    <h4 className="listing-title">{this.props.itemName}</h4> 
                     <p className="listing-description">{item.description}</p>
                     <img className="featured-image" src={item.imageURL[0]} 
                       alt={item.itemName} height="100px" />
-                      </a>
+                      </ NavLink>
                       </div>
                   )}
                 </div>

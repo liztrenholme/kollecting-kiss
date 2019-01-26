@@ -17,10 +17,20 @@ class ItemView extends Component {
             );
             // Get a hook to the items collection
             const items = mongodb.db("memorabilia").collection("items");
-            return items.find({"_id": this.props._id}).asArray()
+            return items.find({ "_id": this.props._id }).asArray()
 
         })
-            .then(items => this.setState({ items: items }));
+            .then(items =>
+                console.log(items)
+            //     item => this.setState({
+            //     itemName: item.itemName,
+            //     year: item.year,
+            //     imageURL: item.imageURL,
+            //     itemManufacturer: item.itemManufacturer,
+            //     description: item.description
+
+            // })
+            );
     }
 
     render() {
