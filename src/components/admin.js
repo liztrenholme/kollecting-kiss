@@ -10,8 +10,6 @@ const {
 } = require('mongodb-stitch-browser-sdk');
 let imgArr = [];
 
-// TO DO: put imgArr in state, pass all image values to create call, ability to choose mainImg 
-
 class Admin extends Component {
   state = {
     itemName: '',
@@ -25,7 +23,6 @@ class Admin extends Component {
     imageURL: '',
     mainImage: ''
   }
-  // updates state with form inputs
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -41,6 +38,7 @@ class Admin extends Component {
     );
     const items = mongodb.db('memorabilia').collection('items');
     // here we are inserting data into the database through the form
+    // eslint-disable-next-line no-unused-vars
     stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
       try {
         items.insertOne({
@@ -65,6 +63,7 @@ class Admin extends Component {
           errorMsg: ''
         });
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.log(err);
         this.setState({
           errorMsg: 'Error inserting data.'
@@ -87,6 +86,7 @@ class Admin extends Component {
 
     upload.end((err, response) => {
       if (err) {
+        // eslint-disable-next-line no-console
         console.error(err);
         this.setState({
           errorMsg: 'Error: picture may be too large, or there was a problem on Cloudinary\'s end.'
@@ -98,16 +98,10 @@ class Admin extends Component {
         this.setState({
           imageURL: imgArr, mainImage: imgArr[0]
         });
-        // console.log(this.state.imageURL);
-        // console.log(this.state.totalImages);
-        console.log(imgArr);
       }
     });
   }
-  setMainImage = (url) => () => {
-    console.log('hi', url);
-    this.setState({mainImage: url});
-  }
+  setMainImage = (url) => () => { this.setState({mainImage: url}); }
   render() {
     return (
       <div className="Admin">
