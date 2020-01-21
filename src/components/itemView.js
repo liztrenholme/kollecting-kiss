@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './mem.css';
 import stitchClient from '../components/stitch';
+import PropTypes from 'prop-types'; 
 
 const {
   RemoteMongoClient,
@@ -63,5 +64,14 @@ class ItemView extends Component {
     );
   }
 }
+
+ItemView.propTypes = {
+  description: PropTypes.string,
+  _id: PropTypes.string,
+  itemName: PropTypes.string,
+  imageURL: PropTypes.string,
+  itemManufacturer: PropTypes.string,
+  year: PropTypes.number,
+};
 
 export default ItemView;
