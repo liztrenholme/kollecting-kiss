@@ -13,7 +13,7 @@ class adminLogin extends Component {
       username: '',
       password: '',
       message: '',
-      authed: false
+      authed: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,28 +25,28 @@ class adminLogin extends Component {
     this.setState({
       [event.target.name]: event.target.value,
       message: ''
-    })
+    });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     // authenticating through stitch to keep password secure
-    client.callFunction("login", [this.state.username, this.state.password]).then(result => {
-      console.log("handleSubmit here: " + result);
+    client.callFunction('login', [this.state.username, this.state.password]).then(result => {
+      console.log('handleSubmit here: ' + result);
       if (result === true) {
         this.setState({
           authed: true
-        })
+        });
       }
       else if (result === false) {
         this.setState({
           username: '',
           password: '',
-          message: "Incorrect Username and/or Password",
+          message: 'Incorrect Username and/or Password',
           authed: false
-        })
+        });
       }
-    })
+    });
   }
   render() {
     const form = (<div className="Login">
@@ -67,12 +67,12 @@ class adminLogin extends Component {
                 <input type="submit" className='btn btn-outline-secondary' value="Log In" />
               </form>
             </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <p className="error-msg" style={{ color: 'red' }}>{this.state.message}</p>
             </div>
-            <div className="row">
-              <div className="col-md-12">
-                <p className="error-msg" style={{ color: 'red' }}>{this.state.message}</p>
-              </div>
-            </div>
+          </div>
         </div>
         <div className="col-md-3">
         </div>

@@ -10,33 +10,30 @@ const {
 } = require('mongodb-stitch-browser-sdk');
 let imgArr = [];
 
+// TO DO: put imgArr in state, pass all image values to create call, ability to choose mainImg 
+
 class Admin extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      itemName: '',
-      itemManufacturer: '',
-      year: '',
-      description: '',
-      itemValue: '',
-      category: 'actionFigures',
-      submit: '',
-      uploadedFile: null,
-      imageURL: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.onImageDrop = this.onImageDrop.bind(this);
+  state = {
+    itemName: '',
+    itemManufacturer: '',
+    year: '',
+    description: '',
+    itemValue: '',
+    category: 'actionFigures',
+    submit: '',
+    uploadedFile: null,
+    imageURL: '',
+    mainImage: ''
   }
   // updates state with form inputs
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
       submit: ''
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     const mongodb = stitchClient.getServiceClient(
       RemoteMongoClient.factory,
@@ -53,7 +50,8 @@ class Admin extends Component {
           description: this.state.description,
           itemValue: this.state.itemValue,
           category: this.state.category,
-          imageURL: this.state.imageURL
+          imageURL: this.state.imageURL,
+          mainImage: this.state.mainImage
         });
         this.setState({
           itemName: '',
@@ -63,25 +61,26 @@ class Admin extends Component {
           itemValue: '',
           category: 'actionFigures',
           imageURL: '',
-          submit: 'Data insert successful!'
+          successMessage: 'Data successfully inserted!',
+          errorMsg: ''
         });
       } catch (err) {
         console.log(err);
         this.setState({
-          submit: 'Error inserting data.'
+          errorMsg: 'Error inserting data.'
         });
       }
     });
   }
   // allows user to either click on or drag image to box for upload
-  onImageDrop(files) {
+  onImageDrop = (files) => {
     this.setState({
       uploadedFile: files[0]
     });
     this.handleImageUpload(files[0]);
   }
   // sends image to cloudinary, updates state, fetches imageURL to send to mongodb
-  handleImageUpload(file) {
+  handleImageUpload = (file) => {
     let upload = request.post('https://api.cloudinary.com/v1_1/cheesecake/upload')
       .field('upload_preset', 'jvr3ebf0')
       .field('file', file);
@@ -90,20 +89,24 @@ class Admin extends Component {
       if (err) {
         console.error(err);
         this.setState({
-          submit: 'Error: picture may be too large, or there was a problem on Cloudinary\'s end.'
+          errorMsg: 'Error: picture may be too large, or there was a problem on Cloudinary\'s end.'
         });
       }
 
       if (response.body.secure_url !== '') {
         imgArr.push(response.body.secure_url);
         this.setState({
-          imageURL: imgArr
+          imageURL: imgArr, mainImage: imgArr[0]
         });
         // console.log(this.state.imageURL);
         // console.log(this.state.totalImages);
-        // console.log(imgArr);
+        console.log(imgArr);
       }
     });
+  }
+  setMainImage = (url) => () => {
+    console.log('hi', url);
+    this.setState({mainImage: url});
   }
   render() {
     return (
@@ -131,9 +134,16 @@ class Admin extends Component {
               </Dropzone>
               <div>
                 {this.state.imageURL === '' ? null :
-                  imgArr.map(image =>
-                    <img className="uploaded" src={image} key={image} alt="Successfully uploaded" height="100px" />
-                  )
+                  imgArr.map(image => (
+                    <img 
+                      className={'uploaded', this.state.mainImage === image ? 'mainImageAdmin' : ''}
+                      onClick={this.setMainImage(image)} 
+                      src={image} 
+                      key={image} 
+                      alt="Successfully uploaded" 
+                      height="100px"
+                    />
+                  ))
                 }
               </div>
             </div>
@@ -197,7 +207,8 @@ class Admin extends Component {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <h1 style={{ color: 'red' }}>{this.state.submit}</h1>
+            <h1 style={{ color: 'red' }}>{this.state.errorMsg}</h1>
+            <h1 style={{ color: 'green' }}>{this.state.successMsg}</h1>
           </div>
         </div>
         <div className="row">
