@@ -25,7 +25,8 @@ class Admin extends Component {
     uploadedFile: null,
     imageURL: '',
     mainImage: '',
-    categories: []
+    categories: [],
+    editModalOpen: false
   }
   handleChange = (event) => {
     this.setState({
@@ -106,9 +107,39 @@ class Admin extends Component {
     });
   }
   setMainImage = (url) => () => { this.setState({mainImage: url}); }
+  handleOpenModal = () => this.setState({ editModalOpen: true })
+  handleCloseModal = () => this.setState({ editModalOpen: false })
   render() {
     return (
       <div className="Admin">
+        {this.state.editModalOpen ? 
+          (<div className="editModal">
+            <div onClick={this.handleCloseModal} 
+              style={{fontWeight: 'bolder', textAlign: 'right', marginRight: '1em'}}>
+              <h2>X</h2>
+            </div>
+            <AdminForm
+              imgArr={imgArr}
+              errorMsg={this.state.errorMsg}
+              successMessage={this.state.successMessage}
+              category={this.state.category}
+              categories={this.state.categories}
+              handleChange={this.handleChange}
+              handleImageUpload={this.handleImageUpload}
+              handleSubmit={this.handleSubmit}
+              itemName={this.state.itemName}
+              itemManufacturer={this.state.itemManufacturer}
+              year={this.state.year}
+              description={this.state.description}
+              itemValue={this.state.itemValue}
+              submit={this.state.submit}
+              uploadedFile={this.state.uploadedFile}
+              imageURL={this.state.imageURL}
+              mainImage={this.state.mainImage}
+              onImageDrop={this.onImageDrop}
+              setMainImage={this.setMainImage}
+            />
+          </div>) : null}
         <AdminForm
           imgArr={imgArr}
           errorMsg={this.state.errorMsg}
@@ -132,7 +163,7 @@ class Admin extends Component {
         />
         <div className="row">
           <div className="col-md-12">
-            <AdminEdit />
+            <AdminEdit openModal={this.handleOpenModal} />
           </div>
         </div>
       </div>

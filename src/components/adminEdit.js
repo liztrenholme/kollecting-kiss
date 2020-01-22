@@ -41,10 +41,10 @@ render() {
                 key={item._id} 
                 data-key={item._id}
                 data-valuename={item.itemName} 
-                onClick={this.props.grabId}>
+                onClick={this.props.openModal}>
                 <h4 className="listing-title">{this.props.itemName}</h4> 
                 <p className="listing-description">{item.description}</p>
-                <img className="featured-image" src={item.imageURL[0]} 
+                <img className="featured-image" src={item.mainImage || item.imageURL[0]} 
                   alt={item.itemName} height="100px" />
               </div>
             )}
@@ -63,7 +63,7 @@ AdminEdit.propTypes = {
   imageURL: PropTypes.string,
   itemManufacturer: PropTypes.string,
   year: PropTypes.number,
-  grabId: PropTypes.func
+  openModal: PropTypes.func
 };
 
 export default AdminEdit;
