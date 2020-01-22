@@ -1,7 +1,7 @@
 import stitchClient from '../../components/stitch';
 const {
-    RemoteMongoClient,
-    AnonymousCredential
+  RemoteMongoClient,
+  AnonymousCredential
 } = require('mongodb-stitch-browser-sdk');
 
 // export const fetchData = (id) => {
@@ -26,21 +26,21 @@ const {
 //         // });
 //         // console.log(items);
 //     }
-    // export const fetchData = (id) => {
-    //     const mongodb = stitchClient.getServiceClient(
-    //                     RemoteMongoClient.factory,
-    //                     "mongodb-atlas"
-    //                 );
-    //     const collection = mongodb.db("memorabilia").collection("items");
+// export const fetchData = (id) => {
+//     const mongodb = stitchClient.getServiceClient(
+//                     RemoteMongoClient.factory,
+//                     "mongodb-atlas"
+//                 );
+//     const collection = mongodb.db("memorabilia").collection("items");
       
-    //     return collection
-    //       .findOne({"_id": id})
-    //       .then(doc => {
-    //         const asBase64 = doc.binary_data.toBase64();
-    //         const asOidString = doc._id.toString();
-    //         return { asBase64, asOidString }
-    //       }).then(console.log(collection))
-    //   }
+//     return collection
+//       .findOne({"_id": id})
+//       .then(doc => {
+//         const asBase64 = doc.binary_data.toBase64();
+//         const asOidString = doc._id.toString();
+//         return { asBase64, asOidString }
+//       }).then(console.log(collection))
+//   }
 
 //     .then(item => console.log(item))
 //   .catch(console.error)

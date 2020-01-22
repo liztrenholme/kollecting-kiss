@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './mem.css';
 import stitchClient from './stitch';
-import Dropzone from 'react-dropzone';
 import request from 'superagent';
+import AdminEdit from './adminEdit';
+import AdminForm from './adminForm';
+
+// TO DO: change category select to be checkboxes, push into array of categories to send to db
 
 const {
   RemoteMongoClient,
@@ -21,7 +24,8 @@ class Admin extends Component {
     submit: '',
     uploadedFile: null,
     imageURL: '',
-    mainImage: ''
+    mainImage: '',
+    categories: []
   }
   handleChange = (event) => {
     this.setState({
@@ -105,108 +109,30 @@ class Admin extends Component {
   render() {
     return (
       <div className="Admin">
-        <div className="row">
-          <div className="col-md-1">
-          </div>
-          <div className="col-md-10 adminform">
-            <h3 className="title">Enter new item</h3>
-            <div >
-              <Dropzone onDrop={this.onImageDrop}
-                multiple={false}
-                accept="image/*">
-                {({ getRootProps, getInputProps, isDragActive }) => {
-                  return (<div
-                    {...getRootProps()}>
-                    <input {...getInputProps()} />
-                    {
-                      isDragActive ?
-                        <p className="photo-upload">Drop image here...</p> :
-                        <p className="photo-upload">Try dropping an image here, or click to select image to upload.</p>
-                    }
-                  </div>);
-                }}
-              </Dropzone>
-              <div>
-                {this.state.imageURL === '' ? null :
-                  imgArr.map(image => (
-                    <img 
-                      className={'uploaded', this.state.mainImage === image ? 'mainImageAdmin' : ''}
-                      onClick={this.setMainImage(image)} 
-                      src={image} 
-                      key={image} 
-                      alt="Successfully uploaded" 
-                      height="100px"
-                    />
-                  ))
-                }
-              </div>
-            </div>
-            <form onSubmit={this.handleSubmit}>
-              <input className="text-input" placeholder=" Item Name" required type="text"
-                name="itemName" value={this.state.itemName} onChange={this.handleChange} />
-              <input className="text-input" placeholder=" Manufacturer" type="text"
-                name="itemManufacturer" value={this.state.itemManufacturer} onChange={this.handleChange} />
-              <input className="text-input" placeholder=" Year" type="text" name="year" value={this.state.year} onChange={this.handleChange} />
-              <textarea className="text-input" required rows="10" cols="25"
-                name="description" value={this.state.description} onChange={this.handleChange} placeholder=" Description" width="50%" height="50%"></textarea>
-              <input className="text-input" placeholder=" Estimated value" type="text"
-                name="itemValue" value={this.state.itemValue} onChange={this.handleChange} />
-              <select className="options" name="category" value={this.state.category} onChange={this.handleChange} >
-                <option value="actionFigures">Action Figures / Dolls</option>
-                <option value="advertisingAds">Advertising Ads</option>
-                <option value="artworkBusts">Artwork / Busts</option>
-                <option value="backstagePasses">Backstage Passes</option>
-                <option value="bags">Bags / Backpacks / Wallets</option>
-                <option value="beltBuckles">Belt Buckles</option>
-                <option value="blankets">Blankets / Rugs / Towels</option>
-                <option value="books">Books</option>
-                <option value="buttons">Buttons / Lapel Pins</option>
-                <option value="calendars">Calendars</option>
-                <option value="autoAccessories">Car Automobile Accessories</option>
-                <option value="cars">Cars / Die Cast</option>
-                <option value="clocks">Clocks / Watches</option>
-                <option value="clothing">Clothing</option>
-                <option value="coins">Coins</option>
-                <option value="comics">Comics</option>
-                <option value="electronics">Electronics / Gaming Gear</option>
-                <option value="games">Games / Puzzles</option>
-                <option value="glassware">Glassware</option>
-                <option value="guitarDrum">Guitar Picks & Drum Sticks</option>
-                <option value="halloween">Halloween Products</option>
-                <option value="health">Health & Beauty</option>
-                <option value="homeDecor">Home Decor</option>
-                <option value="incenseCandles">Incense / Candles</option>
-                <option value="jewelry">Jewelry</option>
-                <option value="keychains">Keychains</option>
-                <option value="lunchBoxes">Lunch Boxes</option>
-                <option value="magazines">Magazines</option>
-                <option value="magnets">Magnet / Magnet Sets</option>
-                <option value="misc">Miscellaneous</option>
-                <option value="ornaments">Ornaments</option>
-                <option value="petSupplies">Pet Supplies & Accessories</option>
-                <option value="posters">Posters</option>
-                <option value="stationary">Stationary Products</option>
-                <option value="stickersPatches">Stickers / Patches</option>
-                <option value="tickets">Tickets / Stubs</option>
-                <option value="tourBooks">Tour Books</option>
-                <option value="tradingPostCards">Trading Cards Phone & Post Cards</option>
-                <option value="wine">Wine</option>
-                <option value="lighters">Zippos / Lighters</option>
-              </select>
-              <input type="submit" className='btn btn-outline-secondary' value="Submit" />
-            </form>
-          </div>
-          <div className="col-md-1">
-          </div>
-        </div>
+        <AdminForm
+          imgArr={imgArr}
+          errorMsg={this.state.errorMsg}
+          successMessage={this.state.successMessage}
+          category={this.state.category}
+          categories={this.state.categories}
+          handleChange={this.handleChange}
+          handleImageUpload={this.handleImageUpload}
+          handleSubmit={this.handleSubmit}
+          itemName={this.state.itemName}
+          itemManufacturer={this.state.itemManufacturer}
+          year={this.state.year}
+          description={this.state.description}
+          itemValue={this.state.itemValue}
+          submit={this.state.submit}
+          uploadedFile={this.state.uploadedFile}
+          imageURL={this.state.imageURL}
+          mainImage={this.state.mainImage}
+          onImageDrop={this.onImageDrop}
+          setMainImage={this.setMainImage}
+        />
         <div className="row">
           <div className="col-md-12">
-            <h1 style={{ color: 'red' }}>{this.state.errorMsg}</h1>
-            <h1 style={{ color: 'green' }}>{this.state.successMsg}</h1>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12">
+            <AdminEdit />
           </div>
         </div>
       </div>
