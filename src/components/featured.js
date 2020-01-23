@@ -47,10 +47,10 @@ class Featured extends Component {
                       data-valuename={item.itemName} 
                       onClick={this.props.grabId}>
                       {/* <a href={process.env.PUBLIC_URL + "/item_view"}> */}
-                      <NavLink to="/item_view">
+                      <NavLink to={`/item-view/${item.grn}`}>
                         <h4 className="listing-title">{this.props.itemName}</h4> 
                         <p className="listing-description">{item.description}</p>
-                        <img className="featured-image" src={item.imageURL[0]} 
+                        <img className="featured-image" src={item.mainImage || item.imageURL[0]} 
                           alt={item.itemName} height="100px" />
                       </ NavLink>
                     </div>
