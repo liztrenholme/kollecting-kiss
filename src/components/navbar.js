@@ -46,8 +46,12 @@ class NavBar extends Component {
             </li>
             <li className="nav-item active dropdown">
               <p className="nav-link dropdown-toggle scrollable-menu"
-                id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">Categories</p>
+                id="navbarDropdown" 
+                role="button" 
+                data-toggle="dropdown"
+                aria-haspopup="true" 
+                aria-expanded="false"
+                style={{whiteSpace: 'nowrap'}}>Categories</p>
               <div className="dropdown-menu pre-scrollable"
                 aria-labelledby="navbarDropdown">
                 <option value="actionFigures">Action Figures / Dolls</option>
