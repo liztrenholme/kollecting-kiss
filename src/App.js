@@ -88,18 +88,11 @@ class App extends Component {
                        <Route path="/contact" exact component={Contact} />
                        <Route path="/" exact render={(props) => <Featured {...props}
                          items={items}
-                         hi={this.state._id}
+                         id={this.state._id}
                          grabId={this.grabId}
                        />} />
                        <Route path='/login' exact component={adminLogin} />
-                       <Route path={'/item-view/' + this.state._id} exact render={(props) => (<ItemView {...props}
-                         _id={this.state._id}
-                         itemName={this.state.itemName}
-                         year={this.state.year}
-                         itemManufacturer={this.state.itemManufacturer}
-                         description={this.state.description}
-                       />)}
-                       />
+                       <Route path='/item-view/' component={ItemView} />
                      </Switch>
                    </BrowserRouter>
                  </div>
