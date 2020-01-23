@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-// import { NavLink } from 'react-router-dom';
 import Logo from '../images/logo.jpg';
 import Facebook from '../images/facebook.png';
 import Twitter from '../images/twitter-48.png';
 import Blogger from '../images/blogger-5-48.png';
 import './mem.css';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 
 class NavBar extends Component {
 
   render() {
     const { search, handleSearch, selected, fetchData } = this.props;
     return (
-      <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
         <a className="navbar-brand"
           href="/"><img src={Logo}
             alt="logo"
@@ -53,47 +52,48 @@ class NavBar extends Component {
                 aria-expanded="false"
                 style={{whiteSpace: 'nowrap'}}>Categories</p>
               <div className="dropdown-menu pre-scrollable"
+                style={{textAlign: 'center'}}
                 aria-labelledby="navbarDropdown">
-                <option value="actionFigures">Action Figures / Dolls</option>
-                <option value="advertisingAds">Advertising Ads</option>
-                <option value="artworkBusts">Artwork / Busts</option>
-                <option value="backstagePasses">Backstage Passes</option>
-                <option value="bags">Bags / Backpacks / Wallets</option>
-                <option value="beltBuckles">Belt Buckles</option>
-                <option value="blankets">Blankets / Rugs / Towels</option>
-                <option value="books">Books</option>
-                <option value="buttons">Buttons / Lapel Pins</option>
-                <option value="calendars">Calendars</option>
-                <option value="autoAccessories">Car Automobile Accessories</option>
-                <option value="cars">Cars / Die Cast</option>
-                <option value="clocks">Clocks / Watches</option>
-                <option value="clothing">Clothing</option>
-                <option value="coins">Coins</option>
-                <option value="comics">Comics</option>
-                <option value="electronics">Electronics / Gaming Gear</option>
-                <option value="games">Games / Puzzles</option>
-                <option value="glassware">Glassware</option>
-                <option value="guitarDrum">Guitar Picks & Drum Sticks</option>
-                <option value="halloween">Halloween Products</option>
-                <option value="health">Health & Beauty</option>
-                <option value="homeDecor">Home Decor</option>
-                <option value="incenseCandles">Incense / Candles</option>
-                <option value="jewelry">Jewelry</option>
-                <option value="keychains">Keychains</option>
-                <option value="lunchBoxes">Lunch Boxes</option>
-                <option value="magazines">Magazines</option>
-                <option value="magnets">Magnet / Magnet Sets</option>
-                <option value="misc">Miscellaneous</option>
-                <option value="ornaments">Ornaments</option>
-                <option value="petSupplies">Pet Supplies & Accessories</option>
-                <option value="posters">Posters</option>
-                <option value="stationary">Stationary Products</option>
-                <option value="stickersPatches">Stickers / Patches</option>
-                <option value="tickets">Tickets / Stubs</option>
-                <option value="tourBooks">Tour Books</option>
-                <option value="tradingPostCards">Trading Cards Phone & Post Cards</option>
-                <option value="wine">Wine</option>
-                <option value="lighters">Zippos / Lighters</option>
+                <a href='/category/actionFigures'>Action Figures / Dolls</a>
+                <a href="/category/advertisingAds">Advertising Ads</a><br />
+                <a href="/category/artworkBusts">Artwork / Busts</a><br />
+                <a href="/category/backstagePasses">Backstage Passes</a><br />
+                <a href="/category/bags">Bags / Backpacks / Wallets</a><br />
+                <a href="/category/beltBuckles">Belt Buckles</a><br />
+                <a href="/category/blankets">Blankets / Rugs / Towels</a><br />
+                <a href="/category/books">Books</a><br />
+                <a href="/category/buttons">Buttons / Lapel Pins</a><br />
+                <a href="/category/calendars">Calendars</a><br />
+                <a href="/category/autoAccessories">Car Automobile Accessories</a><br />
+                <a href="/category/cars">Cars / Die Cast</a><br />
+                <a href="/category/clocks">Clocks / Watches</a><br />
+                <a href="/category/clothing">Clothing</a><br />
+                <a href="/category/coins">Coins</a><br />
+                <a href="/category/comics">Comics</a><br />
+                <a href="/category/electronics">Electronics / Gaming Gear</a><br />
+                <a href="/category/games">Games / Puzzles</a><br />
+                <a href="/category/glassware">Glassware</a><br />
+                <a href="/category/guitarDrum">Guitar Picks & Drum Sticks</a><br />
+                <a href="/category/halloween">Halloween Products</a><br />
+                <a href="/category/health">Health & Beauty</a><br />
+                <a href="/category/homeDecor">Home Decor</a><br />
+                <a href="/category/incenseCandles">Incense / Candles</a><br />
+                <a href="/category/jewelry">Jewelry</a><br />
+                <a href="/category/keychains">Keychains</a><br />
+                <a href="/category/lunchBoxes">Lunch Boxes</a><br />
+                <a href="/category/magazines">Magazines</a><br />
+                <a href="/category/magnets">Magnet / Magnet Sets</a><br />
+                <a href="/category/misc">Miscellaneous</a><br />
+                <a href="/category/ornaments">Ornaments</a><br />
+                <a href="/category/petSupplies">Pet Supplies & Accessories</a><br />
+                <a href="/category/posters">Posters</a><br />
+                <a href="/category/stationary">Stationary Products</a><br />
+                <a href="/category/stickersPatches">Stickers / Patches</a><br />
+                <a href="/category/tickets">Tickets / Stubs</a><br />
+                <a href="/category/tourBooks">Tour Books</a><br />
+                <a href="/category/tradingPostCards">Trading Cards Phone & Post Cards</a><br />
+                <a href="/category/wine">Wine</a><br />
+                <a href="/category/lighters">Zippos / Lighters</a><br />
               </div>
             </li>
             <li className="nav-item active">

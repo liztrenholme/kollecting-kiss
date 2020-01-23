@@ -2,20 +2,10 @@ import React, { Component } from 'react';
 import './mem.css';
 import stitchClient from '../components/stitch';
 import PropTypes from 'prop-types';
-
-// const {
-//   RemoteMongoClient,
-//   AnonymousCredential,
-//   BSON
-// } = require('mongodb-stitch-browser-sdk');
 import {
   AnonymousCredential,
-  Stitch,
   RemoteMongoClient,
-  BSON
 } from 'mongodb-stitch-browser-sdk';
-
-// import { BSON } from 'mongodb-stitch-browser-sdk';
  
 class ItemView extends Component {
 state = {
@@ -28,16 +18,13 @@ state = {
 }
 componentDidMount() {
   const grn = window.location.pathname.split('/')[2];
-  console.log(window.location.pathname.split('/')[2]);
   stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
     const mongodb = stitchClient.getServiceClient(
       RemoteMongoClient.factory,
       'mongodb-atlas'
     );
-      // Get a hook to the items collection
     const items = mongodb.db('memorabilia').collection('items');
     return items.find({ 'grn': grn}).asArray();
-
   })
     .then(items => {
       if (items && items[0]) {
@@ -52,7 +39,8 @@ componentDidMount() {
         });
       }
     }
-    );
+    // eslint-disable-next-line no-console
+    ).catch(err => console.log(err));
 }
 
 handleViewLarger = (image) => () => this.setState({ largeImage: image })
