@@ -24,7 +24,7 @@ state = {
   mainImage: '',
   itemManufacturer: '',
   description: '',
-  imgURL: []
+  imageURL: []
 }
 componentDidMount() {
   const grn = window.location.pathname.split('/')[2];
@@ -47,12 +47,15 @@ componentDidMount() {
           mainImage: items[0].mainImage,
           itemManufacturer: items[0].itemManufacturer,
           description: items[0].description,
-          imgURL: items[0].imgURL
+          imageURL: items[0].imageURL,
+          largeImage: items[0].mainImage || items[0].imageURL[0]
         });
       }
     }
     );
 }
+
+handleViewLarger = (image) => () => this.setState({ largeImage: image })
 
 render() {
   return (
@@ -68,12 +71,28 @@ render() {
           </div>
           <div className="row">
             <div className="col-md-4">
-              <img src={this.state.mainImage} alt={this.state.itemName} />
-              <p>{this.state.year}</p>
-              <p>{this.state.itemManufacturer}</p>
+              <img 
+                src={this.state.largeImage} 
+                alt={this.state.itemName}
+                style={{maxWidth: '250px'}}
+              />
             </div>
             <div className="col-md-8">
               <p>{this.state.description}</p>
+              <p>{this.state.year}</p>
+              <p>{this.state.itemManufacturer}</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-8">
+              {this.state.imageURL ? this.state.imageURL.map(img => (
+                <img 
+                  width="80px"
+                  src={img} 
+                  alt={img} 
+                  key={img} 
+                  onClick={this.handleViewLarger(img)} />
+              )) : null}
             </div>
           </div>
         </div>
