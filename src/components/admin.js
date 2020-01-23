@@ -6,6 +6,8 @@ import AdminEdit from './adminEdit';
 import AdminForm from './adminForm';
 
 // TO DO: change category select to be checkboxes, push into array of categories to send to db
+// fix bugs related to img urls on edit
+// DELETE functionality
 
 const {
   RemoteMongoClient,
@@ -26,7 +28,8 @@ class Admin extends Component {
     imageURL: '',
     mainImage: '',
     categories: [],
-    editModalOpen: false
+    editModalOpen: false,
+    query: {}
   }
   handleChange = (event) => {
     this.setState({
@@ -76,6 +79,55 @@ class Admin extends Component {
       }
     });
   }
+
+  handleUpdateItem = (event) => {
+    event.preventDefault();
+    const {query} = this.state;
+    // Set some fields in that document
+    const update = {
+      '$set': {
+        'itemName': this.state.itemName,
+        'itemManufacturer': this.state.itemManufacturer,
+        'year': this.state.year,
+        'description': this.state.description,
+        'itemValue': this.state.itemValue,
+        'category': this.state.category,
+        'imageURL': this.state.imageURL,
+        'mainImage': this.state.mainImage
+      }
+    };
+    const options = { upsert: true };
+    const mongodb = stitchClient.getServiceClient(
+      RemoteMongoClient.factory,
+      'mongodb-atlas'
+    );
+    const items = mongodb.db('memorabilia').collection('items');
+    // here we are inserting data into the database through the form
+    // eslint-disable-next-line no-unused-vars
+    stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
+      try {
+        console.log('????', query, update, options);
+        items.updateOne(query, update, options);
+        this.setState({
+          itemName: '',
+          itemManufacturer: '',
+          year: '',
+          description: '',
+          itemValue: '',
+          category: 'actionFigures',
+          imageURL: '',
+          successMessage: 'Data successfully updated!',
+          errorMsg: ''
+        });
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+        this.setState({
+          errorMsg: 'Error updating data.'
+        });
+      }
+    });
+  }
   // allows user to either click on or drag image to box for upload
   onImageDrop = (files) => {
     this.setState({
@@ -107,8 +159,53 @@ class Admin extends Component {
     });
   }
   setMainImage = (url) => () => { this.setState({mainImage: url}); }
-  handleOpenModal = () => this.setState({ editModalOpen: true })
-  handleCloseModal = () => this.setState({ editModalOpen: false })
+  handleOpenModal = (item) => () => {
+    console.log(item.imageURL);
+    this.setState({ 
+      editModalOpen: true,
+      itemName: item.itemName,
+      itemManufacturer: item.itemManufacturer,
+      year: item.year,
+      description: item.description,
+      itemValue: item.itemValue,
+      category: item.category,
+      submit: '',
+      uploadedFile: null,
+      imageURL: item.imageUrl,
+      mainImage: item.mainImage,
+      categories: [],
+      query: {
+        itemName: item.itemName,
+        itemManufacturer: item.itemManufacturer,
+        year: item.year,
+        description: item.description,
+        itemValue: item.itemValue,
+        category: item.category,
+        imageURL: item.imageURL,
+        mainImage: item.mainImage,
+        categories: [],
+      }
+    });
+    imgArr = item.imageURL;
+  }
+  handleCloseModal = () => {
+    this.setState({ 
+      itemName: '',
+      itemManufacturer: '',
+      year: '',
+      description: '',
+      itemValue: '',
+      category: 'actionFigures',
+      submit: '',
+      uploadedFile: null,
+      imageURL: '',
+      mainImage: '',
+      categories: [],
+      editModalOpen: false,
+      query: false
+    });
+    imgArr = [];
+  }
   render() {
     return (
       <div className="Admin">
@@ -126,7 +223,6 @@ class Admin extends Component {
               categories={this.state.categories}
               handleChange={this.handleChange}
               handleImageUpload={this.handleImageUpload}
-              handleSubmit={this.handleSubmit}
               itemName={this.state.itemName}
               itemManufacturer={this.state.itemManufacturer}
               year={this.state.year}
@@ -138,8 +234,12 @@ class Admin extends Component {
               mainImage={this.state.mainImage}
               onImageDrop={this.onImageDrop}
               setMainImage={this.setMainImage}
+              handleEdit={this.handleUpdateItem}
+              edit
             />
           </div>) : null}
+        {this.state.editModalOpen ?
+          <div className="modal-overlay" /> : null}
         <AdminForm
           imgArr={imgArr}
           errorMsg={this.state.errorMsg}
@@ -160,6 +260,7 @@ class Admin extends Component {
           mainImage={this.state.mainImage}
           onImageDrop={this.onImageDrop}
           setMainImage={this.setMainImage}
+          edit={false}
         />
         <div className="row">
           <div className="col-md-12">

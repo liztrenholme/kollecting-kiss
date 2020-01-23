@@ -3,16 +3,22 @@ import './mem.css';
 import Dropzone from 'react-dropzone';
 
 // TO DO: change category select to be checkboxes, push into array of categories to send to db
-
 class AdminForm extends Component {
   render() {
+    const imgArr = this.props.imgArr || this.props.imgURL;
     return (
       <div className="Admin">
         <div className="row">
           <div className="col-md-1">
           </div>
           <div className="col-md-10 adminform">
-            <h3 className="title">Enter new item</h3>
+            <h3 className="title">{this.props.edit ? 'Edit Item' : 'Enter New Item'}</h3>
+            <div className="row">
+              <div className="col-md-12">
+                <h1 style={{ color: 'red' }}>{this.props.errorMsg}</h1>
+                <h1 style={{ color: 'green' }}>{this.props.successMsg}</h1>
+              </div>
+            </div>
             <div >
               <Dropzone onDrop={this.props.onImageDrop}
                 multiple={false}
@@ -31,7 +37,7 @@ class AdminForm extends Component {
               </Dropzone>
               <div>
                 {this.props.imageURL === '' ? null :
-                  this.props.imgArr.map(image => (
+                  imgArr.map(image => (
                     <img 
                       className={'uploaded', this.props.mainImage === image ? 'mainImageAdmin' : ''}
                       onClick={this.props.setMainImage(image)} 
@@ -44,7 +50,7 @@ class AdminForm extends Component {
                 }
               </div>
             </div>
-            <form onSubmit={this.props.handleSubmit}>
+            <form onSubmit={this.props.edit ? this.props.handleEdit : this.props.handleSubmit}>
               <input className="text-input" placeholder=" Item Name" required type="text"
                 name="itemName" value={this.props.itemName} onChange={this.props.handleChange} />
               <input className="text-input" placeholder=" Manufacturer" type="text"
@@ -100,12 +106,6 @@ class AdminForm extends Component {
             </form>
           </div>
           <div className="col-md-1">
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12">
-            <h1 style={{ color: 'red' }}>{this.props.errorMsg}</h1>
-            <h1 style={{ color: 'green' }}>{this.props.successMsg}</h1>
           </div>
         </div>
       </div>
