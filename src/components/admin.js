@@ -5,15 +5,14 @@ import request from 'superagent';
 import AdminEdit from './adminEdit';
 import AdminForm from './adminForm';
 
-// TO DO: change category select to be checkboxes, push into array of categories to send to db
-// fix bugs related to img urls on edit
-// DELETE functionality
+// TO DO: get existing categories to appear in checkboxes
+// try/catch conversions
+// sorted by category display for admin
 
-const {
+import {
+  AnonymousCredential,
   RemoteMongoClient,
-  AnonymousCredential
-} = require('mongodb-stitch-browser-sdk');
-let imgArr = [];
+} from 'mongodb-stitch-browser-sdk';
 
 class Admin extends Component {
   state = {
@@ -23,7 +22,6 @@ class Admin extends Component {
     year: '',
     description: '',
     itemValue: '',
-    category: 'actionFigures',
     submit: '',
     uploadedFile: null,
     imageURL: [],
@@ -31,7 +29,8 @@ class Admin extends Component {
     categories: [],
     editModalOpen: false,
     query: {},
-    items: {}
+    items: {},
+    imgArr: []
   }
   
   componentDidMount() {
@@ -59,16 +58,13 @@ class Admin extends Component {
   }
 
   handleCheck = (event) => {
-    console.log(event, event.target.value);
     let {categories} = this.state;
     if (categories.includes(event.target.value)) {
-      console.log('yeah!!');
       categories = categories.filter(i => i !== event.target.value);
       this.setState({categories});
     } else if (!categories.includes(event.target.value)) {
       categories.push(event.target.value);
       this.setState({categories});
-      console.log('nope');
     }
   }
 
@@ -129,7 +125,7 @@ class Admin extends Component {
         'description': this.state.description,
         'itemValue': this.state.itemValue,
         'categories': this.state.categories,
-        'imageURL': this.state.imageURL,
+        'imageURL': this.state.imgArr,
         'mainImage': this.state.mainImage
       }
     };
@@ -142,7 +138,6 @@ class Admin extends Component {
     // eslint-disable-next-line no-unused-vars
     stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
       try {
-        console.log('????', query, update, options);
         items.findOneAndUpdate(query, update, options);
         this.setState({
           itemName: '',
@@ -151,7 +146,7 @@ class Admin extends Component {
           description: '',
           itemValue: '',
           categories: [],
-          imageURL: '',
+          imageURL: [],
           successMessage: 'Data successfully updated!',
           errorMsg: '',
           editModalOpen: false
@@ -228,6 +223,7 @@ class Admin extends Component {
       }
 
       if (response.body.secure_url !== '') {
+        const {imgArr} = this.state;
         imgArr.push(response.body.secure_url);
         this.setState({
           imageURL: imgArr, mainImage: imgArr[0]
@@ -237,7 +233,6 @@ class Admin extends Component {
   }
   setMainImage = (url) => () => { this.setState({mainImage: url}); }
   handleOpenModal = (item) => () => {
-    console.log(item.imageURL);
     this.setState({
       grn: item.grn,
       editModalOpen: true,
@@ -251,6 +246,7 @@ class Admin extends Component {
       imageURL: item.imageURL,
       mainImage: item.mainImage,
       categories: item.categories,
+      imgArr: item.imageURL,
       query: {
         grn: item.grn,
         itemName: item.itemName,
@@ -263,7 +259,6 @@ class Admin extends Component {
         categories: [],
       }
     });
-    imgArr = item.imageURL;
   }
   handleCloseModal = () => {
     this.setState({ 
@@ -275,80 +270,91 @@ class Admin extends Component {
       itemValue: '',
       submit: '',
       uploadedFile: null,
-      imageURL: '',
+      imageURL: [],
       mainImage: '',
       categories: [],
       editModalOpen: false,
-      query: false
+      query: false,
+      imgArr: []
     });
-    imgArr = [];
+  }
+  handleDeleteImage = (url) => () => {
+    let {imgArr} = this.state;
+    imgArr = imgArr.filter(i => i !== url);
+    this.setState({imgArr});
   }
   render() {
-    console.log('state--------------', this.state);
+    const {imgArr, errorMsg, successMessage, categories, itemName, itemManufacturer,
+      year, description, itemValue, submit, uploadedFile, imageURL, mainImage,
+      grn, editModalOpen, items} = this.state;
     return (
       <div className="Admin">
         {this.state.editModalOpen ? 
           (<div className="editModal">
             <div onClick={this.handleCloseModal} 
-              style={{fontWeight: 'bolder', textAlign: 'right', marginRight: '1em'}}>
-              <h2>X</h2>
+              style={{
+                fontWeight: 'bolder',
+                textAlign: 'right',
+                marginRight: '2em',
+                marginTop: '1em'}}>
+              <h1>x</h1>
             </div>
             <AdminForm
               imgArr={imgArr}
-              errorMsg={this.state.errorMsg}
-              successMessage={this.state.successMessage}
-              category={this.state.category}
-              categories={this.state.categories}
+              errorMsg={errorMsg}
+              successMessage={successMessage}
+              categories={categories}
               handleChange={this.handleChange}
               handleImageUpload={this.handleImageUpload}
-              itemName={this.state.itemName}
-              itemManufacturer={this.state.itemManufacturer}
-              year={this.state.year}
-              description={this.state.description}
-              itemValue={this.state.itemValue}
-              submit={this.state.submit}
-              uploadedFile={this.state.uploadedFile}
-              imageURL={this.state.imageURL}
-              mainImage={this.state.mainImage}
+              itemName={itemName}
+              itemManufacturer={itemManufacturer}
+              year={year}
+              description={description}
+              itemValue={itemValue}
+              submit={submit}
+              uploadedFile={uploadedFile}
+              imageURL={imageURL}
+              mainImage={mainImage}
               onImageDrop={this.onImageDrop}
               setMainImage={this.setMainImage}
               handleEdit={this.handleUpdateItem}
               deleteItem={this.handleDeleteItem}
               handleCheck={this.handleCheck}
+              handleDeleteImage={this.handleDeleteImage}
               edit
             />
           </div>) : null}
-        {this.state.editModalOpen ?
+        {editModalOpen ?
           <div className="modal-overlay" /> : null}
         <AdminForm
           imgArr={imgArr}
-          errorMsg={this.state.errorMsg}
-          successMessage={this.state.successMessage}
-          category={this.state.category}
-          categories={this.state.categories}
+          errorMsg={errorMsg}
+          successMessage={successMessage}
+          categories={categories}
           handleChange={this.handleChange}
           handleImageUpload={this.handleImageUpload}
           handleSubmit={this.handleSubmit}
-          itemName={this.state.itemName}
-          itemManufacturer={this.state.itemManufacturer}
-          year={this.state.year}
-          description={this.state.description}
-          itemValue={this.state.itemValue}
-          submit={this.state.submit}
-          uploadedFile={this.state.uploadedFile}
-          imageURL={this.state.imageURL}
-          mainImage={this.state.mainImage}
+          itemName={itemName}
+          itemManufacturer={itemManufacturer}
+          year={year}
+          description={description}
+          itemValue={itemValue}
+          submit={submit}
+          uploadedFile={uploadedFile}
+          imageURL={imageURL}
+          mainImage={mainImage}
           onImageDrop={this.onImageDrop}
           setMainImage={this.setMainImage}
-          grn={this.state.grn}
+          grn={grn}
           handleCheck={this.handleCheck}
+          handleDeleteImage={this.handleDeleteImage}
           edit={false}
         />
         <div className="row">
           <div className="col-md-12">
             <AdminEdit 
               openModal={this.handleOpenModal}
-              items={this.state.items}  />
+              items={items}  />
           </div>
         </div>
       </div>
