@@ -4,7 +4,6 @@ import './mem.css';
 import PropTypes from 'prop-types'; 
 
 class Featured extends Component {
-
   render() {
     const { items } = this.props;
     const itemsArr = Object.keys(items).map(i => items[i]);
@@ -46,11 +45,10 @@ class Featured extends Component {
                       data-key={item._id}
                       data-valuename={item.itemName} 
                       onClick={this.props.grabId}>
-                      {/* <a href={process.env.PUBLIC_URL + "/item_view"}> */}
                       <NavLink to={`/item-view/${item.grn}`}>
-                        <h4 className="listing-title">{this.props.itemName}</h4> 
+                        <h4 className="listing-title">{item.itemName}</h4> 
                         <p className="listing-description">{item.description}</p>
-                        <img className="featured-image" src={item.mainImage || item.imageURL[0]} 
+                        <img className="featured-image" src={item.mainImage ? item.mainImage : (item.imageURL ? item.imageURL[0] : '')} 
                           alt={item.itemName} height="100px" />
                       </ NavLink>
                     </div>

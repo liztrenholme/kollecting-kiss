@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './mem.css';
 import Dropzone from 'react-dropzone';
+import PropTypes from 'prop-types'; 
 
 // TO DO: change category select to be checkboxes, push into array of categories to send to db
 class AdminForm extends Component {
@@ -108,9 +109,35 @@ class AdminForm extends Component {
           <div className="col-md-1">
           </div>
         </div>
+        {this.props.edit ?
+          (<div className="row">
+            <div className="col-md-4">
+            </div>
+            <div className="col-md-4">
+              <button 
+                className='btn-danger' 
+                style={{margin: '1em', padding: '1em'}}
+                onClick={this.props.deleteItem}>
+                  Delete Item
+              </button>
+            </div>
+            <div className="col-md-4">
+            </div>
+          </div>) : null}
       </div>
     );
   }
 }
+
+AdminForm.propTypes = {
+  items: PropTypes.object,
+  _id: PropTypes.string,
+  itemName: PropTypes.string,
+  imageURL: PropTypes.string,
+  itemManufacturer: PropTypes.string,
+  year: PropTypes.number,
+  deleteItem: PropTypes.func,
+  onImageDrop: PropTypes.func
+};
 
 export default AdminForm;

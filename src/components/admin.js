@@ -17,6 +17,7 @@ let imgArr = [];
 
 class Admin extends Component {
   state = {
+    grn: '',
     itemName: '',
     itemManufacturer: '',
     year: '',
@@ -45,7 +46,6 @@ class Admin extends Component {
       'mongodb-atlas'
     );
     const items = mongodb.db('memorabilia').collection('items');
-    // here we are inserting data into the database through the form
     // eslint-disable-next-line no-unused-vars
     stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
       try {
@@ -57,7 +57,8 @@ class Admin extends Component {
           itemValue: this.state.itemValue,
           category: this.state.category,
           imageURL: this.state.imageURL,
-          mainImage: this.state.mainImage
+          mainImage: this.state.mainImage,
+          grn: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         });
         this.setState({
           itemName: '',
@@ -83,7 +84,6 @@ class Admin extends Component {
   handleUpdateItem = (event) => {
     event.preventDefault();
     const {query} = this.state;
-    // Set some fields in that document
     const update = {
       '$set': {
         'itemName': this.state.itemName,
@@ -102,7 +102,6 @@ class Admin extends Component {
       'mongodb-atlas'
     );
     const items = mongodb.db('memorabilia').collection('items');
-    // here we are inserting data into the database through the form
     // eslint-disable-next-line no-unused-vars
     stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
       try {
@@ -121,6 +120,42 @@ class Admin extends Component {
         });
       } catch (err) {
         // eslint-disable-next-line no-console
+        console.log(err);
+        this.setState({
+          errorMsg: 'Error updating data.'
+        });
+      }
+    });
+  }
+
+  handleDeleteItem = () => {
+  //   itemsCollection.deleteOne(query)
+  // .then(result => console.log(`Deleted ${result.deletedCount} item.`))
+  // .catch(err => console.error(`Delete failed with error: ${err}`))
+    const grn = this.state.query.grn;
+    const mongodb = stitchClient.getServiceClient(
+      RemoteMongoClient.factory,
+      'mongodb-atlas'
+    );
+    const items = mongodb.db('memorabilia').collection('items');
+    // eslint-disable-next-line no-unused-vars
+    stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
+      try {
+        items.deleteOne({'grn': grn});
+        this.setState({
+          grn: '',
+          itemName: '',
+          itemManufacturer: '',
+          year: '',
+          description: '',
+          itemValue: '',
+          category: 'actionFigures',
+          imageURL: '',
+          successMessage: 'Data successfully updated!',
+          errorMsg: ''
+        });
+      } catch (err) {
+      // eslint-disable-next-line no-console
         console.log(err);
         this.setState({
           errorMsg: 'Error updating data.'
@@ -161,7 +196,8 @@ class Admin extends Component {
   setMainImage = (url) => () => { this.setState({mainImage: url}); }
   handleOpenModal = (item) => () => {
     console.log(item.imageURL);
-    this.setState({ 
+    this.setState({
+      grn: item.grn,
       editModalOpen: true,
       itemName: item.itemName,
       itemManufacturer: item.itemManufacturer,
@@ -171,10 +207,11 @@ class Admin extends Component {
       category: item.category,
       submit: '',
       uploadedFile: null,
-      imageURL: item.imageUrl,
+      imageURL: item.imageURL,
       mainImage: item.mainImage,
       categories: [],
       query: {
+        grn: item.grn,
         itemName: item.itemName,
         itemManufacturer: item.itemManufacturer,
         year: item.year,
@@ -190,6 +227,7 @@ class Admin extends Component {
   }
   handleCloseModal = () => {
     this.setState({ 
+      grn: '',
       itemName: '',
       itemManufacturer: '',
       year: '',
@@ -207,6 +245,7 @@ class Admin extends Component {
     imgArr = [];
   }
   render() {
+    console.log('state--------------', this.state);
     return (
       <div className="Admin">
         {this.state.editModalOpen ? 
@@ -235,6 +274,7 @@ class Admin extends Component {
               onImageDrop={this.onImageDrop}
               setMainImage={this.setMainImage}
               handleEdit={this.handleUpdateItem}
+              deleteItem={this.handleDeleteItem}
               edit
             />
           </div>) : null}
@@ -260,11 +300,13 @@ class Admin extends Component {
           mainImage={this.state.mainImage}
           onImageDrop={this.onImageDrop}
           setMainImage={this.setMainImage}
+          grn={this.state.grn}
           edit={false}
         />
         <div className="row">
           <div className="col-md-12">
-            <AdminEdit openModal={this.handleOpenModal} />
+            <AdminEdit 
+              openModal={this.handleOpenModal}  />
           </div>
         </div>
       </div>

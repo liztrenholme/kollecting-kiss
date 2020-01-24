@@ -21,10 +21,8 @@ componentDidMount() {
       RemoteMongoClient.factory,
       'mongodb-atlas'
     );
-      // Get a hook to the items collection
     const items = mongodb.db('memorabilia').collection('items');
-    return items.find({}, { limit: 900 }).asArray();
-
+    return items.find({}).asArray();
   })
     .then(items => this.setState({ items: items }));
 }
@@ -38,11 +36,12 @@ render() {
           <div className="grid-container">
             {itemsArr.map(item =>
               <div className="grid-item"
+                grn={item.grn}
                 key={item._id} 
                 data-key={item._id}
                 data-valuename={item.itemName} 
                 onClick={this.props.openModal(item)}>
-                <h4 className="listing-title">{this.props.itemName}</h4> 
+                <h4 className="listing-title">{item.itemName}</h4> 
                 <p className="listing-description">{item.description}</p>
                 <img className="featured-image" src={item.mainImage || item.imageURL[0] || ''} 
                   alt={item.itemName} height="100px" />
