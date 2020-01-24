@@ -4,7 +4,7 @@ import HeaderImg from './images/header.jpg';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Contact from './components/contact';
 import Featured from './components/featured';
-// import Search from '../components/search';
+import SearchListView from './components/searchListView';
 import adminLogin from './components/adminLogin';
 import ItemView from './components/itemView';
 import stitchClient from './components/stitch';
@@ -19,17 +19,7 @@ const {
 
 class App extends Component {
   state = {
-    category: '',
-    results: [],
-    _id: '',
-    itemName: 'test',
-    imageURL: '',
-    year: 'test',
-    itemManufacturer: 'test',
-    description: 'test',
-    items: '',
-    selected: '',
-    search: ''
+    items: []
   };
 
   componentDidMount() {
@@ -38,7 +28,6 @@ class App extends Component {
         RemoteMongoClient.factory,
         'mongodb-atlas'
       );
-      // Get a hook to the items collection
       const items = mongodb.db('memorabilia').collection('items');
       return items.find({}, { limit: 9 }).asArray();
 
@@ -48,6 +37,16 @@ class App extends Component {
      
   handleSearch = (e) => {
     this.setState({ search: e.target.value });
+    // $or Matches documents where the value of a field matches any of the specified expressions.
+    //     EXAMPLE
+    // The following query matches documents where either quantity is greater than zero or 
+    // there are no more than five documents in the reviews array.
+    // {
+    //   "$or": [
+    //     { "quantity": { "$gt": 0 } },
+    //     { "reviews": { "$size": { "$lte": 5 } } }
+    //   ]
+    // }
   }
   render() {
     const { items } = this.state;
@@ -67,13 +66,13 @@ class App extends Component {
                   <BrowserRouter basename={process.env.PUBLIC_URL}>
                     <Switch>
                       <Route path="/contact" exact component={Contact} />
-                      <Route path="/" exact render={(props) => <Featured {...props}
-                        items={items}
-                      />} />
+                      <Route 
+                        path="/" 
+                        exact 
+                        render={(props) => <Featured {...props} items={items}/>} />
                       <Route path='/login' exact component={adminLogin} />
                       <Route path='/item-view/' component={ItemView} />
-                      {/* need to build out a list view for this and figure out how mult categories works with db */}
-                      <Route path='/category/' component={ItemView} />
+                      <Route path='/category/' component={SearchListView} />
                     </Switch>
                   </BrowserRouter>
                 </div>

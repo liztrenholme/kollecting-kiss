@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 class NavBar extends Component {
 
   render() {
-    const { search, handleSearch, selected, fetchData } = this.props;
+    const { search, handleSearch, fetchData } = this.props;
     return (
       <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
         <a className="navbar-brand"
@@ -33,7 +33,7 @@ class NavBar extends Component {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="https://www.facebook.com/pages/category/Reference-Website/Collecting-KISS-138452756205555/">
-                <img src={Facebook} alt="facebook" width="30px" height="30px" /></a>
+                <img src={Facebook} alt="facebook" width="30px" height="30px" style={{opacity: '0.6'}} /></a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="http://twitter.com/KollectingKiss">
@@ -43,7 +43,9 @@ class NavBar extends Component {
               <a className="nav-link" href="http://kollectingkiss.blogspot.com/">
                 <img src={Blogger} className="blogger-pic" alt="blogspot" width="24px" height="24px" /></a>
             </li>
-            <li className="nav-item active dropdown">
+            <li 
+              className="nav-item active dropdown" 
+              style={{width: 'fit-content', whiteSpace: 'nowrap'}}>
               <p className="nav-link dropdown-toggle scrollable-menu"
                 id="navbarDropdown" 
                 role="button" 
@@ -52,9 +54,10 @@ class NavBar extends Component {
                 aria-expanded="false"
                 style={{whiteSpace: 'nowrap'}}>Categories</p>
               <div className="dropdown-menu pre-scrollable"
-                style={{textAlign: 'center'}}
+                style={{textAlign: 'center', padding: '0.2em'}}
                 aria-labelledby="navbarDropdown">
-                <a href='/category/actionFigures'>Action Figures / Dolls</a>
+                <a href='/category/all'>View All Categories</a><br />
+                <a href='/category/actionFigures'>Action Figures / Dolls</a><br />
                 <a href="/category/advertisingAds">Advertising Ads</a><br />
                 <a href="/category/artworkBusts">Artwork / Busts</a><br />
                 <a href="/category/backstagePasses">Backstage Passes</a><br />
@@ -107,8 +110,10 @@ class NavBar extends Component {
               value={search}
               placeholder="Search"
               aria-label="Search" />
-            <button className="btn btn-outline-secondary" id="main-search"
-              type="submit" href={process.env.PUBLIC_URL + '/' + selected} onSubmit={fetchData}>Search</button>
+            <button 
+              className="btn btn-outline-secondary" 
+              id="main-search"
+              onSubmit={fetchData}>Search</button>
           </form>
         </div>
       </nav>

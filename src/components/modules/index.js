@@ -1,8 +1,8 @@
-import stitchClient from '../../components/stitch';
-const {
-  RemoteMongoClient,
-  AnonymousCredential
-} = require('mongodb-stitch-browser-sdk');
+// import stitchClient from '../../components/stitch';
+// const {
+//   RemoteMongoClient,
+//   AnonymousCredential
+// } = require('mongodb-stitch-browser-sdk');
 
 // export const fetchData = (id) => {
 //         const mongodb = stitchClient.getServiceClient(
