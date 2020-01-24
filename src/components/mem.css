@@ -138,6 +138,16 @@ textarea {
 	  margin: 0 2%;
   }
   
+  .checkbox-div {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	text-align: left;
+  }
+
+  .checkbox {
+	  margin: 0.5em;
+  }
+  
   .text-input {
 	border: 1px solid #f2f2f2;
 	background-color: #d8d8d8;
@@ -203,7 +213,7 @@ textarea {
 	  }
 
 	@media only screen and (max-width: 600px) {
-		.grid-container {
+		.grid-container, .checkbox-div {
 			grid-template-columns: auto auto;
 		  }
 	  }
