@@ -30,8 +30,27 @@ class Admin extends Component {
     mainImage: '',
     categories: [],
     editModalOpen: false,
-    query: {}
+    query: {},
+    items: {}
   }
+  
+  componentDidMount() {
+    this.getItemsToEdit();
+  }
+
+  getItemsToEdit = () => {
+    stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
+      const mongodb = stitchClient.getServiceClient(
+        RemoteMongoClient.factory,
+        'mongodb-atlas'
+      );
+      const items = mongodb.db('memorabilia').collection('items');
+      return items.find({}).asArray();
+    })
+      .then(items => this.setState({ items: items }));
+  }
+
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -39,6 +58,21 @@ class Admin extends Component {
     });
   }
 
+  handleCheck = (event) => {
+    console.log(event, event.target.value);
+    let {categories} = this.state;
+    if (categories.includes(event.target.value)) {
+      console.log('yeah!!');
+      categories = categories.filter(i => i !== event.target.value);
+      this.setState({categories});
+    } else if (!categories.includes(event.target.value)) {
+      categories.push(event.target.value);
+      this.setState({categories});
+      console.log('nope');
+    }
+  }
+
+  // TO DO: make all async/await and clean this up
   handleSubmit = (event) => {
     event.preventDefault();
     const mongodb = stitchClient.getServiceClient(
@@ -55,7 +89,7 @@ class Admin extends Component {
           year: this.state.year,
           description: this.state.description,
           itemValue: this.state.itemValue,
-          category: this.state.category,
+          categories: this.state.categories,
           imageURL: this.state.imageURL,
           mainImage: this.state.mainImage,
           grn: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
@@ -66,7 +100,7 @@ class Admin extends Component {
           year: '',
           description: '',
           itemValue: '',
-          category: 'actionFigures',
+          categories: [],
           imageURL: '',
           successMessage: 'Data successfully inserted!',
           errorMsg: ''
@@ -78,12 +112,15 @@ class Admin extends Component {
           errorMsg: 'Error inserting data.'
         });
       }
+      this.getItemsToEdit();
     });
   }
 
+  // TO DO: make all async/await and clean this up
   handleUpdateItem = (event) => {
     event.preventDefault();
-    const {query} = this.state;
+    // const {query} = this.state;
+    const query = {'grn': this.state.grn};
     const update = {
       '$set': {
         'itemName': this.state.itemName,
@@ -91,12 +128,12 @@ class Admin extends Component {
         'year': this.state.year,
         'description': this.state.description,
         'itemValue': this.state.itemValue,
-        'category': this.state.category,
+        'categories': this.state.categories,
         'imageURL': this.state.imageURL,
         'mainImage': this.state.mainImage
       }
     };
-    const options = { upsert: true };
+    const options = { upsert: false };
     const mongodb = stitchClient.getServiceClient(
       RemoteMongoClient.factory,
       'mongodb-atlas'
@@ -106,17 +143,18 @@ class Admin extends Component {
     stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
       try {
         console.log('????', query, update, options);
-        items.updateOne(query, update, options);
+        items.findOneAndUpdate(query, update, options);
         this.setState({
           itemName: '',
           itemManufacturer: '',
           year: '',
           description: '',
           itemValue: '',
-          category: 'actionFigures',
+          categories: [],
           imageURL: '',
           successMessage: 'Data successfully updated!',
-          errorMsg: ''
+          errorMsg: '',
+          editModalOpen: false
         });
       } catch (err) {
         // eslint-disable-next-line no-console
@@ -126,6 +164,8 @@ class Admin extends Component {
         });
       }
     });
+    // works intermittently bc of async nature of JS- needs better handles
+    this.getItemsToEdit();
   }
 
   handleDeleteItem = () => {
@@ -149,10 +189,11 @@ class Admin extends Component {
           year: '',
           description: '',
           itemValue: '',
-          category: 'actionFigures',
+          categories: [],
           imageURL: '',
           successMessage: 'Data successfully updated!',
-          errorMsg: ''
+          errorMsg: '',
+          editModalOpen: false
         });
       } catch (err) {
       // eslint-disable-next-line no-console
@@ -162,8 +203,9 @@ class Admin extends Component {
         });
       }
     });
+    this.getItemsToEdit();
   }
-  // allows user to either click on or drag image to box for upload
+
   onImageDrop = (files) => {
     this.setState({
       uploadedFile: files[0]
@@ -204,12 +246,11 @@ class Admin extends Component {
       year: item.year,
       description: item.description,
       itemValue: item.itemValue,
-      category: item.category,
       submit: '',
       uploadedFile: null,
       imageURL: item.imageURL,
       mainImage: item.mainImage,
-      categories: [],
+      categories: item.categories,
       query: {
         grn: item.grn,
         itemName: item.itemName,
@@ -217,7 +258,6 @@ class Admin extends Component {
         year: item.year,
         description: item.description,
         itemValue: item.itemValue,
-        category: item.category,
         imageURL: item.imageURL,
         mainImage: item.mainImage,
         categories: [],
@@ -233,7 +273,6 @@ class Admin extends Component {
       year: '',
       description: '',
       itemValue: '',
-      category: 'actionFigures',
       submit: '',
       uploadedFile: null,
       imageURL: '',
@@ -275,6 +314,7 @@ class Admin extends Component {
               setMainImage={this.setMainImage}
               handleEdit={this.handleUpdateItem}
               deleteItem={this.handleDeleteItem}
+              handleCheck={this.handleCheck}
               edit
             />
           </div>) : null}
@@ -301,12 +341,14 @@ class Admin extends Component {
           onImageDrop={this.onImageDrop}
           setMainImage={this.setMainImage}
           grn={this.state.grn}
+          handleCheck={this.handleCheck}
           edit={false}
         />
         <div className="row">
           <div className="col-md-12">
             <AdminEdit 
-              openModal={this.handleOpenModal}  />
+              openModal={this.handleOpenModal}
+              items={this.state.items}  />
           </div>
         </div>
       </div>
