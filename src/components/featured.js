@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './mem.css';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 
 class Featured extends Component {
   render() {
@@ -40,18 +40,16 @@ class Featured extends Component {
               <div className="col-md-12">
                 <div className="grid-container">
                   {itemsArr.map(item =>
-                    <div className="grid-item"
-                      key={item._id} 
-                      data-key={item._id}
-                      data-valuename={item.itemName} 
-                      onClick={this.props.grabId}>
-                      <NavLink to={`/item-view/${item.grn}`}>
+                    <NavLink to={`/item-view/${item.grn}`} key={item.grn}>
+                      <div className="grid-item">
                         <h4 className="listing-title">{item.itemName}</h4> 
-                        <p className="listing-description">{item.description}</p>
-                        <img className="featured-image" src={item.mainImage ? item.mainImage : (item.imageURL ? item.imageURL[0] : '')} 
-                          alt={item.itemName} height="100px" />
-                      </ NavLink>
-                    </div>
+                        <img 
+                          className="featured-image" 
+                          src={item.mainImage ? item.mainImage : (item.imageURL ? item.imageURL[0] : '')} 
+                          alt={item.itemName} 
+                          height="100px" />
+                      </div>
+                    </ NavLink>
                   )}
                 </div>
               </div>
@@ -64,7 +62,7 @@ class Featured extends Component {
 }
 
 Featured.propTypes = {
-  items: PropTypes.object,
+  items: PropTypes.array,
   _id: PropTypes.string,
   itemName: PropTypes.string,
   imageURL: PropTypes.string,

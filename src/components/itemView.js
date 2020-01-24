@@ -54,10 +54,10 @@ render() {
         <div className="col-md-8 featured-items">
           <div className="row">
             <div className="col-md-12">
-              <h4>{this.state.itemName}</h4>
+              <h3>{this.state.itemName}</h3>
             </div>
           </div>
-          <div className="row">
+          <div className="row item-view-body">
             <div className="col-md-4">
               <img 
                 src={this.state.largeImage} 
@@ -74,7 +74,8 @@ render() {
           <div className="row">
             <div className="col-md-8">
               {this.state.imageURL ? this.state.imageURL.map(img => (
-                <img 
+                <img
+                  className="item-view-thumbnail"
                   width="80px"
                   src={img} 
                   alt={img} 
