@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 class AdminForm extends Component {
   render() {
-    console.log(this.props.categories);
     const imgArr = this.props.imgArr || this.props.imgURL;
     return (
       <div className="Admin">
@@ -301,7 +300,8 @@ AdminForm.propTypes = {
   itemManufacturer: PropTypes.string,
   year: PropTypes.number,
   deleteItem: PropTypes.func,
-  onImageDrop: PropTypes.func
+  onImageDrop: PropTypes.func,
+  categories: PropTypes.array
 };
 
 export default AdminForm;

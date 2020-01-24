@@ -26,7 +26,7 @@ class Admin extends Component {
     category: 'actionFigures',
     submit: '',
     uploadedFile: null,
-    imageURL: '',
+    imageURL: [],
     mainImage: '',
     categories: [],
     editModalOpen: false,
