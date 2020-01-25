@@ -11,7 +11,7 @@ state = {
   username: '',
   password: '',
   message: '',
-  authed: true
+  authed: false
 }
 
 
