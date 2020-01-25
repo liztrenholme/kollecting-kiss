@@ -76,7 +76,7 @@ render() {
               <img 
                 src={largeImage} 
                 alt={itemName}
-                style={{maxWidth: '250px'}}
+                style={{maxWidth: '250px', cursor: 'pointer'}}
                 onMouseOver={this.enableLargeView}
               />
             </div>
