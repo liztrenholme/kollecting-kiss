@@ -59,15 +59,45 @@ class AdminForm extends Component {
               </div>
             </div>
             <form onSubmit={this.props.edit ? this.props.handleEdit : this.props.handleSubmit}>
-              <input className="text-input" placeholder=" Item Name" required type="text"
-                name="itemName" value={this.props.itemName} onChange={this.props.handleChange} />
-              <input className="text-input" placeholder=" Manufacturer" type="text"
-                name="itemManufacturer" value={this.props.itemManufacturer} onChange={this.props.handleChange} />
-              <input className="text-input" placeholder=" Year" type="text" name="year" value={this.props.year} onChange={this.props.handleChange} />
-              <textarea className="text-input" required rows="10" cols="25"
-                name="description" value={this.props.description} onChange={this.props.handleChange} placeholder=" Description" width="50%" height="50%"></textarea>
-              <input className="text-input" placeholder=" Estimated value" type="text"
-                name="itemValue" value={this.props.itemValue} onChange={this.props.handleChange} />
+              <input 
+                className="text-input" 
+                placeholder=" Item Name" 
+                required type="text"
+                name="itemName" 
+                value={this.props.itemName} 
+                onChange={this.props.handleChange} />
+              <input 
+                className="text-input" 
+                placeholder=" Manufacturer" 
+                type="text"
+                name="itemManufacturer" 
+                value={this.props.itemManufacturer} 
+                onChange={this.props.handleChange} />
+              <input 
+                className="text-input" 
+                placeholder=" Year" 
+                type="text" 
+                name="year" 
+                value={this.props.year} 
+                onChange={this.props.handleChange} />
+              <textarea 
+                className="text-input" 
+                required 
+                rows="10" 
+                cols="25"
+                name="description" 
+                value={this.props.description} 
+                onChange={this.props.handleChange} 
+                placeholder=" Description" 
+                width="50%" 
+                height="50%" />
+              <input 
+                className="text-input" 
+                placeholder=" Estimated value" 
+                type="text"
+                name="itemValue" 
+                value={this.props.itemValue} 
+                onChange={this.props.handleChange} />
               <div className='checkbox-div'>
                 <div className="checkbox">
                   <input 
@@ -314,7 +344,7 @@ class AdminForm extends Component {
                 type="submit" 
                 className='btn-dark' 
                 value={this.props.edit ? 'Submit Changes' : 'Submit'}
-                style={{margin: '1em', padding: '1em'}} />
+                style={{margin: '1em', padding: '1em', cursor: 'pointer'}} />
             </form>
           </div>
           <div className="col-md-1">
@@ -327,7 +357,7 @@ class AdminForm extends Component {
             <div className="col-md-4">
               <button 
                 className='btn-danger' 
-                style={{margin: '1em', padding: '1em'}}
+                style={{margin: '1em', padding: '1em', cursor: 'pointer'}}
                 onClick={this.props.deleteItem}>
                   Delete Item
               </button>

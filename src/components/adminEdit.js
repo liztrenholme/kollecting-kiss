@@ -13,7 +13,7 @@ class AdminEdit extends Component {
           <div className="col-md-12">
             <div className="grid-container">
               {itemsArr.map(item =>
-                <div className="grid-item"
+                <div className="grid-item edit-item"
                   grn={item.grn}
                   key={item._id} 
                   data-key={item._id}

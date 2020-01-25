@@ -5,7 +5,7 @@ import request from 'superagent';
 import AdminEdit from './adminEdit';
 import AdminForm from './adminForm';
 
-// TO DO: get existing categories to appear in checkboxes
+// TO DO: 
 // try/catch conversions
 // sorted by category display for admin
 
@@ -296,7 +296,8 @@ class Admin extends Component {
                 fontWeight: 'bolder',
                 textAlign: 'right',
                 marginRight: '2em',
-                marginTop: '1em'}}>
+                marginTop: '1em',
+                cursor: 'pointer'}}>
               <h1>x</h1>
             </div>
             <AdminForm
