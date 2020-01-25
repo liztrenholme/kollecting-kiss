@@ -7,7 +7,6 @@ import './mem.css';
 import PropTypes from 'prop-types';
 
 class NavBar extends Component {
-
   render() {
     const { search, handleSearch, fetchData } = this.props;
     return (
@@ -45,7 +44,11 @@ class NavBar extends Component {
             </li>
             <li 
               className="nav-item active dropdown" 
-              style={{width: 'fit-content', whiteSpace: 'nowrap'}}>
+              style={{
+                width: 'fit-content',
+                whiteSpace: 'nowrap',
+                cursor: 'pointer'
+              }}>
               <p className="nav-link dropdown-toggle scrollable-menu"
                 id="navbarDropdown" 
                 role="button" 

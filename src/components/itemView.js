@@ -14,7 +14,8 @@ state = {
   mainImage: '',
   itemManufacturer: '',
   description: '',
-  imageURL: []
+  imageURL: [],
+  largeViewOn: false
 }
 componentDidMount() {
   const grn = window.location.pathname.split('/')[2];
@@ -45,7 +46,12 @@ componentDidMount() {
 
 handleViewLarger = (image) => () => this.setState({ largeImage: image })
 
+enableLargeView = () => this.setState({ largeViewOn: true })
+disableLargeView = () => this.setState({ largeViewOn: false })
+
 render() {
+  const {largeImage, largeViewOn, itemManufacturer, 
+    itemName, description, year, imageURL} = this.state;
   return (
     <div>
       <div className="row">
@@ -54,26 +60,35 @@ render() {
         <div className="col-md-8 featured-items">
           <div className="row">
             <div className="col-md-12">
-              <h3>{this.state.itemName}</h3>
+              <h3>{itemName}</h3>
             </div>
           </div>
           <div className="row item-view-body">
+            {largeViewOn ?
+              (<div className="large-view-modal">
+                <img
+                  className="large-view-image"
+                  src={largeImage}
+                  alt={description}
+                  onMouseOut={this.disableLargeView} />
+              </div>) : null}
             <div className="col-md-4">
               <img 
-                src={this.state.largeImage} 
-                alt={this.state.itemName}
+                src={largeImage} 
+                alt={itemName}
                 style={{maxWidth: '250px'}}
+                onMouseOver={this.enableLargeView}
               />
             </div>
             <div className="col-md-8">
-              <p>{this.state.description}</p>
-              <p>{this.state.year}</p>
-              <p>{this.state.itemManufacturer}</p>
+              <p>{description}</p>
+              <p>{year}</p>
+              <p>{itemManufacturer}</p>
             </div>
           </div>
           <div className="row">
             <div className="col-md-8">
-              {this.state.imageURL ? this.state.imageURL.map(img => (
+              {imageURL ? imageURL.map(img => (
                 <img
                   className="item-view-thumbnail"
                   width="80px"

@@ -6,6 +6,9 @@ body {
 	margin: 0 .5em;
 	text-decoration: none;
 }
+.nav-link:hover {
+	opacity: .7;
+}
 
 .form-inline {
 	text-align: center;
@@ -124,8 +127,8 @@ footer {
 }
 
 textarea {
-	border: 1px solid #f2f2f2;
 	border-radius: 20px;
+	border: 1px solid #f2f2f2;
   }
 
 	.form-control {
@@ -243,10 +246,25 @@ textarea {
 	.item-view-thumbnail {
 		max-width: 80px;
 		margin: .5em;
-		/* border: 2px solid #fff; */
 		cursor: pointer;
 		box-shadow: 1px 2px 2px #999;
 		border-radius: 5px;
+	}
+	.large-view-modal {
+		position: fixed;
+		z-index: 100000010;
+		background-color: #fff;
+		border-radius: 5px;
+		box-shadow: 5px 5px 20px;
+		width: 600px;
+		max-height: 80%;
+		overflow: scroll;
+		top: 50%;
+  		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	.large-view-image {
+		width: 600px;
 	}
 
 	.item-view-body {
@@ -298,5 +316,21 @@ textarea {
 	@media only screen and (max-width: 500px) {
 	.grid-container, .checkbox-div {
 		grid-template-columns: auto;
+		}
+		.large-view-modal {
+			position: fixed;
+			z-index: 100000010;
+			background-color: #fff;
+			border-radius: 5px;
+			box-shadow: 5px 5px 20px;
+			width: 300px;
+			max-height: 80%;
+			overflow: scroll;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		.large-view-image {
+			width: 300px;
 		}
 	}
