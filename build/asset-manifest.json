@@ -1,15 +1,15 @@
 {
   "main.css": "/static/css/main.168c5e5b.chunk.css",
-  "main.js": "/static/js/main.4dc4f611.chunk.js",
-  "main.js.map": "/static/js/main.4dc4f611.chunk.js.map",
+  "main.js": "/static/js/main.9094a06a.chunk.js",
+  "main.js.map": "/static/js/main.9094a06a.chunk.js.map",
   "static/js/1.fe59d37b.chunk.js": "/static/js/1.fe59d37b.chunk.js",
   "static/js/1.fe59d37b.chunk.js.map": "/static/js/1.fe59d37b.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/media/header.jpg": "/static/media/header.bc6b8447.jpg",
+  "static/media/kissbanner1.jpg": "/static/media/kissbanner1.60388b47.jpg",
   "static/media/logo.jpg": "/static/media/logo.b741b66d.jpg",
   "static/css/main.168c5e5b.chunk.css.map": "/static/css/main.168c5e5b.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.e75ee35d6341ea1cc7e5fbc52b382a8e.js": "/precache-manifest.e75ee35d6341ea1cc7e5fbc52b382a8e.js",
+  "precache-manifest.c55ccd182b0d66892cd4557c3dcbac95.js": "/precache-manifest.c55ccd182b0d66892cd4557c3dcbac95.js",
   "service-worker.js": "/service-worker.js"
 }

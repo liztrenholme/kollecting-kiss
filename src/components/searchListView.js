@@ -41,8 +41,6 @@ componentDidMount() {
     });
 }
 
-handleViewLarger = (image) => () => this.setState({ largeImage: image })
-
 render() {
   const {items} = this.state;
   const sortedByYear = items.sort((a, b) => b.year - a.year);
