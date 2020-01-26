@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './components/mem.css';
-import HeaderImg from './images/header.jpg';
+import HeaderImg from './images/kissbanner1.jpg';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Contact from './components/contact';
 import Featured from './components/featured';
@@ -53,7 +53,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container-fluid">
-          <NavBar />
+          <NavBar handleChooseCategory={this.handleChooseCategory} />
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">
