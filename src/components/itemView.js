@@ -15,7 +15,8 @@ state = {
   itemManufacturer: '',
   description: '',
   imageURL: [],
-  largeViewOn: false
+  largeViewOn: false,
+  errorMessage: ''
 }
 componentDidMount() {
   const grn = window.location.pathname.split('/')[2];
@@ -39,6 +40,9 @@ componentDidMount() {
           largeImage: items[0].mainImage || items[0].imageURL[0]
         });
       }
+      if (items && !items.length) {
+        this.setState({errorMessage: 'Not found.'});
+      }
     }
     // eslint-disable-next-line no-console
     ).catch(err => console.log(err));
@@ -51,55 +55,59 @@ disableLargeView = () => this.setState({ largeViewOn: false })
 
 render() {
   const {largeImage, largeViewOn, itemManufacturer, 
-    itemName, description, year, imageURL} = this.state;
+    itemName, description, year, imageURL, errorMessage} = this.state;
   return (
     <div>
       <div className="row">
         <div className="col-md-2">
         </div>
-        <div className="col-md-8 featured-items">
-          <div className="row">
-            <div className="col-md-12">
-              <h3>{itemName}</h3>
+        {errorMessage
+          ? (<div className="col-md-8 featured-items">
+            <h3>{errorMessage}</h3>
+          </div>) :
+          (<div className="col-md-8 featured-items">
+            <div className="row">
+              <div className="col-md-12">
+                <h3>{itemName}</h3>
+              </div>
             </div>
-          </div>
-          <div className="row item-view-body">
-            {largeViewOn ?
-              (<div className="large-view-modal">
-                <img
-                  className="large-view-image"
-                  src={largeImage}
-                  alt={description}
-                  onMouseOut={this.disableLargeView} />
-              </div>) : null}
-            <div className="col-md-4">
-              <img 
-                src={largeImage} 
-                alt={itemName}
-                style={{maxWidth: '250px', cursor: 'pointer'}}
-                onMouseOver={this.enableLargeView}
-              />
+            <div className="row item-view-body">
+              {largeViewOn ?
+                (<div className="large-view-modal">
+                  <img
+                    className="large-view-image"
+                    src={largeImage}
+                    alt={description}
+                    onMouseOut={this.disableLargeView} />
+                </div>) : null}
+              <div className="col-md-4">
+                <img 
+                  src={largeImage} 
+                  alt={itemName}
+                  style={{maxWidth: '250px', cursor: 'pointer'}}
+                  onMouseOver={this.enableLargeView}
+                />
+              </div>
+              <div className="col-md-8">
+                <p>{description}</p>
+                <p>{year}</p>
+                <p>{itemManufacturer}</p>
+              </div>
             </div>
-            <div className="col-md-8">
-              <p>{description}</p>
-              <p>{year}</p>
-              <p>{itemManufacturer}</p>
+            <div className="row">
+              <div className="col-md-8">
+                {imageURL ? imageURL.map(img => (
+                  <img
+                    className="item-view-thumbnail"
+                    width="80px"
+                    src={img} 
+                    alt={img} 
+                    key={img} 
+                    onClick={this.handleViewLarger(img)} />
+                )) : null}
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-md-8">
-              {imageURL ? imageURL.map(img => (
-                <img
-                  className="item-view-thumbnail"
-                  width="80px"
-                  src={img} 
-                  alt={img} 
-                  key={img} 
-                  onClick={this.handleViewLarger(img)} />
-              )) : null}
-            </div>
-          </div>
-        </div>
+          </div>)}
         <div className="col-md-2">
         </div>
       </div>
