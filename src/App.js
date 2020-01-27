@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './components/mem.css';
-import HeaderImg from './images/kissbanner1.jpg';
+import HeaderImg from './images/kissbanner.jpg';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Contact from './components/contact';
 import Featured from './components/featured';
