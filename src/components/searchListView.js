@@ -7,11 +7,14 @@ import {
   RemoteMongoClient,
 } from 'mongodb-stitch-browser-sdk';
 import SearchListViewItem from './searchListViewItem';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
  
 class SearchListView extends Component {
 state = {
   items: [],
-  errorMessage: ''
+  errorMessage: '',
+  loading: true
 }
 componentDidMount() {
   const categoryName = window.location.pathname.split('/')[2];
@@ -30,41 +33,52 @@ componentDidMount() {
     .then(items => {
       if (items && items.length) {
         this.setState({
-          items: items
+          items: items,
+          loading: false
         });
+      } else {
+        this.setState({loading: false});
       }
     }
     ).catch(err => {
       // eslint-disable-next-line no-console
       console.log(err);
-      this.setState({errorMessage: err});
+      this.setState({errorMessage: err, loading: false});
     });
 }
 
 render() {
-  const {items} = this.state;
+  const {items, loading} = this.state;
   const sortedByYear = items.sort((a, b) => b.year - a.year);
   return (
     <div>
-      <div className="row">
-        <div className="col-md-1">
-        </div>
-        <div className="col-md-10 featured-items">
+      {loading ?
+        <Loader
+          type="Puff"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          // timeout={3000} //3 secs
+        /> : (
           <div className="row">
-            <div className="col-md-12">
-              <h3>Category Search</h3>
+            <div className="col-md-1">
             </div>
-          </div>
-          {sortedByYear && sortedByYear.length ?
-            sortedByYear.map(item => (
-              <div className="row" key={item.grn}>
-                <SearchListViewItem item={item} />
+            <div className="col-md-10 featured-items">
+              <div className="row">
+                <div className="col-md-12">
+                  <h3>Category Search</h3>
+                </div>
               </div>
-            )) : <div>No results.</div>}
-        </div>
-        <div className="col-md-1">
-        </div>
-      </div>
+              {sortedByYear && sortedByYear.length ?
+                sortedByYear.map(item => (
+                  <div className="row" key={item.grn}>
+                    <SearchListViewItem item={item} />
+                  </div>
+                )) : <div>No results.</div>}
+            </div>
+            <div className="col-md-1">
+            </div>
+          </div>)}
     </div>
   );
 }

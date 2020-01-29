@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './mem.css';
 import PropTypes from 'prop-types';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 class Featured extends Component {
   render() {
-    const { items } = this.props;
+    const { items, loading } = this.props;
     const itemsArr = Object.keys(items).map(i => items[i]);
     return (
       <div className="Featured">
         <div className="row">
-          <div className="col-md-1">
-          </div>
+          <div className="col-md-1" />
           <div className="col-md-10">
             <div className="row">
               <div className="main-blurb">
@@ -31,31 +32,44 @@ class Featured extends Component {
                   the page and type in the item or year you want to see.`}</p>
               </div>
             </div>
-            <div className="col-md-1">
-            </div>
           </div>
-          <div className="featured-items">
-            <h3>Featured Items</h3>
-            <div className="row">
-              <div className="col-md-12">
-                <div className="grid-container">
-                  {itemsArr.map(item =>
-                    <NavLink to={`/item-view/${item.grn}`} key={item.grn}>
-                      <div className="grid-item">
-                        <h4 className="listing-title">{item.itemName}</h4> 
-                        <img 
-                          className="featured-image" 
-                          src={item.mainImage ? item.mainImage : (item.imageURL ? item.imageURL[0] : '')} 
-                          alt={item.itemName} 
-                          height="100px" />
-                      </div>
-                    </ NavLink>
-                  )}
+          <div className="col-md-1" />
+        </div>
+        {loading ?
+          (<div className="row">
+            <div className="col-md-5" />
+            <div className="col-md-2" style={{textAlign: 'center'}}>
+              <Loader
+                type="Puff"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                // timeout={3000} //3 secs
+              />
+            </div>
+            <div className="col-md-5" />
+          </div>) : (
+            <div className="featured-items">
+              <h3>Featured Items</h3>
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="grid-container">
+                    {itemsArr.map(item =>
+                      <NavLink to={`/item-view/${item.grn}`} key={item.grn}>
+                        <div className="grid-item">
+                          <h4 className="listing-title">{item.itemName}</h4> 
+                          <img 
+                            className="featured-image" 
+                            src={item.mainImage ? item.mainImage : (item.imageURL ? item.imageURL[0] : '')} 
+                            alt={item.itemName} 
+                            height="100px" />
+                        </div>
+                      </ NavLink>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </div>)}
       </div>
     );
   }
@@ -68,7 +82,8 @@ Featured.propTypes = {
   imageURL: PropTypes.string,
   itemManufacturer: PropTypes.string,
   year: PropTypes.number,
-  grabId: PropTypes.func
+  grabId: PropTypes.func,
+  loading: PropTypes.bool
 };
 
 export default Featured;

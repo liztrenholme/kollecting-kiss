@@ -6,6 +6,8 @@ import {
   AnonymousCredential,
   RemoteMongoClient,
 } from 'mongodb-stitch-browser-sdk';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
  
 class ItemView extends Component {
 state = {
@@ -16,7 +18,8 @@ state = {
   description: '',
   imageURL: [],
   largeViewOn: false,
-  errorMessage: ''
+  errorMessage: '',
+  loading: true
 }
 componentDidMount() {
   const grn = window.location.pathname.split('/')[2];
@@ -37,11 +40,12 @@ componentDidMount() {
           itemManufacturer: items[0].itemManufacturer,
           description: items[0].description,
           imageURL: items[0].imageURL,
-          largeImage: items[0].mainImage || items[0].imageURL[0]
+          largeImage: items[0].mainImage || items[0].imageURL[0],
+          loading: false
         });
       }
       if (items && !items.length) {
-        this.setState({errorMessage: 'Not found.'});
+        this.setState({errorMessage: 'Not found.', loading: false});
       }
     }
     // eslint-disable-next-line no-console
@@ -54,63 +58,71 @@ enableLargeView = () => this.setState({ largeViewOn: true })
 disableLargeView = () => this.setState({ largeViewOn: false })
 
 render() {
-  const {largeImage, largeViewOn, itemManufacturer, 
+  const {largeImage, largeViewOn, itemManufacturer, loading,
     itemName, description, year, imageURL, errorMessage} = this.state;
   return (
     <div>
-      <div className="row">
-        <div className="col-md-2">
-        </div>
-        {errorMessage
-          ? (<div className="col-md-8 featured-items">
-            <h3>{errorMessage}</h3>
-          </div>) :
-          (<div className="col-md-8 featured-items">
-            <div className="row">
-              <div className="col-md-12">
-                <h3>{itemName}</h3>
-              </div>
+      {loading ?
+        <Loader
+          type="Puff"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          // timeout={3000} //3 secs
+        /> : (
+          <div className="row">
+            <div className="col-md-2">
             </div>
-            <div className="row item-view-body">
-              {largeViewOn ?
-                (<div className="large-view-modal">
-                  <img
-                    className="large-view-image"
-                    src={largeImage}
-                    alt={description}
-                    onMouseOut={this.disableLargeView} />
-                </div>) : null}
-              <div className="col-md-4">
-                <img 
-                  src={largeImage} 
-                  alt={itemName}
-                  style={{maxWidth: '250px', cursor: 'pointer'}}
-                  onMouseOver={this.enableLargeView}
-                />
-              </div>
-              <div className="col-md-8">
-                <p>{description}</p>
-                <p>{year}</p>
-                <p>{itemManufacturer}</p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-8">
-                {imageURL ? imageURL.map(img => (
-                  <img
-                    className="item-view-thumbnail"
-                    width="80px"
-                    src={img} 
-                    alt={img} 
-                    key={img} 
-                    onClick={this.handleViewLarger(img)} />
-                )) : null}
-              </div>
+            {errorMessage
+              ? (<div className="col-md-8 featured-items">
+                <h3>{errorMessage}</h3>
+              </div>) :
+              (<div className="col-md-8 featured-items">
+                <div className="row">
+                  <div className="col-md-12">
+                    <h3>{itemName}</h3>
+                  </div>
+                </div>
+                <div className="row item-view-body">
+                  {largeViewOn ?
+                    (<div className="large-view-modal">
+                      <img
+                        className="large-view-image"
+                        src={largeImage}
+                        alt={description}
+                        onMouseOut={this.disableLargeView} />
+                    </div>) : null}
+                  <div className="col-md-4">
+                    <img 
+                      src={largeImage} 
+                      alt={itemName}
+                      style={{maxWidth: '250px', cursor: 'pointer'}}
+                      onMouseOver={this.enableLargeView}
+                    />
+                  </div>
+                  <div className="col-md-8">
+                    <p>{description}</p>
+                    <p>{year}</p>
+                    <p>{itemManufacturer}</p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-8">
+                    {imageURL ? imageURL.map(img => (
+                      <img
+                        className="item-view-thumbnail"
+                        width="80px"
+                        src={img} 
+                        alt={img} 
+                        key={img} 
+                        onClick={this.handleViewLarger(img)} />
+                    )) : null}
+                  </div>
+                </div>
+              </div>)}
+            <div className="col-md-2">
             </div>
           </div>)}
-        <div className="col-md-2">
-        </div>
-      </div>
     </div>
   );
 }

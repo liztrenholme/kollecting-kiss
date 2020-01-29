@@ -19,7 +19,9 @@ const {
 
 class App extends Component {
   state = {
-    items: []
+    items: [],
+    loading: true,
+    error: ''
   };
 
   componentDidMount() {
@@ -32,7 +34,8 @@ class App extends Component {
       return items.find({}, { limit: 9 }).asArray();
 
     })
-      .then(items => this.setState({ items: items }));
+      .then(items => this.setState({ items: items, loading: false }))
+      .catch(e => this.setState({loading: false, error: e}));
   }
      
   handleSearch = (e) => {
@@ -49,7 +52,7 @@ class App extends Component {
     // }
   }
   render() {
-    const { items } = this.state;
+    const { items, loading } = this.state;
     return (
       <div className="App">
         <div className="container-fluid">
@@ -69,7 +72,7 @@ class App extends Component {
                       <Route 
                         path="/" 
                         exact 
-                        render={(props) => <Featured {...props} items={items}/>} />
+                        render={(props) => <Featured {...props} items={items} loading={loading}/>} />
                       <Route path='/login' exact component={adminLogin} />
                       <Route path='/item-view/' component={ItemView} />
                       <Route path='/category/' component={SearchListView} />
