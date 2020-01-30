@@ -70,6 +70,7 @@ class NavBar extends Component {
                 <a href="/category/books">Books</a><br />
                 <a href="/category/buttons">Buttons / Lapel Pins</a><br />
                 <a href="/category/calendars">Calendars</a><br />
+                <a href="/category/capsHatsBandannas">Caps / Hats / Bandannas</a><br />
                 <a href="/category/autoAccessories">Car Automobile Accessories</a><br />
                 <a href="/category/cars">Cars / Die Cast</a><br />
                 <a href="/category/clocks">Clocks / Watches</a><br />
@@ -92,11 +93,13 @@ class NavBar extends Component {
                 <a href="/category/misc">Miscellaneous</a><br />
                 <a href="/category/ornaments">Ornaments</a><br />
                 <a href="/category/petSupplies">Pet Supplies & Accessories</a><br />
+                <a href="/category/phoneAccessories">Phone Accessories</a><br />
                 <a href="/category/posters">Posters</a><br />
                 <a href="/category/stationary">Stationary Products</a><br />
                 <a href="/category/stickersPatches">Stickers / Patches</a><br />
                 <a href="/category/tickets">Tickets / Stubs</a><br />
                 <a href="/category/tourBooks">Tour Books</a><br />
+                <a href="/category/toys">Toys</a><br />
                 <a href="/category/tradingPostCards">Trading Cards Phone & Post Cards</a><br />
                 <a href="/category/wine">Wine</a><br />
                 <a href="/category/lighters">Zippos / Lighters</a><br />

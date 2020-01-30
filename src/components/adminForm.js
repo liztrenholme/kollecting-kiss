@@ -160,6 +160,12 @@ class AdminForm extends Component {
                     onChange={this.props.handleCheck} 
                     value="calendars"/>Calendars</div>
                 <div className="checkbox">
+                  <input 
+                    checked={this.props.categories.includes('capsHatsBandannas') ? true : false}
+                    type="checkbox"
+                    onChange={this.props.handleCheck} 
+                    value="capsHatsBandannas"/>Caps / Hats / Bandannas</div>
+                <div className="checkbox">
                   <input
                     checked={this.props.categories.includes('autoAccessories') ? true : false}
                     type="checkbox"
@@ -293,6 +299,12 @@ class AdminForm extends Component {
                     value="petSupplies"/>Pet Supplies & Accessories</div>
                 <div className="checkbox">
                   <input 
+                    checked={this.props.categories.includes('phoneAccessories') ? true : false}
+                    type="checkbox"
+                    onChange={this.props.handleCheck} 
+                    value="phoneAccessories"/>Phone Accessories</div>
+                <div className="checkbox">
+                  <input 
                     checked={this.props.categories.includes('posters') ? true : false}
                     type="checkbox"
                     onChange={this.props.handleCheck} 
@@ -321,6 +333,12 @@ class AdminForm extends Component {
                     type="checkbox"
                     onChange={this.props.handleCheck} 
                     value="tourBooks"/>Tour Books</div>
+                <div className="checkbox">
+                  <input 
+                    checked={this.props.categories.includes('toys') ? true : false}
+                    type="checkbox"
+                    onChange={this.props.handleCheck} 
+                    value="toys"/>Toys</div>
                 <div className="checkbox">
                   <input 
                     checked={this.props.categories.includes('tradingPostCards') ? true : false}
