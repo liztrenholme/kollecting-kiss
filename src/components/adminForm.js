@@ -362,7 +362,7 @@ class AdminForm extends Component {
                     checked={this.props.categories.includes('tradingPostCards') ? true : false}
                     type="checkbox"
                     onChange={this.props.handleCheck} 
-                    value="tradingPostCards"/>Trading Cards Phone & Post Cards</div>
+                    value="tradingPostCards"/>Trading Cards & Post Cards</div>
                 <div className="checkbox">
                   <input 
                     checked={this.props.categories.includes('wine') ? true : false}

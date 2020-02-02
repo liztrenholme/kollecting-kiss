@@ -103,7 +103,7 @@ class NavBar extends Component {
                 <a href="/category/tickets">Tickets / Stubs</a><br />
                 <a href="/category/tourBooks">Tour Books</a><br />
                 <a href="/category/toys">Toys</a><br />
-                <a href="/category/tradingPostCards">Trading Cards Phone & Post Cards</a><br />
+                <a href="/category/tradingPostCards">Trading Cards & Post Cards</a><br />
                 <a href="/category/wine">Wine</a><br />
                 <a href="/category/lighters">Zippos / Lighters</a><br />
               </div>
