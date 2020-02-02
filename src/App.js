@@ -73,7 +73,7 @@ class App extends Component {
         return items.find({
           '$or': [
             { 'categories': {$regex: `.+${search}`, $options:'i'} },
-            { 'year': {$regex: `.+${search}`, $options:'i'} },
+            { 'year': search },
             { 'itemName': {$regex: `.+${search}`, $options:'i'} },
             { 'itemManufacturer': {$regex: `.+${search}`, $options:'i'} },
             { 'description': {$regex: `.+${search}`, $options:'i'} }
