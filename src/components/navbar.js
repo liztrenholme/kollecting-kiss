@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 class NavBar extends Component {
   render() {
-    const { search, handleSearch, fetchData } = this.props;
+    const { search, handleSearch, fetchData, searchResults } = this.props;
     return (
       <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
         <a className="navbar-brand"
@@ -111,19 +111,36 @@ class NavBar extends Component {
             <li className="nav-item active">
               <a className="nav-link" href="/contact">Contact</a>
             </li>
+            <li>
+              <div style={{display: 'flex', flexDirection: 'row'}}>
+                <input className="form-control mr-sm-2"
+                  type="text"
+                  onChange={handleSearch}
+                  value={search}
+                  placeholder="Search"
+                  aria-label="Search" />
+                <button 
+                  className="btn btn-outline-secondary" 
+                  id="main-search"
+                  onSubmit={fetchData}>Search</button>
+                {searchResults && searchResults.length ? 
+                  <div className="searchDropdown pre-scrollable"
+                    style={{textAlign: 'center', padding: '0.2em'}}
+                    aria-labelledby="navbarDropdown">
+                    <ul>
+                      {searchResults.map(i => {
+                        return (<li key={i.grn}>
+                          <a href={`/item-view/${i.grn}`}>
+                            <p style={{fontSize: '.7em'}}>{i.itemName}</p>
+                          </a>
+                        </li>);
+                      }
+                      )}
+                    </ul>
+                  </div> : null}
+              </div>
+            </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
-            <input className="form-control mr-sm-2"
-              type="text"
-              onChange={handleSearch}
-              value={search}
-              placeholder="Search"
-              aria-label="Search" />
-            <button 
-              className="btn btn-outline-secondary" 
-              id="main-search"
-              onSubmit={fetchData}>Search</button>
-          </form>
         </div>
       </nav>
     );
@@ -134,7 +151,8 @@ NavBar.propTypes = {
   selected: PropTypes.string,
   search: PropTypes.string,
   handleSearch: PropTypes.func,
-  fetchData: PropTypes.func
+  fetchData: PropTypes.func,
+  searchResults: PropTypes.array
 };
 
 export default NavBar;
