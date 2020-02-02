@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 class NavBar extends Component {
   render() {
-    const { search, handleSearch, fetchData, searchResults } = this.props;
+    const { search, handleSearch, searchResults } = this.props;
     return (
       <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
         <a className="navbar-brand"
@@ -117,12 +117,12 @@ class NavBar extends Component {
                   type="text"
                   onChange={handleSearch}
                   value={search}
-                  placeholder="Search"
+                  placeholder="Search..."
                   aria-label="Search" />
-                <button 
+                {/* <button 
                   className="btn btn-outline-secondary" 
                   id="main-search"
-                  onSubmit={fetchData}>Search</button>
+                  onSubmit={fetchData}>Search</button> */}
                 {searchResults && searchResults.length ? 
                   <div className="searchDropdown pre-scrollable"
                     style={{textAlign: 'center', padding: '0.2em'}}

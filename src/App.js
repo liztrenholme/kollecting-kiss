@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import {
+  // Stitch,
+  RemoteMongoClient,
+  AnonymousCredential,
+  // BSON
+} from 'mongodb-stitch-browser-sdk';
 import './components/mem.css';
 import HeaderImg from './images/kissbanner.jpg';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -11,10 +17,11 @@ import stitchClient from './components/stitch';
 // import { fetchData } from './components/modules/index';
 import NavBar from './components/navbar';
 
-const {
-  RemoteMongoClient,
-  AnonymousCredential
-} = require('mongodb-stitch-browser-sdk');
+// const {
+//   RemoteMongoClient,
+//   AnonymousCredential,
+//   BSON
+// } = require('mongodb-stitch-browser-sdk');
 
 
 class App extends Component {
@@ -38,6 +45,10 @@ class App extends Component {
       .then(items => this.setState({ items: items, loading: false }))
       .catch(e => this.setState({loading: false, error: e}));
   }
+
+  // escapeRegex = (text) => {
+  //   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+  // };
      
   handleSearch = (e) => {
     const search = e.target.value;
@@ -61,17 +72,19 @@ class App extends Component {
         const items = mongodb.db('memorabilia').collection('items');
         return items.find({
           '$or': [
-            { 'categories': search },
-            { 'year': search },
-            { 'itemName': search },
-            { 'itemManufacturer': search },
-            { 'description': search }
+            { 'categories': {$regex: `.+${search}`, $options:'i'} },
+            { 'year': {$regex: `.+${search}`, $options:'i'} },
+            { 'itemName': {$regex: `.+${search}`, $options:'i'} },
+            { 'itemManufacturer': {$regex: `.+${search}`, $options:'i'} },
+            { 'description': {$regex: `.+${search}`, $options:'i'} }
           ]
         }).asArray();
 
       })
         .then(items => this.setState({searchResults: items}))
         .catch(e => this.setState({loading: false, error: e}));
+    } else {
+      this.setState({searchResults: []});
     }
   }
   render() {
