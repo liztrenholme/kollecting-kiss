@@ -21,7 +21,8 @@ class App extends Component {
   state = {
     items: [],
     loading: true,
-    error: ''
+    error: '',
+    searchResults: []
   };
 
   componentDidMount() {
@@ -39,7 +40,9 @@ class App extends Component {
   }
      
   handleSearch = (e) => {
-    this.setState({ search: e.target.value });
+    const search = e.target.value;
+    this.setState({ search });
+    console.log(e.target.value, 'hiiiiii');
     // $or Matches documents where the value of a field matches any of the specified expressions.
     //     EXAMPLE
     // The following query matches documents where either quantity is greater than zero or 
@@ -50,13 +53,42 @@ class App extends Component {
     //     { "reviews": { "$size": { "$lte": 5 } } }
     //   ]
     // }
+    stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
+      const mongodb = stitchClient.getServiceClient(
+        RemoteMongoClient.factory,
+        'mongodb-atlas'
+      );
+      const items = mongodb.db('memorabilia').collection('items');
+      return items.find({
+        '$or': [
+          { 'categories': search },
+          { 'year': search },
+          { 'itemName': search },
+          { 'itemManufacturer': search },
+          { 'description': search }
+        ]
+      }).asArray();
+
+    })
+      // .then(items => this.setState({ items: items, loading: false }))
+      .then(items => this.setState({searchResults: items}))
+      .catch(e => this.setState({loading: false, error: e}));
   }
   render() {
-    const { items, loading } = this.state;
+    const { items, loading, searchResults } = this.state;
     return (
       <div className="App">
         <div className="container-fluid">
-          <NavBar handleChooseCategory={this.handleChooseCategory} />
+          <NavBar 
+            handleChooseCategory={this.handleChooseCategory}
+            handleSearch={this.handleSearch} />
+            
+          {searchResults && searchResults.length ? <div style={{backgroundColor: '#fff'}}>
+            <ul>
+              {searchResults.map(i => <li key={i.grn}>{i.itemName}</li>)}
+            </ul>
+          </div> : null}
+            
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">
