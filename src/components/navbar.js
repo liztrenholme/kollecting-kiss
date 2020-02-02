@@ -67,6 +67,7 @@ class NavBar extends Component {
                 <a href="/category/bags">Bags / Backpacks / Wallets</a><br />
                 <a href="/category/beltBuckles">Belt Buckles</a><br />
                 <a href="/category/blankets">Blankets / Rugs / Towels</a><br />
+                <a href='/category/bobbleheads'>Bobbleheads</a><br />
                 <a href="/category/books">Books</a><br />
                 <a href="/category/buttons">Buttons / Lapel Pins</a><br />
                 <a href="/category/calendars">Calendars</a><br />
@@ -83,6 +84,7 @@ class NavBar extends Component {
                 <a href="/category/guitarDrum">Guitar Picks & Drum Sticks</a><br />
                 <a href="/category/halloween">Halloween Products</a><br />
                 <a href="/category/health">Health & Beauty</a><br />
+                <a href='/category/holiday'>Holiday / KISSmas</a><br />
                 <a href="/category/homeDecor">Home Decor</a><br />
                 <a href="/category/incenseCandles">Incense / Candles</a><br />
                 <a href="/category/jewelry">Jewelry</a><br />
@@ -94,6 +96,7 @@ class NavBar extends Component {
                 <a href="/category/ornaments">Ornaments</a><br />
                 <a href="/category/petSupplies">Pet Supplies & Accessories</a><br />
                 <a href="/category/phoneAccessories">Phone Accessories</a><br />
+                <a href='/category/plush'>Plush</a><br />
                 <a href="/category/posters">Posters</a><br />
                 <a href="/category/stationary">Stationary Products</a><br />
                 <a href="/category/stickersPatches">Stickers / Patches</a><br />

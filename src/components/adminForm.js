@@ -142,6 +142,12 @@ class AdminForm extends Component {
                     onChange={this.props.handleCheck} 
                     value="blankets"/>Blankets / Rugs / Towels</div>
                 <div className="checkbox">
+                  <input
+                    checked={this.props.categories.includes('bobbleheads') ? true : false}
+                    type="checkbox"
+                    onChange={this.props.handleCheck} 
+                    value="bobbleheads"/>Bobbleheads</div>
+                <div className="checkbox">
                   <input 
                     checked={this.props.categories.includes('books') ? true : false}
                     type="checkbox"
@@ -239,6 +245,12 @@ class AdminForm extends Component {
                     value="health"/>Health & Beauty</div>
                 <div className="checkbox">
                   <input
+                    checked={this.props.categories.includes('holiday') ? true : false}
+                    type="checkbox"
+                    onChange={this.props.handleCheck} 
+                    value="holiday"/>Holiday / KISSmas</div>
+                <div className="checkbox">
+                  <input
                     checked={this.props.categories.includes('homeDecor') ? true : false}
                     type="checkbox"
                     onChange={this.props.handleCheck} 
@@ -303,6 +315,12 @@ class AdminForm extends Component {
                     type="checkbox"
                     onChange={this.props.handleCheck} 
                     value="phoneAccessories"/>Phone Accessories</div>
+                <div className="checkbox">
+                  <input
+                    checked={this.props.categories.includes('plush') ? true : false}
+                    type="checkbox"
+                    onChange={this.props.handleCheck} 
+                    value="plush"/>Plush</div>
                 <div className="checkbox">
                   <input 
                     checked={this.props.categories.includes('posters') ? true : false}
