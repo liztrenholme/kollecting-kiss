@@ -51,7 +51,7 @@ a {
 }
 
 a:hover {
-	opacity: .7;
+	opacity: .9;
 	text-decoration: none;
 	color: #353A40;
 }
@@ -299,7 +299,7 @@ textarea {
 	}
 	.list-view-container { 	
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		text-align: center;
 		width: 100%;
 		justify-content: space-around;
@@ -308,7 +308,7 @@ textarea {
 	.list-view-thumbnail {
 		max-width: 150px;
 		max-height: 150px;
-		margin: .5em 1em;
+		margin: .5em auto;
 	}
 	.list-view-body {
 		padding: .5em;
