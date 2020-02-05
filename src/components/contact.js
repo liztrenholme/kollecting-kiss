@@ -11,7 +11,7 @@ class Contact extends Component {
           <div className="col-md-8 contactform">
             <h3 className="title">Ask a question</h3>
             <p className="hear">Send us a general question or comment here.</p>
-            <form action="https://formspree.io/liztrenholme@gmail.com" method="POST">
+            <form action="https://formspree.io/marshalllblakley@gmail.com" method="POST">
               <input className="text-input" placeholder="First Name" required type="text" name="first_name" />
               <input className="text-input" placeholder="Last Name" type="text" name="last_name" />
               <input className="text-input" placeholder="Your Email Address" required type="email" name="_replyto" />
