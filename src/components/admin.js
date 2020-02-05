@@ -29,24 +29,52 @@ class Admin extends Component {
     categories: [],
     editModalOpen: false,
     query: {},
-    items: {},
-    imgArr: []
+    items: [],
+    imgArr: [],
+    searchInput: ''
   }
   
   componentDidMount() {
     this.getItemsToEdit();
   }
 
-  getItemsToEdit = () => {
-    stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
-      const mongodb = stitchClient.getServiceClient(
-        RemoteMongoClient.factory,
-        'mongodb-atlas'
-      );
-      const items = mongodb.db('memorabilia').collection('items');
-      return items.find({}).asArray();
-    })
-      .then(items => this.setState({ items: items }));
+  getItemsToEdit = (search) => {
+    if (search) {
+      if (search !== '') {
+        stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
+          const mongodb = stitchClient.getServiceClient(
+            RemoteMongoClient.factory,
+            'mongodb-atlas'
+          );
+          const items = mongodb.db('memorabilia').collection('items');
+          return items.find({
+            '$or': [
+              { 'categories': {$regex: `.+${search}`, $options:'i'} },
+              { 'year': search },
+              { 'itemName': {$regex: `.+${search}`, $options:'i'} },
+              { 'itemManufacturer': {$regex: `.+${search}`, $options:'i'} },
+              { 'description': {$regex: `.+${search}`, $options:'i'} }
+            ]
+          }).asArray();
+  
+        })
+          .then(items => this.setState({items}))
+          .catch(e => this.setState({loading: false, error: e}));
+      } else {
+        this.setState({searchResults: []});
+      }
+    }
+    else {
+      stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
+        const mongodb = stitchClient.getServiceClient(
+          RemoteMongoClient.factory,
+          'mongodb-atlas'
+        );
+        const items = mongodb.db('memorabilia').collection('items');
+        return items.find({}).asArray();
+      })
+        .then(items => this.setState({ items: items }));
+    }
   }
 
 
@@ -55,6 +83,9 @@ class Admin extends Component {
       [event.target.name]: event.target.value,
       submit: ''
     });
+    if (event.target.name === 'searchInput') {
+      this.getItemsToEdit(event.target.value);
+    }
   }
 
   handleCheck = (event) => {
@@ -286,7 +317,7 @@ class Admin extends Component {
   render() {
     const {imgArr, errorMsg, successMessage, categories, itemName, itemManufacturer,
       year, description, itemValue, submit, uploadedFile, imageURL, mainImage,
-      grn, editModalOpen, items} = this.state;
+      grn, editModalOpen, items, searchInput} = this.state;
     return (
       <div className="Admin">
         {this.state.editModalOpen ? 
@@ -351,6 +382,19 @@ class Admin extends Component {
           handleDeleteImage={this.handleDeleteImage}
           edit={false}
         />
+        <div className="row" style={{marginTop: '1em'}}>
+          <div className="col-md-12">
+            <h3>Edit Items</h3>
+            <input 
+              style={{margin: '0.5em'}}
+              className="form-control mr-sm-2"
+              placeholder="Search item to edit..." 
+              type="text"
+              value={searchInput}
+              name="searchInput"
+              onChange={this.handleChange} />
+          </div>
+        </div>
         <div className="row">
           <div className="col-md-12">
             <AdminEdit 
