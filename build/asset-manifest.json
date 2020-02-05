@@ -1,7 +1,7 @@
 {
-  "main.css": "/static/css/main.aa3503b4.chunk.css",
-  "main.js": "/static/js/main.c46ecb92.chunk.js",
-  "main.js.map": "/static/js/main.c46ecb92.chunk.js.map",
+  "main.css": "/static/css/main.12995c4b.chunk.css",
+  "main.js": "/static/js/main.45294d45.chunk.js",
+  "main.js.map": "/static/js/main.45294d45.chunk.js.map",
   "static/css/1.21212165.chunk.css": "/static/css/1.21212165.chunk.css",
   "static/js/1.2a780670.chunk.js": "/static/js/1.2a780670.chunk.js",
   "static/js/1.2a780670.chunk.js.map": "/static/js/1.2a780670.chunk.js.map",
@@ -9,9 +9,9 @@
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
   "static/media/kissbanner.jpg": "/static/media/kissbanner.0716cc91.jpg",
   "static/media/logo.jpg": "/static/media/logo.b741b66d.jpg",
-  "static/css/main.aa3503b4.chunk.css.map": "/static/css/main.aa3503b4.chunk.css.map",
+  "static/css/main.12995c4b.chunk.css.map": "/static/css/main.12995c4b.chunk.css.map",
   "static/css/1.21212165.chunk.css.map": "/static/css/1.21212165.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.516f0f4316d2be1419800bce8267548e.js": "/precache-manifest.516f0f4316d2be1419800bce8267548e.js",
+  "precache-manifest.6d15203d9aba0eb57f74433c73fd2d92.js": "/precache-manifest.6d15203d9aba0eb57f74433c73fd2d92.js",
   "service-worker.js": "/service-worker.js"
 }
