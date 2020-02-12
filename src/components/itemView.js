@@ -86,19 +86,24 @@ render() {
                 <div className="row item-view-body">
                   {largeViewOn ?
                     (<div className="large-view-modal">
-                      <img
+                      <picture>
+                        <source srcSet={largeImage} type="image/webp" />
+                        <img src={largeImage.endsWith('.webp') 
+                          ? largeImage.replace('.webp', '.png') : largeImage} 
                         className="large-view-image"
-                        src={largeImage}
                         alt={description}
                         onMouseOut={this.disableLargeView} />
+                      </picture>
                     </div>) : null}
                   <div className="col-md-4">
-                    <img 
-                      src={largeImage} 
-                      alt={itemName}
+                    <picture>
+                      <source srcSet={largeImage} type="image/webp" />
+                      <img src={largeImage.endsWith('.webp') 
+                        ? largeImage.replace('.webp', '.png') : largeImage} 
+                      alt={itemName} 
                       style={{maxWidth: '250px', cursor: 'pointer'}}
-                      onMouseOver={this.enableLargeView}
-                    />
+                      onMouseOver={this.enableLargeView} />
+                    </picture>
                   </div>
                   <div className="col-md-8">
                     <p>{description}</p>
@@ -109,13 +114,15 @@ render() {
                 <div className="row">
                   <div className="col-md-8">
                     {imageURL ? imageURL.map(img => (
-                      <img
+                      <picture key={img}>
+                        <source srcSet={img} type="image/webp" />
+                        <img src={img.endsWith('.webp') 
+                          ? img.replace('.webp', '.png') : img} 
+                        alt={img}
                         className="item-view-thumbnail"
                         width="80px"
-                        src={img} 
-                        alt={img} 
-                        key={img} 
                         onClick={this.handleViewLarger(img)} />
+                      </picture>
                     )) : null}
                   </div>
                 </div>

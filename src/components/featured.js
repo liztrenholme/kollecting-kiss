@@ -58,11 +58,14 @@ class Featured extends Component {
                       <NavLink to={`/item-view/${item.grn}`} key={item.grn}>
                         <div className="grid-item">
                           <h4 className="listing-title">{item.itemName}</h4> 
-                          <img 
-                            className="featured-image" 
-                            src={item.mainImage ? item.mainImage : (item.imageURL ? item.imageURL[0] : '')} 
-                            alt={item.itemName} 
-                            height="100px" />
+                          <picture style={{height: '100px'}}>
+                            <source srcSet={item.mainImage} type="image/webp" />
+                            <img src={item.mainImage.endsWith('.webp') 
+                              ? item.mainImage.replace('.webp', '.png') : item.mainImage} 
+                            alt="logo" 
+                            height='100px'
+                            className="featured-image" />
+                          </picture>
                         </div>
                       </ NavLink>
                     )}

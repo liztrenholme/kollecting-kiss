@@ -17,13 +17,6 @@ import stitchClient from './components/stitch';
 // import { fetchData } from './components/modules/index';
 import NavBar from './components/navbar';
 
-// const {
-//   RemoteMongoClient,
-//   AnonymousCredential,
-//   BSON
-// } = require('mongodb-stitch-browser-sdk');
-
-
 class App extends Component {
   state = {
     items: [],
@@ -45,24 +38,11 @@ class App extends Component {
       .then(items => this.setState({ items: items, loading: false }))
       .catch(e => this.setState({loading: false, error: e}));
   }
-
-  // escapeRegex = (text) => {
-  //   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-  // };
      
   handleSearch = (e) => {
     const search = e.target.value;
     this.setState({ search });
     // $or Matches documents where the value of a field matches any of the specified expressions.
-    //     EXAMPLE
-    // The following query matches documents where either quantity is greater than zero or 
-    // there are no more than five documents in the reviews array.
-    // {
-    //   "$or": [
-    //     { "quantity": { "$gt": 0 } },
-    //     { "reviews": { "$size": { "$lte": 5 } } }
-    //   ]
-    // }
     if (search !== '') {
       stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
         const mongodb = stitchClient.getServiceClient(

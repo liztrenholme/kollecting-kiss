@@ -12,10 +12,12 @@ class SearchListViewItem extends Component {
         className="navlink-wrapper">
         <h2 className="list-view-header">{item.itemName}</h2>
         <div className="col-md-12 list-view-container">
-          <img 
-            src={item.mainImage} 
-            alt={item.itemName} 
-            className="list-view-thumbnail" />
+          <picture>
+            <source srcSet={item.mainImage} type="image/webp" />
+            <img src={item.mainImage.endsWith('.webp') ? item.mainImage.replace('.webp', '.png') : item.mainImage} 
+              alt={item.itemName}
+              className="list-view-thumbnail" />
+          </picture>
           <div className="list-view-body list-view-description">
             <p>{item.description}</p>
           </div>
