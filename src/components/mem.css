@@ -1,5 +1,6 @@
 body {
 	text-align: center;
+	background-color: black;
 }
 
 .nav-item {
@@ -29,9 +30,17 @@ li{
 	border-radius: 20px;
 	border: 1px #777 solid;
 }
+.youtube-pic {
+	background-color: #777;
+	/* border-radius: 20px; */
+	border: 1px #777 solid;
+}
 
-body {
-	background-color: black;
+iframe {
+	border: solid 4px #777;
+	border-radius: 5px;
+	width: 650px;
+	height: 480px;
 }
 
 .header {
@@ -325,6 +334,10 @@ textarea {
 			left: 50%;
 			width: 700px;
 		}
+		iframe {
+			max-width: 500px;
+			max-height: 380px;
+		}
 	  }
 	
 	@media only screen and (max-width: 500px) {
@@ -346,5 +359,9 @@ textarea {
 		}
 		.large-view-image {
 			width: 300px;
+		}
+		iframe {
+			max-width: 350px;
+			max-height: 270px;
 		}
 	}

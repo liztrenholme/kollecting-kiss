@@ -35,6 +35,13 @@ class Featured extends Component {
           </div>
           <div className="col-md-1" />
         </div>
+        <div className='row'>
+          <div className='col-md-12'>
+            <iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=KollectingKiss" 
+              title="Kollecting KISS on YouTube" />                  
+
+          </div>
+        </div>
         {loading ?
           (<div className="row">
             <div className="col-md-5" />
