@@ -3,6 +3,7 @@ import Logo from '../images/logo.jpg';
 import Facebook from '../images/facebook.png';
 import Twitter from '../images/twitter-48.png';
 import Blogger from '../images/blogger-5-48.png';
+import YouTube from '../images/youtube.png';
 import './mem.css';
 import PropTypes from 'prop-types';
 
@@ -42,10 +43,13 @@ class NavBar extends Component {
               <a className="nav-link" href="http://kollectingkiss.blogspot.com/">
                 <img src={Blogger} className="blogger-pic" alt="blogspot" width="24px" height="24px" /></a>
             </li>
+            <li className="nav-item">
+              <a className="nav-link" href="https://www.youtube.com/user/KollectingKiss">
+                <img src={YouTube} className="youtube-pic" alt="youtube" width="30px" height="24px" /></a>
+            </li>
             <li 
               className="nav-item active dropdown" 
               style={{
-                width: 'fit-content',
                 whiteSpace: 'nowrap',
                 cursor: 'pointer'
               }}>
@@ -113,12 +117,14 @@ class NavBar extends Component {
             </li>
             <li>
               <div style={{display: 'flex', flexDirection: 'row'}}>
-                <input className="form-control mr-sm-2"
+                <input 
+                  className="form-control mr-sm-2"
                   type="text"
                   onChange={handleSearch}
                   value={search}
                   placeholder="Search..."
-                  aria-label="Search" />
+                  aria-label="Search"
+                  style={{marginTop: '0.5em', minWidth: '5em'}} />
                 {/* <button 
                   className="btn btn-outline-secondary" 
                   id="main-search"
