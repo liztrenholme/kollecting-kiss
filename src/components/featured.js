@@ -6,6 +6,7 @@ import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 class Featured extends Component {
+  handleNoTake = (e) => e.preventDefault()
   render() {
     const { items, loading } = this.props;
     const itemsArr = Object.keys(items).map(i => items[i]);
@@ -66,12 +67,19 @@ class Featured extends Component {
                         <div className="grid-item">
                           <h4 className="listing-title">{item.itemName}</h4> 
                           <picture style={{height: '100px'}}>
-                            <source srcSet={item.mainImage} type="image/webp" />
-                            <img src={item.mainImage.endsWith('.webp') 
-                              ? item.mainImage.replace('.webp', '.png') : item.mainImage} 
-                            alt="logo" 
-                            height='100px'
-                            className="featured-image" />
+                            <source 
+                              onMouseDown={this.handleNoTake}
+                              onContextMenu={this.handleNoTake}
+                              srcSet={item.mainImage} 
+                              type="image/webp" />
+                            <img
+                              onMouseDown={this.handleNoTake}
+                              onContextMenu={this.handleNoTake}
+                              src={item.mainImage.endsWith('.webp') 
+                                ? item.mainImage.replace('.webp', '.png') : item.mainImage} 
+                              alt="logo" 
+                              height='100px'
+                              className="featured-image" />
                           </picture>
                         </div>
                       </ NavLink>

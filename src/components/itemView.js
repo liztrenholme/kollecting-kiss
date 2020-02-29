@@ -53,9 +53,9 @@ componentDidMount() {
 }
 
 handleViewLarger = (image) => () => this.setState({ largeImage: image })
-
 enableLargeView = () => this.setState({ largeViewOn: true })
 disableLargeView = () => this.setState({ largeViewOn: false })
+handleNoTake = (e) => e.preventDefault()
 
 render() {
   const {largeImage, largeViewOn, itemManufacturer, loading,
@@ -87,22 +87,36 @@ render() {
                   {largeViewOn ?
                     (<div className="large-view-modal">
                       <picture>
-                        <source srcSet={largeImage} type="image/webp" />
-                        <img src={largeImage.endsWith('.webp') 
-                          ? largeImage.replace('.webp', '.png') : largeImage} 
-                        className="large-view-image"
-                        alt={description}
-                        onMouseOut={this.disableLargeView} />
+                        <source 
+                          onMouseDown={this.handleNoTake}
+                          onContextMenu={this.handleNoTake}
+                          srcSet={largeImage} 
+                          type="image/webp" />
+                        <img 
+                          onMouseDown={this.handleNoTake}
+                          onContextMenu={this.handleNoTake}
+                          src={largeImage.endsWith('.webp') 
+                            ? largeImage.replace('.webp', '.png') : largeImage} 
+                          className="large-view-image"
+                          alt={description}
+                          onMouseOut={this.disableLargeView} />
                       </picture>
                     </div>) : null}
                   <div className="col-md-4">
                     <picture>
-                      <source srcSet={largeImage} type="image/webp" />
-                      <img src={largeImage.endsWith('.webp') 
-                        ? largeImage.replace('.webp', '.png') : largeImage} 
-                      alt={itemName} 
-                      style={{maxWidth: '250px', cursor: 'pointer'}}
-                      onMouseOver={this.enableLargeView} />
+                      <source 
+                        onMouseDown={this.handleNoTake}
+                        onContextMenu={this.handleNoTake}
+                        srcSet={largeImage} 
+                        type="image/webp" />
+                      <img
+                        onMouseDown={this.handleNoTake}
+                        onContextMenu={this.handleNoTake}
+                        src={largeImage.endsWith('.webp') 
+                          ? largeImage.replace('.webp', '.png') : largeImage} 
+                        alt={itemName} 
+                        style={{maxWidth: '250px', cursor: 'pointer'}}
+                        onMouseOver={this.enableLargeView} />
                     </picture>
                   </div>
                   <div className="col-md-8">
@@ -115,13 +129,20 @@ render() {
                   <div className="col-md-8">
                     {imageURL ? imageURL.map(img => (
                       <picture key={img}>
-                        <source srcSet={img} type="image/webp" />
-                        <img src={img.endsWith('.webp') 
-                          ? img.replace('.webp', '.png') : img} 
-                        alt={img}
-                        className="item-view-thumbnail"
-                        width="80px"
-                        onClick={this.handleViewLarger(img)} />
+                        <source 
+                          onMouseDown={this.handleNoTake}
+                          onContextMenu={this.handleNoTake}
+                          srcSet={img} 
+                          type="image/webp" />
+                        <img
+                          onMouseDown={this.handleNoTake}
+                          onContextMenu={this.handleNoTake}
+                          src={img.endsWith('.webp') 
+                            ? img.replace('.webp', '.png') : img} 
+                          alt={img}
+                          className="item-view-thumbnail"
+                          width="80px"
+                          onClick={this.handleViewLarger(img)} />
                       </picture>
                     )) : null}
                   </div>
