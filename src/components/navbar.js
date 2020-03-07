@@ -13,7 +13,7 @@ class NavBar extends Component {
     return (
       <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
         <a className="navbar-brand"
-          href="/"><img src={Logo}
+          href={`${process.env.PUBLIC_URL}/`}><img src={Logo}
             alt="logo"
             width="80px" /></a>
         <button className="navbar-toggler"
@@ -29,7 +29,7 @@ class NavBar extends Component {
           id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+              <a className="nav-link" href={`${process.env.PUBLIC_URL}/`}>Home <span className="sr-only">(current)</span></a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="https://www.facebook.com/pages/category/Reference-Website/Collecting-KISS-138452756205555/">
@@ -63,53 +63,53 @@ class NavBar extends Component {
               <div className="dropdown-menu pre-scrollable"
                 style={{textAlign: 'center', padding: '0.2em'}}
                 aria-labelledby="navbarDropdown">
-                <a href='/category/all'>View All Categories</a><br />
-                <a href='/category/actionFigures'>Action Figures / Dolls</a><br />
-                <a href="/category/advertisingAds">Advertising Ads</a><br />
-                <a href="/category/artworkBusts">Artwork / Busts</a><br />
-                <a href="/category/backstagePasses">Backstage Passes</a><br />
-                <a href="/category/bags">Bags / Backpacks / Wallets</a><br />
-                <a href="/category/beltBuckles">Belt Buckles</a><br />
-                <a href="/category/blankets">Blankets / Rugs / Towels</a><br />
-                <a href='/category/bobbleheads'>Bobbleheads</a><br />
-                <a href="/category/books">Books</a><br />
-                <a href="/category/buttons">Buttons / Lapel Pins</a><br />
-                <a href="/category/calendars">Calendars</a><br />
-                <a href="/category/capsHatsBandannas">Caps / Hats / Bandannas</a><br />
-                <a href="/category/autoAccessories">Car Automobile Accessories</a><br />
-                <a href="/category/cars">Cars / Die Cast</a><br />
-                <a href="/category/clocks">Clocks / Watches</a><br />
-                <a href="/category/clothing">Clothing</a><br />
-                <a href="/category/coins">Coins</a><br />
-                <a href="/category/comics">Comics</a><br />
-                <a href="/category/electronics">Electronics / Gaming Gear</a><br />
-                <a href="/category/games">Games / Puzzles</a><br />
-                <a href="/category/glassware">Glassware</a><br />
-                <a href="/category/guitarDrum">Guitar Picks & Drum Sticks</a><br />
-                <a href="/category/halloween">Halloween Products</a><br />
-                <a href="/category/health">Health & Beauty</a><br />
-                <a href='/category/holiday'>Holiday / KISSmas</a><br />
-                <a href="/category/homeDecor">Home Decor</a><br />
-                <a href="/category/incenseCandles">Incense / Candles</a><br />
-                <a href="/category/jewelry">Jewelry</a><br />
-                <a href="/category/keychains">Keychains</a><br />
-                <a href="/category/lunchBoxes">Lunch Boxes</a><br />
-                <a href="/category/magazines">Magazines</a><br />
-                <a href="/category/magnets">Magnet / Magnet Sets</a><br />
-                <a href="/category/misc">Miscellaneous</a><br />
-                <a href="/category/ornaments">Ornaments</a><br />
-                <a href="/category/petSupplies">Pet Supplies & Accessories</a><br />
-                <a href="/category/phoneAccessories">Phone Accessories</a><br />
-                <a href='/category/plush'>Plush</a><br />
-                <a href="/category/posters">Posters</a><br />
-                <a href="/category/stationary">Stationary Products</a><br />
-                <a href="/category/stickersPatches">Stickers / Patches</a><br />
-                <a href="/category/tickets">Tickets / Stubs</a><br />
-                <a href="/category/tourBooks">Tour Books</a><br />
-                <a href="/category/toys">Toys</a><br />
-                <a href="/category/tradingPostCards">Trading Cards & Post Cards</a><br />
-                <a href="/category/wine">Wine</a><br />
-                <a href="/category/lighters">Zippos / Lighters</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/all`}>View All Categories</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/actionFigures`}>Action Figures / Dolls</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/advertisingAds`}>Advertising Ads</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/artworkBusts`}>Artwork / Busts</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/backstagePasses`}>Backstage Passes</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/bags`}>Bags / Backpacks / Wallets</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/beltBuckles`}>Belt Buckles</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/blankets`}>Blankets / Rugs / Towels</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/bobbleheads`}>Bobbleheads</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/books`}>Books</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/buttons`}>Buttons / Lapel Pins</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/calendars`}>Calendars</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/capsHatsBandannas`}>Caps / Hats / Bandannas</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/autoAccessories`}>Car Automobile Accessories</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/cars`}>Cars / Die Cast</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/clocks`}>Clocks / Watches</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/clothing`}>Clothing</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/coins`}>Coins</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/comics`}>Comics</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/electronics`}>Electronics / Gaming Gear</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/games`}>Games / Puzzles</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/glassware`}>Glassware</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/guitarDrum`}>Guitar Picks & Drum Sticks</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/halloween`}>Halloween Products</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/health`}>Health & Beauty</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/holiday`}>Holiday / KISSmas</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/homeDecor`}>Home Decor</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/incenseCandles`}>Incense / Candles</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/jewelry`}>Jewelry</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/keychains`}>Keychains</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/lunchBoxes`}>Lunch Boxes</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/magazines`}>Magazines</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/magnets`}>Magnet / Magnet Sets</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/misc`}>Miscellaneous</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/ornaments`}>Ornaments</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/petSupplies`}>Pet Supplies & Accessories</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/phoneAccessories`}>Phone Accessories</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/plush`}>Plush</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/posters`}>Posters</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/stationary`}>Stationary Products</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/stickersPatches`}>Stickers / Patches</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/tickets`}>Tickets / Stubs</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/tourBooks`}>Tour Books</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/toys`}>Toys</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/tradingPostCards`}>Trading Cards & Post Cards</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/wine`}>Wine</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/lighters`}>Zippos / Lighters</a><br />
               </div>
             </li>
             <li className="nav-item active">
@@ -136,7 +136,7 @@ class NavBar extends Component {
                     <ul>
                       {searchResults.map(i => {
                         return (<li key={i.grn}>
-                          <a href={`/item-view/${i.grn}`}>
+                          <a href={`${process.env.PUBLIC_URL}/item-view/${i.grn}`}>
                             <p style={{fontSize: '.7em'}}>{i.itemName}</p>
                           </a>
                         </li>);

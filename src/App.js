@@ -87,14 +87,14 @@ class App extends Component {
                 <div>
                   <BrowserRouter basename={process.env.PUBLIC_URL}>
                     <Switch>
-                      <Route path="/contact" exact component={Contact} />
+                      <Route path={`${process.env.PUBLIC_URL}/contact`} exact component={Contact} />
                       <Route 
-                        path="/" 
+                        path={`${process.env.PUBLIC_URL}/`}
                         exact 
                         render={(props) => <Featured {...props} items={items} loading={loading}/>} />
-                      <Route path='/login' exact component={adminLogin} />
-                      <Route path='/item-view/' component={ItemView} />
-                      <Route path='/category/' component={SearchListView} />
+                      <Route path={`${process.env.PUBLIC_URL}/login`} exact component={adminLogin} />
+                      <Route path={`${process.env.PUBLIC_URL}/item-view/`} component={ItemView} />
+                      <Route path={`${process.env.PUBLIC_URL}/category/`} component={SearchListView} />
                     </Switch>
                   </BrowserRouter>
                 </div>
