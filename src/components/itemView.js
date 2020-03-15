@@ -8,6 +8,7 @@ import {
 } from 'mongodb-stitch-browser-sdk';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import { FacebookProvider, Like } from 'react-facebook';
  
 class ItemView extends Component {
 state = {
@@ -60,6 +61,7 @@ handleNoTake = (e) => e.preventDefault()
 render() {
   const {largeImage, largeViewOn, itemManufacturer, loading,
     itemName, description, year, imageURL, errorMessage} = this.state;
+  console.log(`${process.env.PUBLIC_URL}${window.location.pathname}`);
   return (
     <div>
       {loading ?
@@ -123,6 +125,9 @@ render() {
                     <p>{description}</p>
                     <p>{year}</p>
                     <p>{itemManufacturer}</p>
+                    <FacebookProvider appId="894073691014883">
+                      <Like href={`${process.env.PUBLIC_URL}${window.location.pathname}`} colorScheme="dark" showFaces share />
+                    </FacebookProvider>
                   </div>
                 </div>
                 <div className="row">
