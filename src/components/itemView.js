@@ -126,7 +126,10 @@ render() {
                     <p>{year}</p>
                     <p>{itemManufacturer}</p>
                     <FacebookProvider appId="894073691014883">
-                      <Like href={`${process.env.PUBLIC_URL}${window.location.pathname}`} colorScheme="dark" showFaces share />
+                      <Like href={`${process.env.PUBLIC_URL}${window.location.pathname}`} 
+                        colorScheme="light" 
+                        showFaces 
+                        share />
                     </FacebookProvider>
                   </div>
                 </div>
