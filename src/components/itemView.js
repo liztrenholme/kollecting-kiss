@@ -61,7 +61,6 @@ handleNoTake = (e) => e.preventDefault()
 render() {
   const {largeImage, largeViewOn, itemManufacturer, loading,
     itemName, description, year, imageURL, errorMessage} = this.state;
-  console.log(`${process.env.PUBLIC_URL}${window.location.pathname}`);
   return (
     <div>
       {loading ?
