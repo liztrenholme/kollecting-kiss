@@ -16,6 +16,8 @@ import ItemView from './components/itemView';
 import stitchClient from './components/stitch';
 // import { fetchData } from './components/modules/index';
 import NavBar from './components/navbar';
+import KISSMuseum from './images/museum.jpg';
+import KISSOnlineShop from './images/KISS-SHOPTOUR-BANNER_2_1800x.jpg';
 
 class App extends Component {
   state = {
@@ -98,6 +100,24 @@ class App extends Component {
                     </Switch>
                   </BrowserRouter>
                 </div>
+              </div>
+            </div>
+            <div className="row" style={{marginTop: '2em', marginBottom: '2em'}}>
+              <div className="col-md-7">
+                <a href="https://www.kissmuseum.com">
+                  <img 
+                    src={KISSMuseum} 
+                    alt='KISS Museum Online Shop'
+                    width="80%" />
+                </a>
+              </div>
+              <div className="col-md-5">
+                <a href="https://shopkissonline.com">
+                  <img 
+                    src={KISSOnlineShop} 
+                    alt='KISS Online'
+                    width="80%" />
+                </a>
               </div>
             </div>
           </div>
