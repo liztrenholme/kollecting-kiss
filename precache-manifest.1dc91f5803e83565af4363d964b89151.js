@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "458ec1187ba9ce6e45d7",
-    "url": "/static/css/main.1f1be712.chunk.css"
+    "revision": "d84a65e6067605f85286",
+    "url": "/static/css/main.73315834.chunk.css"
   },
   {
-    "revision": "458ec1187ba9ce6e45d7",
-    "url": "/static/js/main.458ec118.chunk.js"
+    "revision": "d84a65e6067605f85286",
+    "url": "/static/js/main.d84a65e6.chunk.js"
   },
   {
-    "revision": "e81a587aa6b8e20d55b4",
-    "url": "/static/css/1.bef3e119.chunk.css"
+    "revision": "c29c6e8c6ae4ebf21f95",
+    "url": "/static/css/1.60075dff.chunk.css"
   },
   {
-    "revision": "e81a587aa6b8e20d55b4",
-    "url": "/static/js/1.e81a587a.chunk.js"
+    "revision": "c29c6e8c6ae4ebf21f95",
+    "url": "/static/js/1.c29c6e8c.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -28,6 +28,10 @@ self.__precacheManifest = [
     "url": "/static/media/logo.b741b66d.jpg"
   },
   {
+    "revision": "dd578c41189d3e760a9ee2079ee50b32",
+    "url": "/static/media/instagram.dd578c41.png"
+  },
+  {
     "revision": "8ec1ee0a4f3ddbc50d1a0381d996995a",
     "url": "/static/media/museum.8ec1ee0a.jpg"
   },
@@ -36,7 +40,7 @@ self.__precacheManifest = [
     "url": "/static/media/KISS-SHOPTOUR-BANNER_2_1800x.2b1c3079.jpg"
   },
   {
-    "revision": "fbef80a58cc0ec52a757cba2043a6c5b",
+    "revision": "a8c25d5702c09b28eb6a3ebce2f06daa",
     "url": "/index.html"
   }
 ];
