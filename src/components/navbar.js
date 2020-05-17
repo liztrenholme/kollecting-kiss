@@ -4,6 +4,7 @@ import Facebook from '../images/facebook.png';
 import Twitter from '../images/twitter-48.png';
 import Blogger from '../images/blogger-5-48.png';
 import YouTube from '../images/youtube.png';
+import Instagram from '../images/instagram.png';
 import './mem.css';
 import PropTypes from 'prop-types';
 
@@ -46,6 +47,10 @@ class NavBar extends Component {
             <li className="nav-item">
               <a className="nav-link" href="https://www.youtube.com/user/KollectingKiss">
                 <img src={YouTube} className="youtube-pic" alt="youtube" width="30px" height="24px" /></a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="https://www.instagram.com/kollectingkiss/">
+                <img src={Instagram} alt="instagram" width="55px" height="40px" style={{opacity: '0.6'}} /></a>
             </li>
             <li 
               className="nav-item active dropdown" 
