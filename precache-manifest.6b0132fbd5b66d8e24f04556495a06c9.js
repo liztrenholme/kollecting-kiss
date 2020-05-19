@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "d84a65e6067605f85286",
+    "revision": "68b374867f7197b4f097",
     "url": "/static/css/main.73315834.chunk.css"
   },
   {
-    "revision": "d84a65e6067605f85286",
-    "url": "/static/js/main.d84a65e6.chunk.js"
+    "revision": "68b374867f7197b4f097",
+    "url": "/static/js/main.68b37486.chunk.js"
   },
   {
     "revision": "c29c6e8c6ae4ebf21f95",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/static/media/KISS-SHOPTOUR-BANNER_2_1800x.2b1c3079.jpg"
   },
   {
-    "revision": "a8c25d5702c09b28eb6a3ebce2f06daa",
+    "revision": "abf9b18d3310f28e3e7717dd956a8624",
     "url": "/index.html"
   }
 ];
