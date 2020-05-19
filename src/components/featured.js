@@ -17,7 +17,7 @@ class Featured extends Component {
           <div className="col-md-10">
             <div className="row">
               <div className="main-blurb">
-                <h4>Kollecting KISS is your ultimate resource guide for collecting KISS memorabilia since June 2007.</h4>
+                <h4>Kollecting KISS is your ultimate resource guide for collecting KISS memorabilia since June 25th, 2007.</h4>
                 <p className="disclaimer">(Please note that we are NOT a retail site. We are for informational purposes only!)</p>
                 <p>{`Have you ever seen an item and wondered, "Where did that come from, and is it a fake or a licensed item?" 
                   That's where www.KollectingKISS.com comes in. We are building a database that will be made by you, the fans. 
