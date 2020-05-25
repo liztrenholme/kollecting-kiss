@@ -10,7 +10,8 @@ import PropTypes from 'prop-types';
 
 class NavBar extends Component {
   render() {
-    const { search, handleSearch, searchResults } = this.props;
+    const { search, handleSearch, searchResults, allCategories } = this.props;
+    console.log(allCategories);
     return (
       <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
         <a className="navbar-brand"
@@ -69,7 +70,10 @@ class NavBar extends Component {
                 style={{textAlign: 'center', padding: '0.2em'}}
                 aria-labelledby="navbarDropdown">
                 <a href={`${process.env.PUBLIC_URL}/category/all`}>View All Categories</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/actionFigures`}>Action Figures / Dolls</a><br />
+                {allCategories && allCategories.length ? 
+                  allCategories.map(category => <div key={category} ><a href={`${process.env.PUBLIC_URL}/category/${category}`}>{category}</a><br /></div>)
+                  : null}
+                {/* <a href={`${process.env.PUBLIC_URL}/category/actionFigures`}>Action Figures / Dolls</a><br />
                 <a href={`${process.env.PUBLIC_URL}/category/advertisingAds`}>Advertising Ads</a><br />
                 <a href={`${process.env.PUBLIC_URL}/category/artworkBusts`}>Artwork / Busts</a><br />
                 <a href={`${process.env.PUBLIC_URL}/category/backstagePasses`}>Backstage Passes</a><br />
@@ -114,7 +118,7 @@ class NavBar extends Component {
                 <a href={`${process.env.PUBLIC_URL}/category/toys`}>Toys</a><br />
                 <a href={`${process.env.PUBLIC_URL}/category/tradingPostCards`}>Trading Cards & Post Cards</a><br />
                 <a href={`${process.env.PUBLIC_URL}/category/wine`}>Wine</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/lighters`}>Zippos / Lighters</a><br />
+                <a href={`${process.env.PUBLIC_URL}/category/lighters`}>Zippos / Lighters</a><br /> */}
               </div>
             </li>
             <li className="nav-item active">
@@ -163,7 +167,8 @@ NavBar.propTypes = {
   search: PropTypes.string,
   handleSearch: PropTypes.func,
   fetchData: PropTypes.func,
-  searchResults: PropTypes.array
+  searchResults: PropTypes.array,
+  allCategories: PropTypes.array
 };
 
 export default NavBar;
