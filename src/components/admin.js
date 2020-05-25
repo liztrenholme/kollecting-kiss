@@ -4,6 +4,7 @@ import stitchClient from './stitch';
 import request from 'superagent';
 import AdminEdit from './adminEdit';
 import AdminForm from './adminForm';
+import PropTypes from 'prop-types';
 
 // TO DO: 
 // try/catch conversions
@@ -318,6 +319,7 @@ class Admin extends Component {
     const {imgArr, errorMsg, successMessage, categories, itemName, itemManufacturer,
       year, description, itemValue, submit, uploadedFile, imageURL, mainImage,
       grn, editModalOpen, items, searchInput} = this.state;
+    const allCategories = this.props.categories;
     return (
       <div className="Admin">
         {this.state.editModalOpen ? 
@@ -354,6 +356,7 @@ class Admin extends Component {
               handleCheck={this.handleCheck}
               handleDeleteImage={this.handleDeleteImage}
               edit
+              allCategories={allCategories}
             />
           </div>) : null}
         {editModalOpen ?
@@ -381,6 +384,7 @@ class Admin extends Component {
           handleCheck={this.handleCheck}
           handleDeleteImage={this.handleDeleteImage}
           edit={false}
+          allCategories={allCategories}
         />
         <div className="row" style={{marginTop: '1em'}}>
           <div className="col-md-12">
@@ -406,5 +410,9 @@ class Admin extends Component {
     );
   }
 }
+
+Admin.propTypes = {
+  categories: PropTypes.array
+};
 
 export default Admin;
