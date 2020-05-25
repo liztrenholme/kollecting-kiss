@@ -11,7 +11,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Contact from './components/contact';
 import Featured from './components/featured';
 import SearchListView from './components/searchListView';
-import adminLogin from './components/adminLogin';
+import AdminLogin from './components/adminLogin';
 import ItemView from './components/itemView';
 import stitchClient from './components/stitch';
 // import { fetchData } from './components/modules/index';
@@ -24,7 +24,8 @@ class App extends Component {
     items: [],
     loading: true,
     error: '',
-    searchResults: []
+    searchResults: [],
+    allCategories: []
   };
 
   componentDidMount() {
@@ -39,8 +40,27 @@ class App extends Component {
     })
       .then(items => this.setState({ items: items, loading: false }))
       .catch(e => this.setState({loading: false, error: e}));
+    this.getAllCategories();
   }
      
+  getAllCategories = () => {
+    const categories = [];
+    stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(() => {
+      const mongodb = stitchClient.getServiceClient(
+        RemoteMongoClient.factory,
+        'mongodb-atlas'
+      );
+      const items = mongodb.db('memorabilia').collection('items');
+      return items.find({}).asArray();
+
+    })
+      .then(items => {
+        items.forEach(i => categories.push(i.categories));
+        const allCategories = [...new Set(categories.flat().filter(i => i !== ''))].sort();
+        this.setState({ allCategories, loading: false });
+      })
+      .catch(e => this.setState({loading: false, error: e}));
+  }
   handleSearch = (e) => {
     const search = e.target.value;
     this.setState({ search });
@@ -70,11 +90,12 @@ class App extends Component {
     }
   }
   render() {
-    const { items, loading, searchResults } = this.state;
+    const { items, loading, searchResults, allCategories } = this.state;
     return (
       <div className="App">
         <div className="container-fluid">
-          <NavBar 
+          <NavBar
+            allCategories={allCategories}
             handleChooseCategory={this.handleChooseCategory}
             handleSearch={this.handleSearch}
             searchResults={searchResults} />
@@ -94,7 +115,10 @@ class App extends Component {
                         path={`${process.env.PUBLIC_URL}/`}
                         exact 
                         render={(props) => <Featured {...props} items={items} loading={loading}/>} />
-                      <Route path={`${process.env.PUBLIC_URL}/login`} exact component={adminLogin} />
+                      <Route
+                        path={`${process.env.PUBLIC_URL}/login`} 
+                        exact
+                        render={(props) => <AdminLogin {...props} allCategories={allCategories}/>} />
                       <Route path={`${process.env.PUBLIC_URL}/item-view/`} component={ItemView} />
                       <Route path={`${process.env.PUBLIC_URL}/category/`} component={SearchListView} />
                     </Switch>
