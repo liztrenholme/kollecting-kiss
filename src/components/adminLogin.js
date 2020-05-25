@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Admin from './admin';
 import './mem.css';
+import PropTypes from 'prop-types';
 
 const { Stitch } = require('mongodb-stitch-browser-sdk');
 
@@ -87,10 +88,14 @@ render() {
   </div>);
   return (
     <div>
-      {this.state.authed ? <Admin /> : form}
+      {this.state.authed ? <Admin categories={this.props.allCategories} /> : form}
     </div>
   );
 }
 }
+
+adminLogin.propTypes = {
+  allCategories: PropTypes.array
+};
 
 export default adminLogin;
