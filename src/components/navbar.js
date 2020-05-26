@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 class NavBar extends Component {
   render() {
     const { search, handleSearch, searchResults, allCategories } = this.props;
-    console.log(allCategories);
     return (
       <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
         <a className="navbar-brand"
@@ -71,54 +70,8 @@ class NavBar extends Component {
                 aria-labelledby="navbarDropdown">
                 <a href={`${process.env.PUBLIC_URL}/category/all`}>View All Categories</a><br />
                 {allCategories && allCategories.length ? 
-                  allCategories.map(category => <div key={category} ><a href={`${process.env.PUBLIC_URL}/category/${category}`}>{category}</a><br /></div>)
+                  allCategories.map(category => <div key={category} ><a href={`${process.env.PUBLIC_URL}/category/${category}`}>{category ? category.replace(/([A-Z]+)/g, ' $1').trim().replace(category[0], category[0].toUpperCase()) : null}</a><br /></div>)
                   : null}
-                {/* <a href={`${process.env.PUBLIC_URL}/category/actionFigures`}>Action Figures / Dolls</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/advertisingAds`}>Advertising Ads</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/artworkBusts`}>Artwork / Busts</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/backstagePasses`}>Backstage Passes</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/bags`}>Bags / Backpacks / Wallets</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/beltBuckles`}>Belt Buckles</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/blankets`}>Blankets / Rugs / Towels</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/bobbleheads`}>Bobbleheads</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/books`}>Books</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/buttons`}>Buttons / Lapel Pins</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/calendars`}>Calendars</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/capsHatsBandannas`}>Caps / Hats / Bandannas</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/autoAccessories`}>Car Automobile Accessories</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/cars`}>Cars / Die Cast</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/clocks`}>Clocks / Watches</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/clothing`}>Clothing</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/coins`}>Coins</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/comics`}>Comics</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/electronics`}>Electronics / Gaming Gear</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/games`}>Games / Puzzles</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/glassware`}>Glassware</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/guitarDrum`}>Guitar Picks & Drum Sticks</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/halloween`}>Halloween Products</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/health`}>Health & Beauty</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/holiday`}>Holiday / KISSmas</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/homeDecor`}>Home Decor</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/incenseCandles`}>Incense / Candles</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/jewelry`}>Jewelry</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/keychains`}>Keychains</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/lunchBoxes`}>Lunch Boxes</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/magazines`}>Magazines</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/magnets`}>Magnet / Magnet Sets</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/misc`}>Miscellaneous</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/ornaments`}>Ornaments</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/petSupplies`}>Pet Supplies & Accessories</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/phoneAccessories`}>Phone Accessories</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/plush`}>Plush</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/posters`}>Posters</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/stationary`}>Stationary Products</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/stickersPatches`}>Stickers / Patches</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/tickets`}>Tickets / Stubs</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/tourBooks`}>Tour Books</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/toys`}>Toys</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/tradingPostCards`}>Trading Cards & Post Cards</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/wine`}>Wine</a><br />
-                <a href={`${process.env.PUBLIC_URL}/category/lighters`}>Zippos / Lighters</a><br /> */}
               </div>
             </li>
             <li className="nav-item active">
@@ -131,13 +84,9 @@ class NavBar extends Component {
                   type="text"
                   onChange={handleSearch}
                   value={search}
-                  placeholder="Search..."
+                  placeholder="Type to search..."
                   aria-label="Search"
                   style={{marginTop: '0.5em', minWidth: '5em'}} />
-                {/* <button 
-                  className="btn btn-outline-secondary" 
-                  id="main-search"
-                  onSubmit={fetchData}>Search</button> */}
                 {searchResults && searchResults.length ? 
                   <div className="searchDropdown pre-scrollable"
                     style={{textAlign: 'center', padding: '0.2em'}}
