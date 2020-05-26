@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "68b374867f7197b4f097",
-    "url": "/static/css/main.73315834.chunk.css"
+    "revision": "ae141727ba36789f34a1",
+    "url": "/static/css/main.c79dea87.chunk.css"
   },
   {
-    "revision": "68b374867f7197b4f097",
-    "url": "/static/js/main.68b37486.chunk.js"
+    "revision": "ae141727ba36789f34a1",
+    "url": "/static/js/main.ae141727.chunk.js"
   },
   {
-    "revision": "c29c6e8c6ae4ebf21f95",
-    "url": "/static/css/1.60075dff.chunk.css"
+    "revision": "f574847cd397ca388987",
+    "url": "/static/css/1.c68d4122.chunk.css"
   },
   {
-    "revision": "c29c6e8c6ae4ebf21f95",
-    "url": "/static/js/1.c29c6e8c.chunk.js"
+    "revision": "f574847cd397ca388987",
+    "url": "/static/js/1.f574847c.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/static/media/KISS-SHOPTOUR-BANNER_2_1800x.2b1c3079.jpg"
   },
   {
-    "revision": "abf9b18d3310f28e3e7717dd956a8624",
+    "revision": "39159a65a013eedea27a54cea0ab6c88",
     "url": "/index.html"
   }
 ];
