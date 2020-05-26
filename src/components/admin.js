@@ -82,7 +82,9 @@ class Admin extends Component {
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
-      submit: ''
+      submit: '',
+      successMessage: '',
+      errorMsg: ''
     });
     if (event.target.name === 'searchInput') {
       this.getItemsToEdit(event.target.value);
@@ -130,14 +132,15 @@ class Admin extends Component {
           itemValue: '',
           categories: [],
           imageURL: '',
-          successMessage: 'Data successfully inserted!',
-          errorMsg: ''
+          successMessage: 'New item successfully added!',
+          errorMsg: '',
+          imgArr: []
         });
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log(err);
         this.setState({
-          errorMsg: 'Error inserting data.'
+          errorMsg: 'Error adding new item.'
         });
       }
       this.getItemsToEdit();
@@ -179,7 +182,7 @@ class Admin extends Component {
           itemValue: '',
           categories: [],
           imageURL: [],
-          successMessage: 'Data successfully updated!',
+          successMessage: 'Item successfully updated!',
           errorMsg: '',
           editModalOpen: false
         });
@@ -187,7 +190,7 @@ class Admin extends Component {
         // eslint-disable-next-line no-console
         console.log(err);
         this.setState({
-          errorMsg: 'Error updating data.'
+          errorMsg: 'Error updating item.'
         });
       }
     });
@@ -218,7 +221,7 @@ class Admin extends Component {
           itemValue: '',
           categories: [],
           imageURL: '',
-          successMessage: 'Data successfully updated!',
+          successMessage: 'Item successfully deleted!',
           errorMsg: '',
           editModalOpen: false
         });
@@ -226,7 +229,7 @@ class Admin extends Component {
       // eslint-disable-next-line no-console
         console.log(err);
         this.setState({
-          errorMsg: 'Error updating data.'
+          errorMsg: 'Error deleting item.'
         });
       }
     });
