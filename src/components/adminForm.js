@@ -5,14 +5,40 @@ import PropTypes from 'prop-types';
 
 class AdminForm extends Component {
   state = {
-    newCategory: ''
+    newCategory: '',
+    prettyCategory: ''
   }
-  handleUpdateNewCategory = (e) => this.setState({newCategory: e.currentTarget.value});
+  handleUpdateNewCategory = (e) => {
+    let categoryInput = e.currentTarget.value.replace(/[`~!@#$%^&*()_|+\-=÷¿?;:'",.<>{}[\]\\/]/gi, '');
+    let category = categoryInput;
+    if (categoryInput.includes(' ')) {
+      console.log('yeesssssss');
+      category = categoryInput.replace(/([A-Z]+)/g, ' $1').trim().replace(category[0], category[0].toUpperCase());
+      const temp = category.split(' ');
+      console.log(temp);
+      // if (temp && temp.length > 1) {
+      //   category = temp.forEach(i  => {
+      //     if (i[0]) {
+      //       console.log('i[0]', i[0]);
+      //       i[0].toUpperCase(); 
+      //     }
+      //   });
+      //   if (category && category.length) {
+      //     console.log('is this undefined??', category);
+      //     category.join('');
+      //   }
+      //  temp.join('');
+      console.log('category', category);
+      // return category;
+      // }
+    }
+    this.setState({newCategory: category, prettyCategory: e.currentTarget.value});
+  }
   render() {
     const imgArr = this.props.imgArr || this.props.imgURL;
-    const {newCategory} = this.state;
-    const checker = /([a-z]*)([A-Z]*?)([A-Z][a-z]+)/g;
-    console.log(checker, 'hiiiiiiiiUhjb'.match(checker), 'atomRain'.split('R')[1]);
+    const {newCategory, prettyCategory} = this.state;
+    // console.log('gy&yhg%^gffg/hjkh__-po08"'.replace(/[`~!@#$%^&*()_|+\-=÷¿?;:'",.<>{}[\]\\/]/gi, ''));
+    console.log('newCategory', newCategory, prettyCategory);
     return (
       <div className="Admin">
         <div className="row">
@@ -23,7 +49,7 @@ class AdminForm extends Component {
             <div className="row">
               <div className="col-md-12">
                 <h1 style={{ color: 'red' }}>{this.props.errorMsg}</h1>
-                <h1 style={{ color: 'green' }}>{this.props.successMsg}</h1>
+                <h1 style={{ color: 'green' }}>{this.props.successMessage}</h1>
               </div>
             </div>
             <div >
@@ -115,7 +141,7 @@ class AdminForm extends Component {
                       checked={this.props.categories.includes(category) ? true : false}
                       type="checkbox"
                       onChange={this.props.handleCheck} 
-                      value={category}/>{category}</div>)
+                      value={category}/>{category ? category.replace(/([A-Z]+)/g, ' $1').trim().replace(category[0], category[0].toUpperCase()) : null}</div>)
                   : null}
                 <div className="checkbox">
                   <input
@@ -128,7 +154,7 @@ class AdminForm extends Component {
                     onChange={this.handleUpdateNewCategory} 
                     type="text"
                     placeholder="Add new category"
-                    value={newCategory}/>
+                    value={prettyCategory}/>
                 </div>
               </div>
               <input 
