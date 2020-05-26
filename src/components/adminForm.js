@@ -12,33 +12,21 @@ class AdminForm extends Component {
     let categoryInput = e.currentTarget.value.replace(/[`~!@#$%^&*()_|+\-=÷¿?;:'",.<>{}[\]\\/]/gi, '');
     let category = categoryInput;
     if (categoryInput.includes(' ')) {
-      console.log('yeesssssss');
-      category = categoryInput.replace(/([A-Z]+)/g, ' $1').trim().replace(category[0], category[0].toUpperCase());
+      category = categoryInput.replace(/\\s[`~!@#$%^&*()_|+\-=÷¿?;:'",.<>{}[\]\\/]/gi, '$1').trim().replace(category[0], category[0].toLowerCase());
       const temp = category.split(' ');
-      console.log(temp);
-      // if (temp && temp.length > 1) {
-      //   category = temp.forEach(i  => {
-      //     if (i[0]) {
-      //       console.log('i[0]', i[0]);
-      //       i[0].toUpperCase(); 
-      //     }
-      //   });
-      //   if (category && category.length) {
-      //     console.log('is this undefined??', category);
-      //     category.join('');
-      //   }
-      //  temp.join('');
-      console.log('category', category);
-      // return category;
-      // }
+      const tempTwo = []; 
+      temp.forEach(i => {
+        if (i && i[0] && i[0] !== '') {
+          tempTwo.push(i.replace(i[0], i[0].toUpperCase()));
+        }});
+      category = tempTwo.join('');
+      category = category.replace(category[0], category[0].toLowerCase());
     }
     this.setState({newCategory: category, prettyCategory: e.currentTarget.value});
   }
   render() {
     const imgArr = this.props.imgArr || this.props.imgURL;
     const {newCategory, prettyCategory} = this.state;
-    // console.log('gy&yhg%^gffg/hjkh__-po08"'.replace(/[`~!@#$%^&*()_|+\-=÷¿?;:'",.<>{}[\]\\/]/gi, ''));
-    console.log('newCategory', newCategory, prettyCategory);
     return (
       <div className="Admin">
         <div className="row">
