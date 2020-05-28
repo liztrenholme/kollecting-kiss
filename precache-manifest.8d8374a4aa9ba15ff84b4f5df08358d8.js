@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "ae141727ba36789f34a1",
-    "url": "/static/css/main.c79dea87.chunk.css"
+    "revision": "2f7ee7cc754d257645c4",
+    "url": "/static/css/main.f85bfc74.chunk.css"
   },
   {
-    "revision": "ae141727ba36789f34a1",
-    "url": "/static/js/main.ae141727.chunk.js"
+    "revision": "2f7ee7cc754d257645c4",
+    "url": "/static/js/main.2f7ee7cc.chunk.js"
   },
   {
-    "revision": "f574847cd397ca388987",
-    "url": "/static/css/1.c68d4122.chunk.css"
+    "revision": "59b6ceaf0a21cfabb32d",
+    "url": "/static/css/1.974576ae.chunk.css"
   },
   {
-    "revision": "f574847cd397ca388987",
-    "url": "/static/js/1.f574847c.chunk.js"
+    "revision": "59b6ceaf0a21cfabb32d",
+    "url": "/static/js/1.59b6ceaf.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -40,7 +40,11 @@ self.__precacheManifest = [
     "url": "/static/media/KISS-SHOPTOUR-BANNER_2_1800x.2b1c3079.jpg"
   },
   {
-    "revision": "39159a65a013eedea27a54cea0ab6c88",
+    "revision": "16e06eb58c2fd91b0bc79ee4b3ff7ee1",
+    "url": "/static/media/Kulick_Merch_Banner.16e06eb5.jpg"
+  },
+  {
+    "revision": "7b7c46622c0d105c8b72e219e306015e",
     "url": "/index.html"
   }
 ];
