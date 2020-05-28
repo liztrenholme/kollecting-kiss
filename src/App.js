@@ -18,6 +18,7 @@ import stitchClient from './components/stitch';
 import NavBar from './components/navbar';
 import KISSMuseum from './images/museum.jpg';
 import KISSOnlineShop from './images/KISS-SHOPTOUR-BANNER_2_1800x.jpg';
+import KulickBanner from './images/Kulick_Merch_Banner.jpg';
 
 class App extends Component {
   state = {
@@ -124,6 +125,16 @@ class App extends Component {
                     </Switch>
                   </BrowserRouter>
                 </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12">
+                <a href="www.brucekulick.com/shop/">
+                  <img 
+                    src={KulickBanner} 
+                    alt='Kulick Online Shop'
+                    width="50%" />
+                </a>
               </div>
             </div>
             <div className="row" style={{marginTop: '2em', marginBottom: '2em'}}>
