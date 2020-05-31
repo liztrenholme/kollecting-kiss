@@ -36,8 +36,8 @@ class App extends Component {
         'mongodb-atlas'
       );
       const items = mongodb.db('memorabilia').collection('items');
-      return items.find({}, { limit: 9 }).asArray();
-
+      // return items.find({}, { limit: 9 }).asArray(); // return first 9 items in db
+      return items.aggregate([{ $sample: { size: 9 } }]).asArray(); // return a random set of 9 from the db
     })
       .then(items => this.setState({ items: items, loading: false }))
       .catch(e => this.setState({loading: false, error: e}));
@@ -129,7 +129,7 @@ class App extends Component {
             </div>
             <div className="row">
               <div className="col-md-12">
-                <a href="www.brucekulick.com/shop/">
+                <a href="https://www.brucekulick.com/shop/">
                   <img 
                     src={KulickBanner} 
                     alt='Kulick Online Shop'
