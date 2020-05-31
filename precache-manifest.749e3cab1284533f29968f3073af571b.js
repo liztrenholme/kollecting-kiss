@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "db8eab46a48e646287e2",
+    "revision": "54fec9f3e664f5d20c82",
     "url": "/static/css/main.f85bfc74.chunk.css"
   },
   {
-    "revision": "db8eab46a48e646287e2",
-    "url": "/static/js/main.db8eab46.chunk.js"
+    "revision": "54fec9f3e664f5d20c82",
+    "url": "/static/js/main.54fec9f3.chunk.js"
   },
   {
     "revision": "59b6ceaf0a21cfabb32d",
@@ -44,7 +44,7 @@ self.__precacheManifest = [
     "url": "/static/media/Kulick_Merch_Banner.16e06eb5.jpg"
   },
   {
-    "revision": "53250c282f295580718248799f7a3439",
+    "revision": "005665e5c66fca2aea4e4f748585bf7e",
     "url": "/index.html"
   }
 ];
