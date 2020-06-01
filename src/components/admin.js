@@ -274,7 +274,6 @@ class Admin extends Component {
   }
   setMainImage = (url) => () => { this.setState({mainImage: url}); }
   handleOpenModal = (item) => () => {
-    console.log('item', item, item.videoURL);
     this.setState({
       grn: item.grn,
       editModalOpen: true,

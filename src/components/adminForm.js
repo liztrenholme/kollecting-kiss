@@ -27,7 +27,6 @@ class AdminForm extends Component {
   render() {
     const imgArr = this.props.imgArr || this.props.imgURL;
     const {newCategory, prettyCategory} = this.state;
-    console.log('wtf is props', this.props);
     return (
       <div className="Admin">
         <div className="row">
