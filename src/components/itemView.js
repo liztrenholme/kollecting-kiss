@@ -124,7 +124,7 @@ render() {
                   </div>
                   <div className="col-md-8">
                     <p>{description}</p>
-                    <div className='player-wrapper'>
+                    {videoURL ? <div className='player-wrapper'>
                       <ReactPlayer 
                         className='react-player'
                         url={videoURL}
@@ -132,7 +132,7 @@ render() {
                         width='100%'
                         height='100%'
                       />
-                    </div>
+                    </div> : null}
                     <p>{year}</p>
                     <p>{itemManufacturer}</p>
                     <FacebookProvider appId="894073691014883">
