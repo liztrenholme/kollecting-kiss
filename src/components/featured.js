@@ -38,7 +38,9 @@ class Featured extends Component {
         </div>
         <div className='row'>
           <div className='col-md-12'>
-            <iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=KollectingKiss" 
+            <iframe
+              className='kiss-channel'
+              src="https://www.youtube.com/embed/?listType=user_uploads&list=KollectingKiss" 
               title="Kollecting KISS on YouTube" />                  
 
           </div>

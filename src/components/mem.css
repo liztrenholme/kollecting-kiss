@@ -38,7 +38,7 @@ li {
 	border: 1px #777 solid;
 }
 
-iframe {
+.kiss-channel {
 	border: solid 4px #777;
 	border-radius: 5px;
 	width: 650px;
@@ -343,6 +343,17 @@ input {
 	flex-grow: 1.1;
 }
 
+.player-wrapper {
+	position: relative;
+	padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
+  }
+   
+  .react-player {
+	position: absolute;
+	top: 0;
+	left: 0;
+  }
+
 @media only screen and (max-width: 800px) {
 	.grid-container, .checkbox-div {
 		grid-template-columns: auto auto;
@@ -351,7 +362,7 @@ input {
 		left: 50%;
 		width: 700px;
 	}
-	iframe {
+	kiss-channel {
 		max-width: 500px;
 		max-height: 380px;
 	}
