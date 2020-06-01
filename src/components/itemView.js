@@ -9,6 +9,7 @@ import {
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import { FacebookProvider, Like } from 'react-facebook';
+import ReactPlayer from 'react-player';
  
 class ItemView extends Component {
 state = {
@@ -41,6 +42,7 @@ componentDidMount() {
           itemManufacturer: items[0].itemManufacturer,
           description: items[0].description,
           imageURL: items[0].imageURL,
+          videoURL: items[0].videoURL,
           largeImage: items[0].mainImage || items[0].imageURL[0],
           loading: false
         });
@@ -60,7 +62,7 @@ handleNoTake = (e) => e.preventDefault()
 
 render() {
   const {largeImage, largeViewOn, itemManufacturer, loading,
-    itemName, description, year, imageURL, errorMessage} = this.state;
+    itemName, description, year, imageURL, videoURL, errorMessage} = this.state;
   return (
     <div>
       {loading ?
@@ -122,6 +124,15 @@ render() {
                   </div>
                   <div className="col-md-8">
                     <p>{description}</p>
+                    <div className='player-wrapper'>
+                      <ReactPlayer 
+                        className='react-player'
+                        url={videoURL}
+                        light
+                        width='100%'
+                        height='100%'
+                      />
+                    </div>
                     <p>{year}</p>
                     <p>{itemManufacturer}</p>
                     <FacebookProvider appId="894073691014883">
