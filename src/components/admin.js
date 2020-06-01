@@ -26,6 +26,7 @@ class Admin extends Component {
     submit: '',
     uploadedFile: null,
     imageURL: [],
+    videoURL: '',
     mainImage: '',
     categories: [],
     editModalOpen: false,
@@ -121,6 +122,7 @@ class Admin extends Component {
           itemValue: this.state.itemValue,
           categories: this.state.categories,
           imageURL: this.state.imageURL,
+          videoURL: this.state.videoURL,
           mainImage: this.state.mainImage,
           grn: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         });
@@ -132,6 +134,7 @@ class Admin extends Component {
           itemValue: '',
           categories: [],
           imageURL: '',
+          videoURL: '',
           successMessage: 'New item successfully added!',
           errorMsg: '',
           imgArr: []
@@ -161,6 +164,7 @@ class Admin extends Component {
         'itemValue': this.state.itemValue,
         'categories': this.state.categories,
         'imageURL': this.state.imgArr,
+        'videoURL': this.state.videoURL,
         'mainImage': this.state.mainImage
       }
     };
@@ -182,6 +186,7 @@ class Admin extends Component {
           itemValue: '',
           categories: [],
           imageURL: [],
+          videoURL: '',
           successMessage: 'Item successfully updated!',
           errorMsg: '',
           editModalOpen: false
@@ -221,6 +226,7 @@ class Admin extends Component {
           itemValue: '',
           categories: [],
           imageURL: '',
+          videoURL: '',
           successMessage: 'Item successfully deleted!',
           errorMsg: '',
           editModalOpen: false
@@ -268,6 +274,7 @@ class Admin extends Component {
   }
   setMainImage = (url) => () => { this.setState({mainImage: url}); }
   handleOpenModal = (item) => () => {
+    console.log('item', item, item.videoURL);
     this.setState({
       grn: item.grn,
       editModalOpen: true,
@@ -279,9 +286,12 @@ class Admin extends Component {
       submit: '',
       uploadedFile: null,
       imageURL: item.imageURL,
+      videoURL: item.videoURL,
       mainImage: item.mainImage,
       categories: item.categories,
       imgArr: item.imageURL,
+      errorMsg: '',
+      successMessage: '',
       query: {
         grn: item.grn,
         itemName: item.itemName,
@@ -290,6 +300,7 @@ class Admin extends Component {
         description: item.description,
         itemValue: item.itemValue,
         imageURL: item.imageURL,
+        videoURL: item.videoURL,
         mainImage: item.mainImage,
         categories: [],
       }
@@ -306,6 +317,7 @@ class Admin extends Component {
       submit: '',
       uploadedFile: null,
       imageURL: [],
+      videoURL: '',
       mainImage: '',
       categories: [],
       editModalOpen: false,
@@ -321,7 +333,7 @@ class Admin extends Component {
   render() {
     const {imgArr, errorMsg, successMessage, categories, itemName, itemManufacturer,
       year, description, itemValue, submit, uploadedFile, imageURL, mainImage,
-      grn, editModalOpen, items, searchInput} = this.state;
+      grn, editModalOpen, items, searchInput, videoURL} = this.state;
     const allCategories = this.props.categories;
     return (
       <div className="Admin">
@@ -337,6 +349,7 @@ class Admin extends Component {
               <h1>x</h1>
             </div>
             <AdminForm
+              handleCloseModal={this.handleCloseModal}
               imgArr={imgArr}
               errorMsg={errorMsg}
               successMessage={successMessage}
@@ -351,6 +364,7 @@ class Admin extends Component {
               submit={submit}
               uploadedFile={uploadedFile}
               imageURL={imageURL}
+              videoURL={videoURL}
               mainImage={mainImage}
               onImageDrop={this.onImageDrop}
               setMainImage={this.setMainImage}
@@ -380,6 +394,7 @@ class Admin extends Component {
           submit={submit}
           uploadedFile={uploadedFile}
           imageURL={imageURL}
+          videoURL={videoURL}
           mainImage={mainImage}
           onImageDrop={this.onImageDrop}
           setMainImage={this.setMainImage}

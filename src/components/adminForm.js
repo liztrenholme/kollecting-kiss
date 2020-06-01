@@ -27,6 +27,7 @@ class AdminForm extends Component {
   render() {
     const imgArr = this.props.imgArr || this.props.imgURL;
     const {newCategory, prettyCategory} = this.state;
+    console.log('wtf is props', this.props);
     return (
       <div className="Admin">
         <div className="row">
@@ -114,6 +115,13 @@ class AdminForm extends Component {
                 height="50%" />
               <input 
                 className="text-input" 
+                placeholder=" Video URL" 
+                type="text"
+                name="videoURL" 
+                value={this.props.videoURL} 
+                onChange={this.props.handleChange} />
+              <input 
+                className="text-input" 
                 placeholder=" Estimated value" 
                 type="text"
                 name="itemValue" 
@@ -159,7 +167,15 @@ class AdminForm extends Component {
           (<div className="row">
             <div className="col-md-4">
             </div>
-            <div className="col-md-4">
+            <div className="col-md-2">
+              <button 
+                className='btn-secondary' 
+                style={{margin: '1em', padding: '1em', cursor: 'pointer'}}
+                onClick={this.props.handleCloseModal}>
+                  Cancel
+              </button>
+            </div>
+            <div className="col-md-2">
               <button 
                 className='btn-danger' 
                 style={{margin: '1em', padding: '1em', cursor: 'pointer'}}
@@ -184,7 +200,8 @@ AdminForm.propTypes = {
   year: PropTypes.number,
   deleteItem: PropTypes.func,
   onImageDrop: PropTypes.func,
-  categories: PropTypes.array
+  categories: PropTypes.array,
+  videoURL: PropTypes.string
 };
 
 export default AdminForm;
