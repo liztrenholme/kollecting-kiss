@@ -265,10 +265,18 @@ class Admin extends Component {
 
       if (response.body.secure_url !== '') {
         const {imgArr} = this.state;
-        imgArr.push(response.body.secure_url);
-        this.setState({
-          imageURL: imgArr, mainImage: imgArr[0]
-        });
+        console.log('what is imgArr????', typeof imgArr);
+        if (imgArr !== '') {
+          imgArr.push(response.body.secure_url);
+          this.setState({
+            imageURL: imgArr, mainImage: imgArr[0]
+          });
+        } else {
+          const newArr = [].push(response.body.secure_url);
+          this.setState({
+            imageURL: newArr, mainImage: newArr[0], imgArr: newArr
+          });
+        }
       }
     });
   }
@@ -288,7 +296,7 @@ class Admin extends Component {
       videoURL: item.videoURL,
       mainImage: item.mainImage,
       categories: item.categories,
-      imgArr: item.imageURL,
+      imgArr: item.imageURL || [],
       errorMsg: '',
       successMessage: '',
       query: {
