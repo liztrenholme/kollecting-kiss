@@ -150,6 +150,7 @@ class AdminForm extends Component {
                     type="text"
                     placeholder="Add new category"
                     value={prettyCategory}/>
+                  {/* <div className='addNewCatBtn'>+</div> */}
                 </div>
               </div>
               <input 
