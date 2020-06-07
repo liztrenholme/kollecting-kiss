@@ -183,10 +183,12 @@ input {
 
 .checkbox {
 	margin: 0.5em;
+	display: flex;
+	flex-direction: row;
 }
 
 .checked {
-	margin: 0 .4em;
+	margin: .5em;
 }
 
 .text-input {
@@ -345,14 +347,21 @@ input {
 
 .player-wrapper {
 	position: relative;
-	padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
-  }
-   
-  .react-player {
+	padding-top: 56.25%/* Player ratio: 100 / (1280 / 720) */
+}
+
+.react-player {
 	position: absolute;
 	top: 0;
 	left: 0;
-  }
+}
+
+.addNewCatBtn {
+	font-size: 1.1em;
+	cursor: pointer;
+	margin: 0 .3em;
+	border: 1px gray solid;
+}
 
 @media only screen and (max-width: 800px) {
 	.grid-container, .checkbox-div {
