@@ -98,7 +98,7 @@ render() {
                         <img 
                           onMouseDown={this.handleNoTake}
                           onContextMenu={this.handleNoTake}
-                          src={largeImage.endsWith('.webp') 
+                          src={largeImage && largeImage.endsWith('.webp') 
                             ? largeImage.replace('.webp', '.png') : largeImage} 
                           className="large-view-image"
                           alt={description}
@@ -115,7 +115,7 @@ render() {
                       <img
                         onMouseDown={this.handleNoTake}
                         onContextMenu={this.handleNoTake}
-                        src={largeImage.endsWith('.webp') 
+                        src={largeImage && largeImage.endsWith('.webp') 
                           ? largeImage.replace('.webp', '.png') : largeImage} 
                         alt={itemName} 
                         style={{maxWidth: '250px', cursor: 'pointer'}}
@@ -155,7 +155,7 @@ render() {
                         <img
                           onMouseDown={this.handleNoTake}
                           onContextMenu={this.handleNoTake}
-                          src={img.endsWith('.webp') 
+                          src={img && img.endsWith('.webp') 
                             ? img.replace('.webp', '.png') : img} 
                           alt={img}
                           className="item-view-thumbnail"
