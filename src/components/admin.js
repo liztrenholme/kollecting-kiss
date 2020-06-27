@@ -265,7 +265,6 @@ class Admin extends Component {
 
       if (response.body.secure_url !== '') {
         const {imgArr} = this.state;
-        console.log('what is imgArr????', typeof imgArr);
         if (imgArr !== '') {
           imgArr.push(response.body.secure_url);
           this.setState({
