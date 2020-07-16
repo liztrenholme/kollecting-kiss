@@ -5,6 +5,7 @@ import Twitter from '../images/twitter-48.png';
 import Blogger from '../images/blogger-5-48.png';
 import YouTube from '../images/youtube.png';
 import Instagram from '../images/instagram.png';
+import Radio from '../images/radio-tower-icon-64.png';
 import './mem.css';
 import PropTypes from 'prop-types';
 
@@ -51,6 +52,10 @@ class NavBar extends Component {
             <li className="nav-item">
               <a className="nav-link" href="https://www.instagram.com/kollectingkiss/">
                 <img src={Instagram} alt="instagram" width="55px" height="40px" style={{opacity: '0.6'}} /></a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="https://www.unholyradio.com">
+                <img src={Radio} alt="instagram" width="30px" height="30px" style={{opacity: '0.6'}} /></a>
             </li>
             <li 
               className="nav-item active dropdown" 
