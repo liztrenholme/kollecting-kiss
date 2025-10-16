@@ -1,32 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.9ef662a1.chunk.css",
-    "main.js": "/static/js/main.a0197a60.chunk.js",
-    "main.js.map": "/static/js/main.a0197a60.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.47bd2d76.js",
-    "runtime-main.js.map": "/static/js/runtime-main.47bd2d76.js.map",
-    "static/css/2.f87e9f44.chunk.css": "/static/css/2.f87e9f44.chunk.css",
-    "static/js/2.cff16b65.chunk.js": "/static/js/2.cff16b65.chunk.js",
-    "static/js/2.cff16b65.chunk.js.map": "/static/js/2.cff16b65.chunk.js.map",
+    "main.css": "/static/css/main.b7ba59b6.css",
+    "main.js": "/static/js/main.f4589b77.js",
+    "static/media/kissbanner.jpg": "/static/media/kissbanner.5dd66da63a217bf64862.jpg",
+    "static/media/Kulick_Merch_Banner.jpg": "/static/media/Kulick_Merch_Banner.06b525c6a8616195f5d6.jpg",
+    "static/media/UnholyRadio.jpg": "/static/media/UnholyRadio.cbed512ec8fca907c1b3.jpg",
+    "static/media/KISS-SHOPTOUR-BANNER_2_1800x.jpg": "/static/media/KISS-SHOPTOUR-BANNER_2_1800x.3e83f2fcc046c0062cb0.jpg",
+    "static/media/museum.jpg": "/static/media/museum.00ab5cde928c62020df0.jpg",
+    "static/media/instagram.png": "/static/media/instagram.c3eb1e9f200218d1550f.png",
+    "static/media/logo.jpg": "/static/media/logo.386e9d44616fa14fa507.jpg",
     "index.html": "/index.html",
-    "precache-manifest.05beb3dd53773e91162d03c52939644c.js": "/precache-manifest.05beb3dd53773e91162d03c52939644c.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.f87e9f44.chunk.css.map": "/static/css/2.f87e9f44.chunk.css.map",
-    "static/css/main.9ef662a1.chunk.css.map": "/static/css/main.9ef662a1.chunk.css.map",
-    "static/js/2.cff16b65.chunk.js.LICENSE.txt": "/static/js/2.cff16b65.chunk.js.LICENSE.txt",
-    "static/media/KISS-SHOPTOUR-BANNER_2_1800x.jpg": "/static/media/KISS-SHOPTOUR-BANNER_2_1800x.2b1c3079.jpg",
-    "static/media/Kulick_Merch_Banner.jpg": "/static/media/Kulick_Merch_Banner.16e06eb5.jpg",
-    "static/media/UnholyRadio.jpg": "/static/media/UnholyRadio.bacda517.jpg",
-    "static/media/instagram.png": "/static/media/instagram.dd578c41.png",
-    "static/media/kissbanner.jpg": "/static/media/kissbanner.0716cc91.jpg",
-    "static/media/logo.jpg": "/static/media/logo.b741b66d.jpg",
-    "static/media/museum.jpg": "/static/media/museum.8ec1ee0a.jpg"
+    "main.b7ba59b6.css.map": "/static/css/main.b7ba59b6.css.map",
+    "main.f4589b77.js.map": "/static/js/main.f4589b77.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.47bd2d76.js",
-    "static/css/2.f87e9f44.chunk.css",
-    "static/js/2.cff16b65.chunk.js",
-    "static/css/main.9ef662a1.chunk.css",
-    "static/js/main.a0197a60.chunk.js"
+    "static/css/main.b7ba59b6.css",
+    "static/js/main.f4589b77.js"
   ]
 }
